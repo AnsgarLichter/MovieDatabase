@@ -27,3 +27,6 @@ This app uses the API of the [The Movie Database](https://www.themoviedb.org/?la
 * The user must be able to add a movie or a series to his watchlist.
 * The user must be able to view the movies or series in his watchlist.
 * The user must be able to remove movies or series from his watchlist.
+
+
+© 2018 – 2019 [Patrick](https://github.com/patdujmo), [Daniel](https://github.com/linxside), [Ansgar](https://github.com/AnsgarLichter)
