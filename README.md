@@ -4,7 +4,13 @@ Movie Database is a project for the lecture software architectures labratory.
 ## Technologies
 
 ### Angular
-This app uses Angular as a framework for web development.
+This app uses Angular version 14 as framework for web development.
+If you want to know how to build and run the app you can have a look at the [Angular CLI](https://angular.io/cli).
+
+### Angular Material
+The app is built with the UI components of [Angular Material](https://material.angular.io/).
+At the moment the built-in theme pink bluegrey is configured.
+
 
 ### Movie Database API
 This app uses the API of the [The Movie Database](https://www.themoviedb.org/?language=de). This API is the source for all movies, series and actors.
