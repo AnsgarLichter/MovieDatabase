@@ -23,6 +23,13 @@ If you want to add a new secret, please add the new environment variable in the 
 
 If you restart your development server now, the environment variable will be accessible.
 
+### Conventional Commits
+
+The app uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) to have consistent commit messages.
+[Husky](https://typicode.github.io/husky/#/) is used to enable the use of versionized git hooks. In this context the hook ``commit-msg`` is used to validate if the commit messages fullfill the convetional commits specification.
+
+Please make you familiar with [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+
 ## Technologies
 
 ### Angular
