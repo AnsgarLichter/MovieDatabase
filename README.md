@@ -12,6 +12,17 @@ Afterwards you can run ``ng serve`` to start your development server.
 
 The values of the secrets can be accessed as follows ``process.env["ENVIRONMENT_VARIABLE_KEY"]``.
 
+### Adding new secrets
+
+If you want to add a new secret, please add the new environment variable in the following files:
+
+* environment.ts
+* environment.prod.ts
+* .env
+* template.env
+
+If you restart your development server now, the environment variable should be accessible in the code.
+
 ## Technologies
 
 ### Angular
