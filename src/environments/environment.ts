@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  THE_MOVIE_DATABASE_API_KEY: process.env['THE_MOVIE_DATABASE_API_KEY'] || undefined
 };
 
 /*
