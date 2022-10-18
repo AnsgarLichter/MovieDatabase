@@ -18,10 +18,10 @@ If you want to add a new secret, please add the new environment variable in the 
 
 * environment.ts
 * environment.prod.ts
-* .env
 * template.env
+* .env
 
-If you restart your development server now, the environment variable should be accessible in the code.
+If you restart your development server now, the environment variable will be accessible.
 
 ## Technologies
 
