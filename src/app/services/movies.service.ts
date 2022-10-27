@@ -15,6 +15,6 @@ private api_key = environment.THE_MOVIE_DATABASE_API_KEY;
   constructor(private httpClient: HttpClient) { }
 
   public getMovie(movieId: number): Observable<Movie>{
-    return this.httpClient.get<Movie>(`${this.apiServerUrl}/3/movie/${movieId}?api_key=63817d9b87e30adec74e4f210f1e8484`)
+    return this.httpClient.get<Movie>(`${this.apiServerUrl}/3/movie/${movieId}?api_key=${this.api_key}`)
   }
 }
