@@ -1,5 +1,89 @@
-<p>Movie</p>
-<p>Title: {{movie?.original_title}}</p>
-<p>Overview: {{movie?.overview}}</p>
+<div class="container text-center my-4 mx-8">
+  <div class="row">
+    <div class="col col-3">
+      <img class="image-poster" src="{{getConfigurationPath()}}{{movie?.poster_path}}">
+    </div>
+    <div class="col col-9">
+      <div class="row">
+        <div class="col-6">
+          <h1>{{movie?.original_title}}</h1>
+        </div>
+        <div class="col-6">
+          <mat-chip-list class="center-chips" aria-label="Genres">
+            <mat-chip *ngFor="let genre of movie?.genres">{{genre.name}}</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <p>{{movie?.release_date}}</p>
+        </div>
+        <div class="col-3">
+          <p>{{movie?.runtime}} Minutes</p>
+        </div>
+
+        <div class="col-6 justify-content-center">
+          {{movie?.tagline}}
+        </div>
+      </div>
+
+      <div class="row m-4">
+        <h1>Overview</h1>
+        {{movie?.overview}}
+      </div>
+
+      <div class="row">
+        Streaming Dienste
+      </div>
+
+      <div class="row">
+        Writers and Directors
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Description: </p>
+<p>Rating: {{movie?.popularity}}</p>
+
+<p>Release Date: {{movie?.release_date}}</p>
 <p>Budget: {{movie?.budget}}</p>
-<p>Id: {{movie?.id}}</p>
+<p>Watch Providers: </p>
+<p>Cast: </p>
+
+<p>Thumbnail:</p>
+<img src="{{getConfigurationPath()}}{{movie?.backdrop_path}}">
+
+
+<p>Watch Providers:</p>
+<ul>
+  <li>Rent:
+    <ul>
+      <li *ngFor="let watchProvider of getWatchProvidersToRentForCurrentCountry()">{{watchProvider.provider_name}}</li>
+    </ul>
+  </li>
+  <li>Buy:
+    <ul>
+      <li *ngFor="let watchProvider of getWatchProvidersToBuyForCurrentCountry()">{{watchProvider.provider_name}}</li>
+    </ul>
+  </li>
+  <li>Flatrate:
+    <ul>
+      <li
+        *ngFor="let watchProvider of getWatchProvidersToFlatrateForCurrentCountry()">{{watchProvider.provider_name}}</li>
+    </ul>
+  </li>
+</ul>
+<ul>
+</ul>
+
+<p>Crew: </p>
+<ul>
+  <li *ngFor="let member of movie?.credits?.crew">{{member.name}}</li>
+</ul>
+
+<p>Cast: </p>
+<ul>
+  <li *ngFor="let member of movie?.credits?.cast">{{member.name}}</li>
+</ul>
