@@ -1,14 +1,20 @@
-export interface Configuration{
-    images: Image,
-    change_keys: String[]
+export class Configuration {
+  constructor(
+    public images: Image,
+  ) {
+  }
+
 }
 
-export interface Image{
-    base_url: String,
-    secure_base_url: String,
-    backdrop_sizes: String[],
-    logo_sizes: String[],
-    poster_size: String[],
-    profile_sizes: String[],
-    still_sizes: String[]
+export class Image {
+  constructor(
+    public baseUrl: string,
+    public secureBaseUrl: string,
+    public backdropSizes: string[],
+    public logoSizes: string[],
+    public posterSizes: string[],
+    public profileSizes: string[],
+    public stillSizes: string[]
+  ) {
+  }
 }

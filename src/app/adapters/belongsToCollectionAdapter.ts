@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Adapter } from "./adapter";
 
-import {TmdbBelongsToCollection} from "../models/tmdbMovieDto";
+import {TmdbBelongsToCollection} from "../models/Tmdb/tmdbMovieDto";
 import {BelongsToCollection} from "../models/movieDto";
 
 @Injectable({

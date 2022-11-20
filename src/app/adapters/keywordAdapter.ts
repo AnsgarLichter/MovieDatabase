@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Adapter} from "./adapter";
 import {Keyword} from "../models/movieDto";
-import {TmdbKeyword} from "../models/tmdbMovieDto";
+import {TmdbKeyword} from "../models/Tmdb/tmdbMovieDto";
 
 @Injectable({
   providedIn: "root",

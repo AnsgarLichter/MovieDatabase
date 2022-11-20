@@ -41,8 +41,8 @@ export class MoviesComponent implements OnInit {
   }
 
   getConfigurationPath(): string {
-    if (this.configuration?.images?.base_url && this.configuration?.images?.backdrop_sizes[2]) {
-      return this.configuration?.images?.base_url + this.configuration?.images?.backdrop_sizes[2].toString()
+    if (this.configuration?.images?.baseUrl && this.configuration?.images?.backdropSizes[2]) {
+      return this.configuration?.images?.baseUrl + this.configuration?.images?.backdropSizes[2].toString()
     }
 
     return "";
@@ -50,7 +50,7 @@ export class MoviesComponent implements OnInit {
 
   getWatchProvidersForCurrentCountry(): WatchProvider[] | undefined {
     return this.movie?.watchProviders
-      .filter(watchProvider => watchProvider.country === "DE")
+      .filter(watchProvider => watchProvider.country === "DE") //TODO: Determine current country dynamically
       .sort((a: WatchProvider, b: WatchProvider) =>
         a.displayPriority - b.displayPriority
       );

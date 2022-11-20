@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Adapter} from "./adapter";
 import {WatchProvider, WatchProviderType} from "../models/movieDto";
-import {TmdbWatchProvider, TmdbWatchProviders} from "../models/tmdbMovieDto";
+import {TmdbWatchProvider, TmdbWatchProviders} from "../models/Tmdb/tmdbMovieDto";
 
 @Injectable({
   providedIn: "root",

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Adapter} from "./adapter";
 import {SpokenLanguage} from "../models/movieDto";
-import {TmdbSpokenLanguage} from "../models/tmdbMovieDto";
+import {TmdbSpokenLanguage} from "../models/Tmdb/tmdbMovieDto";
 
 @Injectable({
   providedIn: "root",

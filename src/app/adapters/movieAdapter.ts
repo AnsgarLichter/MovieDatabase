@@ -1,18 +1,18 @@
 import {Injectable} from "@angular/core";
 
 import {Adapter} from "./adapter";
-import {GenreAdapter} from "./GenreAdapter";
-import {BelongsToCollectionAdapter} from "./BelongsToCollectionAdapter";
-import {CastAdapter} from "./CastAdapter";
-import {CrewAdapter} from "./CrewAdapter";
-import {ProductionCompanyAdapter} from "./ProductionCompanyAdapter";
-import {ProductionCountryAdapter} from "./ProductionCountryAdapter";
-import {SpokenLanguageAdapter} from "./SpokenLanguageAdapter";
-import {WatchProvidersAdapter} from "./WatchProvidersAdapter";
+import {GenreAdapter} from "./genreAdapter";
+import {BelongsToCollectionAdapter} from "./belongsToCollectionAdapter";
+import {CastAdapter} from "./castAdapter";
+import {CrewAdapter} from "./crewAdapter";
+import {ProductionCompanyAdapter} from "./productionCompanyAdapter";
+import {ProductionCountryAdapter} from "./productionCountryAdapter";
+import {SpokenLanguageAdapter} from "./spokenLanguageAdapter";
+import {WatchProvidersAdapter} from "./watchProvidersAdapter";
 
 import {CrewMember, DirectorOrWriter, Movie} from "../models/movieDto";
-import {TmdbMovie} from "../models/tmdbMovieDto";
-import {KeywordAdapter} from "./KeywordAdapter";
+import {TmdbMovie} from "../models/Tmdb/tmdbMovieDto";
+import {KeywordAdapter} from "./keywordAdapter";
 
 
 @Injectable({

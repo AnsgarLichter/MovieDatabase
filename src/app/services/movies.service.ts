@@ -1,9 +1,9 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {map, Observable} from 'rxjs';
-import {TmdbMovie} from '../models/tmdbMovieDto';
+import {TmdbMovie} from '../models/Tmdb/tmdbMovieDto';
 import {MovieDbService} from './movieDb.service';
-import {MovieAdapter} from "../adapters/MovieAdapter";
+import {MovieAdapter} from "../adapters/movieAdapter";
 import {Movie} from "../models/movieDto";
 
 @Injectable({
