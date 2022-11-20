@@ -1,20 +1,27 @@
-import { Configuration } from './../models/configurationDto';
-import { ConfigurationService } from './../services/configuration.service';
-import { Component, OnInit } from '@angular/core';
-import {Movie, CrewMember, CastMember, WatchProvider} from '../models/movieDto';
-import { MoviesService } from '../services/movies.service';
+import {Component, OnInit} from '@angular/core';
+import { ViewEncapsulation } from '@angular/core';
+
+import {Movie, WatchProvider} from '../models/movieDto';
+import {Configuration} from '../models/configurationDto';
+import {ConfigurationService} from '../services/configuration.service';
+
+import {MoviesService} from '../services/movies.service';
+
+
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css']
+  styleUrls: ['./movies.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MoviesComponent implements OnInit {
 
   public movie: Movie | undefined;
   public configuration: Configuration | undefined;
 
-  constructor(private moviesService: MoviesService, private configurationService: ConfigurationService) { }
+  constructor(private moviesService: MoviesService, private configurationService: ConfigurationService) {
+  }
 
   ngOnInit(): void {
     this.getConfiguration();
@@ -22,7 +29,7 @@ export class MoviesComponent implements OnInit {
   }
 
   getMovie(movieId: number): void {
-    this.moviesService.getMovie(movieId, true, true).subscribe((movie: Movie) => {
+    this.moviesService.getMovie(movieId, true, true, true).subscribe((movie: Movie) => {
       this.movie = movie;
     });
   }
@@ -34,38 +41,19 @@ export class MoviesComponent implements OnInit {
   }
 
   getConfigurationPath(): string {
-    if(this.configuration?.images?.base_url && this.configuration?.images?.backdrop_sizes[0]) {
-      return this.configuration?.images?.base_url + this.configuration?.images?.backdrop_sizes[0].toString()
-    };
+    if (this.configuration?.images?.base_url && this.configuration?.images?.backdrop_sizes[2]) {
+      return this.configuration?.images?.base_url + this.configuration?.images?.backdrop_sizes[2].toString()
+    }
 
     return "";
   }
 
-  getWatchProvidersToRentForCurrentCountry(): WatchProvider[] | undefined {
-    const currentCountry = "DE";
-
-    const watchProviders = this.movie?.["watch/providers"]?.results?.[currentCountry].rent;
-    return watchProviders?.sort((a, b) =>
-      a.display_priority - b.display_priority
-    );
-  }
-
-  getWatchProvidersToBuyForCurrentCountry(): WatchProvider[] | undefined {
-    const currentCountry = "DE";
-
-    const watchProviders = this.movie?.["watch/providers"]?.results?.[currentCountry].buy;
-    return watchProviders?.sort((a, b) =>
-      a.display_priority - b.display_priority
-    );
-  }
-
-  getWatchProvidersToFlatrateForCurrentCountry(): WatchProvider[] | undefined {
-    const currentCountry = "DE";
-
-    const watchProviders = this.movie?.["watch/providers"]?.results?.[currentCountry].flatrate;
-    return watchProviders?.sort((a, b) =>
-      a.display_priority - b.display_priority
-    );
+  getWatchProvidersForCurrentCountry(): WatchProvider[] | undefined {
+    return this.movie?.watchProviders
+      .filter(watchProvider => watchProvider.country === "DE")
+      .sort((a: WatchProvider, b: WatchProvider) =>
+        a.displayPriority - b.displayPriority
+      );
   }
 
 }

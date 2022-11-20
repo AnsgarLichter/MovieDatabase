@@ -1,160 +1,143 @@
-export interface Movie {
-    adult: boolean,
-    backdrop_path: String,
-    belongs_to_collection: BelongsToCollection,
-    budget: number,
-    genres: Genre[],
-    homepage: String,
-    id: number,
-    imdb_id: String,
-    original_language: String,
-    original_title: String,
-    overview: String,
-    popularity: number,
-    poster_path: String,
-    production_companies: ProductionCompany[],
-    production_countries: ProductionCountry[],
-    release_date: String,
-    revenue: number,
-    runtime: number,
-    spoken_languages: SpokenLanguage[],
-    status: String,
-    tagline: String,
-    title: String,
-    video: boolean,
-    vote_average: number,
-    vote_count: number,
-    credits: Credits,
-    "watch/providers": WatchProviders,
+export class Movie {
+  constructor(
+    public id: number,
+    public originalTitle: string,
+    public originalLanguage: string,
+    public title: string,
+    public tagline: string,
+    public overview: string,
+    public releaseDate: Date,
+    public runtime: number,
+    public revenue: number,
+    public budget: number,
+    public voteAverage: number,
+    public voteCount: number,
+    public adult: boolean,
+    public backdropPath: string,
+    public posterPath: string,
+    public status: string,
+    public genres: Genre[],
+    public belongsToCollection: BelongsToCollection,
+    public cast: CastMember[],
+    public crew: CrewMember[],
+    public directorsAndWriters: DirectorOrWriter[],
+    public productionCompanies: ProductionCompany[],
+    public productionCountries: ProductionCountry[],
+    public spokenLanguages: SpokenLanguage[],
+    public watchProviders: WatchProvider[],
+    public keywords: Keyword[],
+  ) {
+  }
 }
 
-export interface BelongsToCollection {
-    id: number,
-    name: String,
-    poster_path: String,
-    backdrop_path: String
+export class Genre {
+  constructor(
+    public id: number,
+    public name: string
+  ) {
+  }
 }
 
-export interface Genre {
-    id: number,
-    name: String
+export class BelongsToCollection {
+  constructor(
+    public id: number,
+    public name: string,
+    public posterPath: string,
+    public backdropPath: string
+  ) {
+  }
 }
 
-export interface ProductionCompany {
-    id: number,
-    logo_path: String,
-    name: String,
-    origin_country: String
+export class CastMember {
+  constructor(
+    public id: number,
+    public castId: number,
+    public creditId: number,
+    public original_name: string,
+    public name: string,
+    public gender: number,
+    public character: string,
+    public knownForDepartment: string,
+    public order: number,
+    public profilePath: string
+  ) {
+  }
 }
 
-export interface ProductionCountry {
-    iso_3166_1: String,
-    name: String
+export class CrewMember {
+  constructor(
+    public id: number,
+    public creditId: number,
+    public original_name: string,
+    public name: string,
+    public gender: number,
+    public adult: boolean,
+    public department: string,
+    public job: string,
+    public knownForDepartment: string,
+  ) {
+  }
 }
 
-export interface SpokenLanguage {
-    english_name: String,
-    iso_639_1: String,
-    name: String
+export class DirectorOrWriter {
+  constructor(
+    public originalName: string,
+    public name: string,
+    public isDirector: boolean,
+    public isWriter: boolean
+  ) {
+  }
 }
 
-export interface Credits {
-  cast: CastMember[]
-  crew: CrewMember[]
+export class ProductionCompany {
+  constructor(
+    public id: number,
+    public name: string,
+    public originCountry: string,
+    public logoPath: string,
+  ) {
+  }
 }
 
-export interface CastMember {
-  adult: false,
-  gender: number,
-  id: number,
-  known_for_department: string,
-  name: string,
-  original_name: string,
-  popularity: number,
-  profile_path: string,
-  cast_id: number,
-  character: string,
-  credit_id: number,
-  order: number
+export class ProductionCountry {
+  constructor(
+    public name: string,
+    public iso31661: string
+  ) {
+  }
 }
 
-export interface CrewMember {
-  adult: boolean,
-  gender: number,
-  id: number,
-  known_for_department: string,
-  name: string,
-  original_name: string,
-  popularity: number,
-  profile_path: null,
-  credit_id: string,
-  department: string,
-  job: string
+export class SpokenLanguage {
+  constructor(
+    public englishName: string,
+    public name: string,
+    public iso6391: string
+  ) {
+  }
 }
 
-export interface WatchProviders {
-  results: WatchProviderCountries
+export class WatchProvider {
+  constructor(
+    public providerId: number,
+    public providerName: string,
+    public type: WatchProviderType,
+    public logoPath: string,
+    public country: string,
+    public displayPriority: number
+  ) {
+  }
 }
 
-export interface WatchProviderCountries {
-  "AZ": WatchProviderInCountry,
-  "AT": WatchProviderInCountry,
-  "AU": WatchProviderInCountry,
-  "BE": WatchProviderInCountry,
-  "BR": WatchProviderInCountry,
-  "CA": WatchProviderInCountry,
-  "CH": WatchProviderInCountry,
-  "CL": WatchProviderInCountry,
-  "CO": WatchProviderInCountry,
-  "CZ": WatchProviderInCountry,
-  "DE": WatchProviderInCountry,
-  "DK": WatchProviderInCountry,
-  "EC": WatchProviderInCountry,
-  "EE": WatchProviderInCountry,
-  "ES": WatchProviderInCountry,
-  "FI": WatchProviderInCountry,
-  "FR": WatchProviderInCountry,
-  "GB": WatchProviderInCountry,
-  "GR": WatchProviderInCountry,
-  "HU": WatchProviderInCountry,
-  "ID": WatchProviderInCountry,
-  "IE": WatchProviderInCountry,
-  "IN": WatchProviderInCountry,
-  "IT": WatchProviderInCountry,
-  "JP": WatchProviderInCountry,
-  "KR": WatchProviderInCountry,
-  "LT": WatchProviderInCountry,
-  "LV": WatchProviderInCountry,
-  "MX": WatchProviderInCountry,
-  "MY": WatchProviderInCountry,
-  "NL": WatchProviderInCountry,
-  "NO": WatchProviderInCountry,
-  "NZ": WatchProviderInCountry,
-  "PE": WatchProviderInCountry,
-  "PH": WatchProviderInCountry,
-  "PL": WatchProviderInCountry,
-  "PT": WatchProviderInCountry,
-  "RO": WatchProviderInCountry,
-  "RU": WatchProviderInCountry,
-  "SE": WatchProviderInCountry,
-  "SG": WatchProviderInCountry,
-  "TH": WatchProviderInCountry,
-  "TR": WatchProviderInCountry,
-  "US": WatchProviderInCountry,
-  "VE": WatchProviderInCountry,
-  "ZA": WatchProviderInCountry
+export class Keyword {
+  constructor(
+    public id: number,
+    public name: string
+  ) {
+  }
 }
 
-export interface WatchProviderInCountry {
-  link: string,
-  buy: WatchProvider[],
-  rent: WatchProvider[],
-  flatrate: WatchProvider[]
-}
-
-export interface WatchProvider {
-  logo_path: string,
-  provider_id: number,
-  provider_name: string,
-  display_priority: number
+export enum WatchProviderType {
+  flatrate = "flatrate",
+  rent = "rent",
+  buy = "buy"
 }

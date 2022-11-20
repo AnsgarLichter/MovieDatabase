@@ -1,4 +1,3 @@
-.center-chips {
-  display: flex;
+.mat-chip-list-wrapper {
   justify-content: center;
 }
