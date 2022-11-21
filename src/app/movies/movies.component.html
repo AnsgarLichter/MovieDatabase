@@ -156,12 +156,12 @@
                     <ng-template #dummyPictureWoman>
                       <img *ngIf="castMember.gender === 1; else dummyPictureMan"
                            class="w-20 h-20 max-w-none rounded-full" alt="Profile Picture of Crew Member"
-                           src="assets/profilePictureMan.svg">
+                           src="../../assets/fallbackProfilePictureMan.svg">
                     </ng-template>
                     <ng-template #dummyPictureMan>
                       <img class="w-20 h-20 max-w-none rounded-full"
                            alt="Profile Picture of cast member"
-                           src="assets/profilePictureMan.svg">
+                           src="../../assets/fallbackProfilePictureMan.svg">
                     </ng-template>
                   </div>
                   <div class="flex flex-col justify-center ml-4">
@@ -186,10 +186,10 @@
                   <div class="flex justify-center items-center">
                     <img *ngIf="crewMember.gender === 1; else dummyPictureMan"
                          class="w-24 h-24 max-w-none rounded-full" alt="Profile Picture of Crew Member"
-                         src="assets/profilePictureWoman.svg">
+                         src="../../assets/fallbackProfilePictureWoman.svg">
                     <ng-template #dummyPictureMan>
                       <img class="w-24 h-24 max-w-none rounded-full" alt="Profile Picture of Crew Member"
-                           src="assets/profilePictureMan.svg">
+                           src="../../assets/fallbackProfilePictureMan.svg">
                     </ng-template>
                   </div>
                   <div class="flex flex-col justify-center ml-4">
