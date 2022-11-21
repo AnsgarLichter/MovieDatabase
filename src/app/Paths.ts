@@ -1,6 +1,6 @@
 export class Paths {
-    public static movieDBApi= '';
     public static home = 'home';
-    public static movies = 'movies';
+    public static movieDetail = 'movies-detail/:id';
+    public static movieSearch = 'movie-search';
     public static series = 'series';
 }

@@ -120,7 +120,9 @@ export class WatchProvider {
   constructor(
     public providerId: number,
     public providerName: string,
-    public type: WatchProviderType,
+    public isAvailableToBuy: boolean,
+    public isAvailableForRent: boolean,
+    public isAvailableInFlatrate: boolean,
     public logoPath: string,
     public country: string,
     public displayPriority: number

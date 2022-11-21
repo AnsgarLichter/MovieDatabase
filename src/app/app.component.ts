@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Paths } from './Paths';
+import {Component} from '@angular/core';
+import {Paths} from './Paths';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { Paths } from './Paths';
 })
 export class AppComponent {
   title = 'movie-database';
-  linkMovie= Paths.movies;
+  linkMovie = Paths.movieSearch;
   linkSeries = Paths.series;
   linkHome = Paths.home;
 }

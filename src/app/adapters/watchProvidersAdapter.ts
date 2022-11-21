@@ -17,18 +17,29 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
         watchProviders.push(new WatchProvider(
           watchProvider.provider_id,
           watchProvider.provider_name,
-          WatchProviderType.buy,
+          true,
+          false,
+          false,
           watchProvider.logo_path,
           item,
           watchProvider.display_priority
-        ));
+        ))
+        ;
       });
 
       results[item].rent?.forEach((watchProvider: TmdbWatchProvider) => {
+        const adaptedWatchProvider = watchProviders.find(includedWatchProvider => includedWatchProvider.providerName === watchProvider.provider_name)
+        if (adaptedWatchProvider) {
+          adaptedWatchProvider.isAvailableForRent = true;
+          return;
+        }
+
         watchProviders.push(new WatchProvider(
           watchProvider.provider_id,
           watchProvider.provider_name,
-          WatchProviderType.rent,
+          false,
+          true,
+          false,
           watchProvider.logo_path,
           item,
           watchProvider.display_priority
@@ -36,10 +47,18 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
       });
 
       results[item].flatrate?.forEach((watchProvider: TmdbWatchProvider) => {
+        const adaptedWatchProvider = watchProviders.find(includedWatchProvider => includedWatchProvider.providerName === watchProvider.provider_name)
+        if (adaptedWatchProvider) {
+          adaptedWatchProvider.isAvailableForRent = true;
+          return;
+        }
+
         watchProviders.push(new WatchProvider(
           watchProvider.provider_id,
           watchProvider.provider_name,
-          WatchProviderType.flatrate,
+          false,
+          false,
+          true,
           watchProvider.logo_path,
           item,
           watchProvider.display_priority

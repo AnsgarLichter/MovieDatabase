@@ -1,0 +1,21 @@
+<p>movie-search works!</p>
+
+<p>Query: {{this.query}}</p>
+
+
+<p>Search Results:</p>
+<div *ngFor="let movie of movies"
+     class="flex flex-row my-4 rounded-xl space-x-8 bg-red-500 mx-8 pr-8 max-w-[50%]">
+  <div class="w-52 h-52 justify-start items-start flex">
+    <img class="w-52 h-52 max-w-none object-contain" alt="Profile Picture of cast member"
+         src="{{getImagePath()}}{{movie.posterPath}}">
+  </div>
+
+
+  <div class="flex flex-col items-center justify-center">
+    <div class="text-center text-xl font-bold">{{movie.originalTitle}}</div>
+    <div class="text-center text-md text-gray-600">{{movie.releaseDate.toLocaleDateString()}}</div>
+    <div>{{movie.overview}}</div>
+  </div>
+
+</div>
