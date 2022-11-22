@@ -28,7 +28,10 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
       });
 
       results[item].rent?.forEach((watchProvider: TmdbWatchProvider) => {
-        const adaptedWatchProvider = watchProviders.find(includedWatchProvider => includedWatchProvider.providerName === watchProvider.provider_name)
+        const adaptedWatchProvider = watchProviders.find(
+          includedWatchProvider => includedWatchProvider.providerName === watchProvider.provider_name
+            && includedWatchProvider.country === item
+        );
         if (adaptedWatchProvider) {
           adaptedWatchProvider.isAvailableForRent = true;
           return;
@@ -47,9 +50,12 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
       });
 
       results[item].flatrate?.forEach((watchProvider: TmdbWatchProvider) => {
-        const adaptedWatchProvider = watchProviders.find(includedWatchProvider => includedWatchProvider.providerName === watchProvider.provider_name)
+        const adaptedWatchProvider = watchProviders.find(
+          includedWatchProvider => includedWatchProvider.providerName === watchProvider.provider_name
+            && includedWatchProvider.country === item
+        );
         if (adaptedWatchProvider) {
-          adaptedWatchProvider.isAvailableForRent = true;
+          adaptedWatchProvider.isAvailableInFlatrate = true;
           return;
         }
 
