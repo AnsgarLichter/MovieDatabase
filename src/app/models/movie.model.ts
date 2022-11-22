@@ -21,9 +21,6 @@ export class Movie {
     public cast: CastMember[],
     public crew: CrewMember[],
     public directorsAndWriters: DirectorOrWriter[],
-    public productionCompanies: ProductionCompany[],
-    public productionCountries: ProductionCountry[],
-    public spokenLanguages: SpokenLanguage[],
     public watchProviders: WatchProvider[],
     public keywords: Keyword[],
   ) {
@@ -57,7 +54,6 @@ export class CastMember {
     public name: string,
     public gender: number,
     public character: string,
-    public knownForDepartment: string,
     public order: number,
     public profilePath: string
   ) {
@@ -71,10 +67,8 @@ export class CrewMember {
     public original_name: string,
     public name: string,
     public gender: number,
-    public adult: boolean,
-    public department: string,
     public job: string,
-    public knownForDepartment: string,
+    public profilePath: string,
   ) {
   }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { Paths } from './Paths';
+import { Paths } from './paths';
 
 import { HomeComponent } from './home/home.component';
 

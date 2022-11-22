@@ -4,8 +4,8 @@ import {ActivatedRoute} from "@angular/router";
 
 import {SearchService} from "../services/search.service";
 
-import {SearchMovie} from "../models/searchMovieDto";
-import {Configuration} from "../models/configurationDto";
+import {SearchMovie} from "../models/search-movie.model";
+import {Configuration} from "../models/configuration.model";
 import {ConfigurationService} from "../services/configuration.service";
 
 @Component({

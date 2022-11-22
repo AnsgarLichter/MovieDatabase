@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center md:flex-row">
     <div class="flex flex-col flex justify-center items-center">
       <img class="max-w-none h-80 w-80 md:h-auto md:w-auto md:max-w-[100%] lg:max-w-[80%] xl:max-w-[60%]"
-           src="{{getImagePath()}}{{movie?.posterPath}}"
+           src="{{movie?.posterPath}}"
            alt="Movie Poster">
     </div>
     <div class="md:mr-24">
@@ -121,29 +121,23 @@
               <div class="text-lg">{{streamingProvider.providerName}}</div>
 
               <div class="flex flex-row w-full text-center items-center justify-center space-x-4 mt-4">
-                <!--<div *ngIf="streamingProvider.type === 'buy'; else rent">-->
-                <div>
+                <div *ngIf="streamingProvider.isAvailableToBuy">
                   <mat-icon aria-hidden="false" aria-label="Buy" fontIcon="sell"></mat-icon>
                   Buy
                 </div>
 
-                <!--</div>-->
-                <!--<ng-template #rent>-->
-                <div>
+                <div *ngIf="streamingProvider.isAvailableForRent">
                   <mat-icon aria-hidden="false"
                             aria-label="Buy" fontIcon="hourglass_top"></mat-icon>
                   Rent
                 </div>
 
-                <!--</ng-template>-->
-                <!--<ng-template #flatrate>-->
-                <div>
+                <div *ngIf="streamingProvider.isAvailableInFlatrate">
                   <mat-icon aria-hidden="false" aria-label="Buy"
                             fontIcon="sync_saved_locally"></mat-icon>
                   Flatrate
                 </div>
 
-                <!--</ng-template>-->
               </div>
             </div>
           </div>
@@ -156,7 +150,7 @@
                class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
             <div class="flex items-center">
               <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
-                   src="{{getImagePath()}}{{castMember.profilePath}}">
+                   src="{{castMember.profilePath}}">
             </div>
 
             <div class="flex flex-col justify-center text-center w-full">
@@ -177,7 +171,7 @@
                class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
             <div class="flex items-center">
               <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
-                   src="assets/fallbackProfilePictureMan.svg">
+                   src="{{crewMember.profilePath}}">
             </div>
 
             <div class="flex flex-col justify-center text-center w-full">

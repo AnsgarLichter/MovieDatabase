@@ -1,10 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {map, Observable} from 'rxjs';
-import {MovieDbService} from './movieDb.service';
-import {SearchMovie} from "../models/searchMovieDto";
-import {TmdbSearchMovie, TmdbSearchMovieResults} from "../models/Tmdb/tmdbSearchMovieDto";
-import {SearchMovieAdapter} from "../adapters/searchMovieAdapter";
+import {MovieDbService} from './movie-db.service';
+import {SearchMovie} from "../models/search-movie.model";
+import {TmdbSearchMovie, TmdbSearchMovieResults} from "../models/tmdb/tmdb-search-movie.model";
+import {SearchMovieAdapter} from "../adapters/search-movie.adapter";
 
 @Injectable({
   providedIn: 'root'

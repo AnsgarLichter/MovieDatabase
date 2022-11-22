@@ -3,8 +3,8 @@ import {ViewEncapsulation} from '@angular/core';
 
 import {ActivatedRoute} from '@angular/router';
 
-import {Movie, WatchProvider} from '../models/movieDto';
-import {Configuration} from '../models/configurationDto';
+import {Movie, WatchProvider} from '../models/movie.model';
+import {Configuration} from '../models/configuration.model';
 import {ConfigurationService} from '../services/configuration.service';
 
 import {MoviesService} from '../services/movies.service';

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {map, Observable, of} from 'rxjs';
-import {MovieDbService} from './movieDb.service';
-import {TmdbConfiguration} from "../models/Tmdb/tmdbConfiguration";
-import {TmdbMovie} from "../models/Tmdb/tmdbMovieDto";
+import {MovieDbService} from './movie-db.service';
+import {TmdbConfiguration} from "../models/tmdb/tmdb-configuration.model";
+import {TmdbMovie} from "../models/tmdb/tmdb-movie.model";
 import {HttpClient} from "@angular/common/http";
-import {Configuration} from "../models/configurationDto";
-import {ConfigurationAdapter} from "../adapters/configurationAdapter";
+import {Configuration} from "../models/configuration.model";
+import {ConfigurationAdapter} from "../adapters/configuration.adapter";
 
 @Injectable({
   providedIn: 'root'

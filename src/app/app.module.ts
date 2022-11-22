@@ -15,6 +15,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {MovieSearchComponent} from './movies/movie-search.component';
+import {ImagePathProvider} from "./utilities/image-path-provider";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import {MovieSearchComponent} from './movies/movie-search.component';
     MatCardModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [ImagePathProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {

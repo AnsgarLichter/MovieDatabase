@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Adapter } from "./adapter";
-import { Genre } from "../models/movieDto";
-import { TmdbGenre } from "../models/Tmdb/tmdbMovieDto";
+import { Adapter } from "./base.adapter";
+import { Genre } from "../models/movie.model";
+import { TmdbGenre } from "../models/tmdb/tmdb-movie.model";
 
 @Injectable({
   providedIn: "root",

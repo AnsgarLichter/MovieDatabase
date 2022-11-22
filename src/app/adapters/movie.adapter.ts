@@ -1,18 +1,16 @@
 import {Injectable} from "@angular/core";
 
-import {Adapter} from "./adapter";
-import {GenreAdapter} from "./genreAdapter";
-import {BelongsToCollectionAdapter} from "./belongsToCollectionAdapter";
-import {CastAdapter} from "./castAdapter";
-import {CrewAdapter} from "./crewAdapter";
-import {ProductionCompanyAdapter} from "./productionCompanyAdapter";
-import {ProductionCountryAdapter} from "./productionCountryAdapter";
-import {SpokenLanguageAdapter} from "./spokenLanguageAdapter";
-import {WatchProvidersAdapter} from "./watchProvidersAdapter";
+import {Adapter} from "./base.adapter";
+import {GenreAdapter} from "./genre.adapter";
+import {BelongsToCollectionAdapter} from "./belongs-to-collection.adapter";
+import {CastAdapter} from "./cast.adapter";
+import {CrewAdapter} from "./crew.adapter";
+import {WatchProvidersAdapter} from "./watch-provider.adapter";
 
-import {CrewMember, DirectorOrWriter, Movie} from "../models/movieDto";
-import {TmdbMovie} from "../models/Tmdb/tmdbMovieDto";
-import {KeywordAdapter} from "./keywordAdapter";
+import {CrewMember, DirectorOrWriter, Movie} from "../models/movie.model";
+import {TmdbMovie} from "../models/tmdb/tmdb-movie.model";
+import {KeywordAdapter} from "./keyword.adapter";
+import {ImagePathProvider} from "../utilities/image-path-provider";
 
 
 @Injectable({
@@ -25,13 +23,11 @@ export class MovieAdapter implements Adapter<Movie> {
   }
 
   constructor(
+    private imagePathProvider: ImagePathProvider,
     private genreAdapter: GenreAdapter,
     private belongsToCollectionAdapter: BelongsToCollectionAdapter,
     private castAdapter: CastAdapter,
     private crewAdapter: CrewAdapter,
-    private productionCompanyAdapter: ProductionCompanyAdapter,
-    private productionCountryAdapter: ProductionCountryAdapter,
-    private spokenLanguageAdapter: SpokenLanguageAdapter,
     private watchProvidersAdapter: WatchProvidersAdapter,
     private keywordAdapter: KeywordAdapter,
   ) {
@@ -43,11 +39,11 @@ export class MovieAdapter implements Adapter<Movie> {
     const castMembers = item.credits.cast.map(castMember => this.castAdapter.adapt(castMember));
     const crewMembers = item.credits.crew.map(crewMember => this.crewAdapter.adapt(crewMember));
     const directorsAndWriters = this.getDirectorsAndWriters(crewMembers);
-    const productionCompanies = item.production_companies.map(productCompany => this.productionCompanyAdapter.adapt(productCompany));
-    const productionCountries = item.production_countries.map(productionCountry => this.productionCountryAdapter.adapt(productionCountry));
-    const spokenLanguages = item.spoken_languages.map(spokenLanguage => this.spokenLanguageAdapter.adapt(spokenLanguage));
     const watchProviders = this.watchProvidersAdapter.adapt(item["watch/providers"]);
     const keywords = item.keywords.keywords.map(keyword => this.keywordAdapter.adapt(keyword));
+
+    const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || ""; //TODO: Add fallback image
+    const posterPath = this.imagePathProvider.getBackdropUrl(item.poster_path) || ""; //TODO: Add fallback image
 
     return new Movie(
       item.id,
@@ -63,17 +59,14 @@ export class MovieAdapter implements Adapter<Movie> {
       item.vote_average,
       item.vote_count,
       item.adult,
-      item.backdrop_path, //TODO: insert configuration string?
-      item.poster_path, //TODO: insert configuration string?
+      backdropPath,
+      posterPath,
       item.status,
       genres,
       belongsToCollection,
       castMembers,
       crewMembers,
       directorsAndWriters,
-      productionCompanies, //TODO: Is this in use?
-      productionCountries, //TODO: Is this in use?
-      spokenLanguages, //TODO: Is this in use?
       watchProviders,
       keywords
     );

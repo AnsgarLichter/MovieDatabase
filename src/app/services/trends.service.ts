@@ -1,9 +1,9 @@
-import { MovieDbService } from './movieDb.service';
+import { MovieDbService } from './movie-db.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MovieTrends, SeriesTrends } from '../models/trendsDto';
+import { MovieTrends, SeriesTrends } from '../models/trends.model';
 
 @Injectable({
   providedIn: 'root'

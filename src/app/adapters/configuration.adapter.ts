@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
-import {Adapter} from "./adapter";
-import {Configuration, Image} from "../models/configurationDto";
-import {TmdbConfiguration} from "../models/Tmdb/tmdbConfiguration";
+import {Adapter} from "./base.adapter";
+import {Configuration, Image} from "../models/configuration.model";
+import {TmdbConfiguration} from "../models/tmdb/tmdb-configuration.model";
+import {ImagePathProvider} from "../utilities/image-path-provider";
 
 @Injectable({
   providedIn: "root",
