@@ -14,7 +14,7 @@ export class ConfigurationAdapter implements Adapter<Configuration> {
       item.images.secure_base_url,
       item.images.backdrop_sizes,
       item.images.logo_sizes,
-      item.images.poster_size,
+      item.images.poster_sizes,
       item.images.profile_sizes,
       item.images.still_sizes,
     );
