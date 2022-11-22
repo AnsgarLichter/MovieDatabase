@@ -8,7 +8,7 @@ export interface TmdbImage{
   secure_base_url: string,
   backdrop_sizes: string[],
   logo_sizes: string[],
-  poster_size: string[],
+  poster_sizes: string[],
   profile_sizes: string[],
   still_sizes: string[]
 }
