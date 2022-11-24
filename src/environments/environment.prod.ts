@@ -1,4 +1,6 @@
 export const environment = {
   production: false,
-  THE_MOVIE_DATABASE_API_KEY: process.env['THE_MOVIE_DATABASE_API_KEY'] || undefined
+  movieDbApi: 'https://api.themoviedb.org',
+  movieDbApiKey: process.env['THE_MOVIE_DATABASE_API_KEY'] || undefined,
+  movieDbApiVersion: '3'
 };

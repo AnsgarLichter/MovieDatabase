@@ -1,0 +1,192 @@
+<div class="my-12 mx-8 ">
+  <div class="flex flex-col items-center md:flex-row">
+    <div class="flex flex-col flex justify-center items-center">
+      <img class="max-w-none h-80 w-80 md:h-auto md:w-auto md:max-w-[100%] lg:max-w-[80%] xl:max-w-[60%]"
+           src="{{movie?.posterPath}}"
+           alt="Movie Poster">
+    </div>
+    <div class="md:mr-24">
+      <div class="flex flex-col items-center lg:flex-row mt-4 md:mt-0">
+        <div class="flex flex-col md:grow md:shrink-0 md:basis-auto md:w-1/2">
+          <div class="text-2xl font-bold text-center">{{movie?.originalTitle}}</div>
+          <div class="flex justify-center mt-2 md:mt-4">{{movie?.tagline}}</div>
+        </div>
+
+        <div class="flex flex-col mt-4 md:grow md:shrink-0 md:basis-auto md:w-1/2 md:mt-0 xl:mt-0">
+          <div>
+            <mat-chip-list class="flex justify-center" aria-label="Genres">
+              <mat-chip *ngFor="let genre of movie?.genres">{{genre.name}}</mat-chip>
+            </mat-chip-list>
+          </div>
+          <div class="flex flex-row mt-2 md:mt-4">
+            <div class="flex basis-1/2 justify-center">
+              {{movie?.releaseDate?.toLocaleDateString()}}
+            </div>
+            <div class="flex basis-1/2 justify-center">
+              {{movie?.runtime}} Minutes
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col mx-8 md:mx-24 mt-2 md:mt-12">
+        <div class="flex justify-center text-xl font-bold">
+          Overview
+        </div>
+        <div class="mt-2 md:mt-4">
+          {{movie?.overview}}
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-center mx-4 mt-4 md:mt-12">
+        <div class="flex flex-col flex-1 justify-center mx-4 my-1"
+             *ngFor="let directorOrWriter of movie?.directorsAndWriters">
+          <div class="flex justify-center font-bold text-base">
+            {{directorOrWriter.name}}
+          </div>
+          <div class="mx-8">
+            <div class="flex justify-center">
+              <div *ngIf="directorOrWriter.isDirector && directorOrWriter.isWriter; else director">
+                Director, Writer
+              </div>
+              <ng-template #director>
+                <div *ngIf="directorOrWriter.isDirector; else writer">
+                  Director
+                </div>
+              </ng-template>
+              <ng-template #writer>
+                <div *ngIf="directorOrWriter.isWriter">
+                  Writer
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col xl:flex-row mt-24 xl:mt-12">
+    <div class="flex xl:grow xl:shrink-0 xl:basis-auto xl:w-1/3 justify-center items-center xl:mb-12">
+      <div class="flex flex-col justify-center items-center space-y-4">
+        <div>
+          <div class="text-xl font-bold text-center">Keywords</div>
+          <div class="flex justify-center">
+            <mat-chip-list class="flex justify-center max-w-[80%] xl:max-w-[33%] center-mat-chips mt-4"
+                           aria-label="Keywords">
+              <mat-chip *ngFor="let keyword of movie?.keywords">{{keyword.name}}</mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Rating</div>
+          <div class="text-lg text-center">{{movie?.voteAverage}}</div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Budget</div>
+          <div class="text-lg text-center">{{movie?.budget}}</div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Revenue</div>
+          <div class="text-lg text-center">{{movie?.revenue}}</div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Original Language</div>
+          <div class="text-lg text-center">{{movie?.originalLanguage}}</div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Status</div>
+          <div class="text-lg text-center">{{movie?.status}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="xl:grow-0 xl:shrink-0 xl:basis-auto xl:w-2/3 mt-24 xl:mt-0">
+      <div class="flex flex-col flex-1 px-4">
+        <div class="flex justify-center text-3xl font-bold my-8">Streaming Providers</div>
+        <div class="flex flex-row overflow-x-auto space-x-4 px-4">
+          <div *ngFor="let streamingProvider of getWatchProvidersForCurrentCountry()"
+               class="flex bg-red-500 min-w-[275px] p-4 rounded-xl space-x-4">
+            <div class="flex items-center">
+              <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
+                   src="{{getImagePath()}}{{streamingProvider.logoPath}}">
+            </div>
+
+            <div class="flex flex-col justify-center text-center w-full">
+              <div class="text-lg">{{streamingProvider.providerName}}</div>
+
+              <div class="flex flex-row w-full text-center items-center justify-center space-x-4 mt-4">
+                <div *ngIf="streamingProvider.isAvailableToBuy">
+                  <mat-icon aria-hidden="false" aria-label="Buy" fontIcon="sell"></mat-icon>
+                  Buy
+                </div>
+
+                <div *ngIf="streamingProvider.isAvailableForRent">
+                  <mat-icon aria-hidden="false"
+                            aria-label="Buy" fontIcon="hourglass_top"></mat-icon>
+                  Rent
+                </div>
+
+                <div *ngIf="streamingProvider.isAvailableInFlatrate">
+                  <mat-icon aria-hidden="false" aria-label="Buy"
+                            fontIcon="sync_saved_locally"></mat-icon>
+                  Flatrate
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cast -->
+        <div class="flex justify-center text-3xl font-bold my-8">Cast</div>
+        <div class="flex flex-row overflow-x-auto space-x-4 px-4">
+          <div *ngFor="let castMember of movie?.cast"
+               class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
+            <div class="flex items-center">
+              <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
+                   src="{{castMember.profilePath}}">
+            </div>
+
+            <div class="flex flex-col justify-center text-center w-full">
+              <div class="text-lg">{{castMember.name}}</div>
+
+              <div>
+                {{castMember.character}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Crew -->
+        <div class="flex justify-center text-3xl font-bold my-8">Crew</div>
+        <div class="flex flex-row overflow-x-auto space-x-4 px-4">
+          <div *ngFor="let crewMember of movie?.crew"
+               class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
+            <div class="flex items-center">
+              <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
+                   src="{{crewMember.profilePath}}">
+            </div>
+
+            <div class="flex flex-col justify-center text-center w-full">
+              <div class="text-lg">{{crewMember.name}}</div>
+
+              <div>
+                {{crewMember.job}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
