@@ -31,7 +31,6 @@ export class MoviesService extends MovieDbService {
       requestUrl += ",keywords"
     }
 
-    //TODO: Pass configuration to adapter
     return this.httpClient.get<TmdbMovie>(requestUrl).pipe(
       map((movie: TmdbMovie) => this.adapter.adapt(movie))
     );

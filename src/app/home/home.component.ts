@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs';
 import { MovieTrends, SeriesTrends } from '../models/trends.model';
 import { TrendsService } from '../services/trends.service';
 
