@@ -2,13 +2,13 @@ import {Injectable} from "@angular/core";
 import {Adapter} from "./base.adapter";
 import {TmdbSearchMovie} from "../models/tmdb/tmdb-search-movie.model";
 import {SearchMovie} from "../models/search-movie.model";
-import {ImagePathProvider} from "../utilities/image-path-provider";
+import {ImageUrlProvider} from "../utilities/image-url-provider";
 
 @Injectable({
   providedIn: "root",
 })
 export class SearchMovieAdapter implements Adapter<SearchMovie> {
-  constructor(private imagePathProvider: ImagePathProvider) {
+  constructor(private imagePathProvider: ImageUrlProvider) {
   }
 
   adapt(item: TmdbSearchMovie): SearchMovie {

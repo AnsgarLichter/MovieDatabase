@@ -4,13 +4,13 @@ import {Adapter} from "./base.adapter";
 import {TmdbBelongsToCollection} from "../models/tmdb/tmdb-movie.model";
 import {BelongsToCollection} from "../models/movie.model";
 import {Configuration} from "../models/configuration.model";
-import {ImagePathProvider} from "../utilities/image-path-provider";
+import {ImageUrlProvider} from "../utilities/image-url-provider";
 
 @Injectable({
   providedIn: "root",
 })
 export class BelongsToCollectionAdapter implements Adapter<BelongsToCollection> {
-  constructor(private imagePathProvider: ImagePathProvider) {
+  constructor(private imagePathProvider: ImageUrlProvider) {
   }
 
   adapt(item: TmdbBelongsToCollection): BelongsToCollection {

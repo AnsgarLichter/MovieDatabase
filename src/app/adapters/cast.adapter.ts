@@ -2,13 +2,13 @@ import {Injectable} from "@angular/core";
 import {Adapter} from "./base.adapter";
 import {CastMember} from "../models/movie.model";
 import {TmdbCastMember} from "../models/tmdb/tmdb-movie.model";
-import {ImagePathProvider} from "../utilities/image-path-provider";
+import {ImageUrlProvider} from "../utilities/image-url-provider";
 
 @Injectable({
   providedIn: "root",
 })
 export class CastAdapter implements Adapter<CastMember> {
-  constructor(private imagePathProvider: ImagePathProvider) {
+  constructor(private imagePathProvider: ImageUrlProvider) {
   }
 
 

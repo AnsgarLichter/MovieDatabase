@@ -10,7 +10,7 @@ import {WatchProvidersAdapter} from "./watch-provider.adapter";
 import {CrewMember, DirectorOrWriter, Movie} from "../models/movie.model";
 import {TmdbMovie} from "../models/tmdb/tmdb-movie.model";
 import {KeywordAdapter} from "./keyword.adapter";
-import {ImagePathProvider} from "../utilities/image-path-provider";
+import {ImageUrlProvider} from "../utilities/image-url-provider";
 
 
 @Injectable({
@@ -23,7 +23,7 @@ export class MovieAdapter implements Adapter<Movie> {
   }
 
   constructor(
-    private imagePathProvider: ImagePathProvider,
+    private imagePathProvider: ImageUrlProvider,
     private genreAdapter: GenreAdapter,
     private belongsToCollectionAdapter: BelongsToCollectionAdapter,
     private castAdapter: CastAdapter,

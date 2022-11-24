@@ -5,7 +5,7 @@ import {Injectable} from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-export class ImagePathProvider {
+export class ImageUrlProvider {
   private configuration: Configuration | undefined
 
   constructor(private configurationService: ConfigurationService) {
