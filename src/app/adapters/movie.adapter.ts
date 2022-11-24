@@ -42,8 +42,8 @@ export class MovieAdapter implements Adapter<Movie> {
     const watchProviders = this.watchProvidersAdapter.adapt(item["watch/providers"]);
     const keywords = item.keywords.keywords.map(keyword => this.keywordAdapter.adapt(keyword));
 
-    const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || ""; //TODO: Add fallback image
-    const posterPath = this.imagePathProvider.getBackdropUrl(item.poster_path) || ""; //TODO: Add fallback image
+    const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || "assets/fallbackPictureMovie.png";
+    const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || "assets/fallbackPictureMovie.png";
 
     return new Movie(
       item.id,

@@ -31,7 +31,7 @@ export class ImageUrlProvider {
   }
 
   private constructImageUrl(availableSizes: string[] | undefined, imagePath: string): string | null {
-    if (!availableSizes || !availableSizes.length) {
+    if (!availableSizes || !availableSizes.length || !imagePath) {
       return null;
     }
 

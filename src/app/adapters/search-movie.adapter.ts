@@ -12,10 +12,7 @@ export class SearchMovieAdapter implements Adapter<SearchMovie> {
   }
 
   adapt(item: TmdbSearchMovie): SearchMovie {
-    let posterPath = this.imagePathProvider.getPosterUrl(item.poster_path);
-    if (!posterPath || !item.poster_path) {
-      posterPath = ""; //TODO: fallback path
-    }
+    const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || "assets/fallbackPictureMovie.png";
 
     return new SearchMovie(
       item.id,
