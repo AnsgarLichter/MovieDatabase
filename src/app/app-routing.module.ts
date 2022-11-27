@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: Paths.home, component: HomeComponent},
   { path: Paths.movieSearch, component: MovieSearchComponent},
   { path: Paths.movieDetail, component: MovieDetailComponent},
-  { path: Paths.series, component: SeriesComponent}
+  { path: Paths.series, component: SeriesComponent},
+  { path: Paths.seriesDetail, component: SeriesComponent} //TODO make detail component
 ];
 
 @NgModule({
