@@ -90,8 +90,8 @@ export class ProductionCompany {
   constructor(
     public id: number,
     public name: string,
-    public originCountry: string,
-    public logoPath: string,
+    public origin_country: string,
+    public logo_path: string,
   ) {
   }
 }
@@ -108,7 +108,7 @@ export class SpokenLanguage {
   constructor(
     public englishName: string,
     public name: string,
-    public iso6391: string
+    public iso_639_1: string
   ) {
   }
 }

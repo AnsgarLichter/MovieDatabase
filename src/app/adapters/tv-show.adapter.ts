@@ -2,15 +2,11 @@ import {Injectable} from "@angular/core";
 
 import {Adapter} from "./base.adapter";
 import {GenreAdapter} from "./genre.adapter";
-import {BelongsToCollectionAdapter} from "./belongs-to-collection.adapter";
-import {CastAdapter} from "./cast.adapter";
-import {CrewAdapter} from "./crew.adapter";
-import {WatchProvidersAdapter} from "./watch-provider.adapter";
 
 import {CrewMember, DirectorOrWriter, Movie} from "../models/movie.model";
 import {TvShow} from "../models/tv-show.model";
-import {KeywordAdapter} from "./keyword.adapter";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
+import {TMDB_TvShow} from "../models/tmdb/tmdb-tv-show-model";
 
 
 @Injectable({
@@ -25,50 +21,59 @@ export class TvShowAdapter implements Adapter<TvShow> {
   constructor(
     private imagePathProvider: ImageUrlProvider,
     private genreAdapter: GenreAdapter,
-    private belongsToCollectionAdapter: BelongsToCollectionAdapter,
-    private castAdapter: CastAdapter,
-    private crewAdapter: CrewAdapter,
-    private watchProvidersAdapter: WatchProvidersAdapter,
-    private keywordAdapter: KeywordAdapter,
+    //private belongsToCollectionAdapter: BelongsToCollectionAdapter,
+    //private castAdapter: CastAdapter,
+    //private crewAdapter: CrewAdapter,
+    //private watchProvidersAdapter: WatchProvidersAdapter,
+    //private keywordAdapter: KeywordAdapter,
   ) {
   }
 
-  adapt(item: TvShow): TvShow { //TODO: TvShow 1. is TMDB model, TVSHow 2. is our object
+  adapt(item: TMDB_TvShow): TvShow {
     const genres = item.genres.map(genre => this.genreAdapter.adapt(genre));
-    const belongsToCollection = this.belongsToCollectionAdapter.adapt(item.belongs_to_collection);
-    const castMembers = item.credits.cast.map(castMember => this.castAdapter.adapt(castMember));
-    const crewMembers = item.credits.crew.map(crewMember => this.crewAdapter.adapt(crewMember));
-    const directorsAndWriters = this.getDirectorsAndWriters(crewMembers);
-    const watchProviders = this.watchProvidersAdapter.adapt(item["watch/providers"]);
-    const keywords = item.keywords.keywords.map(keyword => this.keywordAdapter.adapt(keyword));
+    //const belongsToCollection = this.belongsToCollectionAdapter.adapt(item.belongs_to_collection);
+    //const castMembers = item.credits.cast.map(castMember => this.castAdapter.adapt(castMember));
+    //const crewMembers = item.credits.crew.map(crewMember => this.crewAdapter.adapt(crewMember));
+    //const directorsAndWriters = this.getDirectorsAndWriters(crewMembers);
+    //const watchProviders = this.watchProvidersAdapter.adapt(item["watch/providers"]);
+    //const keywords = item.keywords.keywords.map(keyword => this.keywordAdapter.adapt(keyword));
 
     const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || "assets/fallbackPictureMovie.png";
     const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || "assets/fallbackPictureMovie.png";
 
     return new TvShow(
       item.id,
-      item.original_title,
+      item.adult,
+      item.backdrop_path,
+      item.created_by,
+      item.episode_run_time,
+      item.first_air_date,
+      genres,
+      item.homepage,
+      item.in_production,
+      item.languages,
+      item.last_air_date,
+      item.last_episode_to_air,
+      item.name,
+      item.networks,
+      item.number_of_episodes,
+      item.number_of_seasons,
+      item.origin_country,
       item.original_language,
-      item.title,
-      item.tagline,
+      item.original_name,
       item.overview,
-      new Date(item.release_date),
-      item.runtime,
-      item.revenue,
-      item.budget,
+      item.popularity,
+      item.production_companies,
+      item.production_countries,
+      item.seasons,
+      item.spoken_languages,
+      item.status,
+      item.tagline,
+      item.type,
       item.vote_average,
       item.vote_count,
-      item.adult,
-      backdropPath,
-      posterPath,
-      item.status,
-      genres,
-      belongsToCollection,
-      castMembers,
-      crewMembers,
-      directorsAndWriters,
-      watchProviders,
-      keywords
+      item.next_episode_to_air,
+      item.poster_path,
     );
   }
 
