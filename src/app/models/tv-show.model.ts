@@ -1,4 +1,4 @@
-export interface tvSHow {
+export interface TvShow {
 	adult: boolean;
 	backdrop_path: string;
 	created_by: tvShow_created_by[];
