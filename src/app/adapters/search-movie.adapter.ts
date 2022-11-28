@@ -17,9 +17,9 @@ export class SearchMovieAdapter implements Adapter<SearchMovie> {
     return new SearchMovie(
       item.id,
       item.original_title,
-      new Date(item.release_date),
       item.overview,
-      posterPath
+      posterPath,
+      new Date(item.release_date)
     );
   }
 }
