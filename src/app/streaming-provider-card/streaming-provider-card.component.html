@@ -1,0 +1,28 @@
+<div class="flex bg-red-500 min-w-[275px] p-4 rounded-md space-x-4">
+    <div class="flex items-center">
+        <img class="w-14 h-14 max-w-none rounded-md" alt="Logo of Streaming Provider"
+            src="{{logoPath}}">
+    </div>
+
+    <div class="flex flex-col justify-center text-center w-full">
+        <div class="text-lg">{{name}}</div>
+
+        <div class="flex flex-row w-full text-center items-center justify-center space-x-4 mt-4">
+            <div *ngIf="isAvailableToBuy">
+                <mat-icon aria-hidden="false" aria-label="Buy" fontIcon="sell"></mat-icon>
+                Buy
+            </div>
+
+            <div *ngIf="isAvailableForRent">
+                <mat-icon aria-hidden="false" aria-label="Buy" fontIcon="hourglass_top"></mat-icon>
+                Rent
+            </div>
+
+            <div *ngIf="isAvailableInFlatrate">
+                <mat-icon aria-hidden="false" aria-label="Buy" fontIcon="sync_saved_locally"></mat-icon>
+                Flatrate
+            </div>
+
+        </div>
+    </div>
+</div>

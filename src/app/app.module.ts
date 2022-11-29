@@ -23,6 +23,8 @@ import {MovieDetailComponent} from './movies/movie-detail.component';
 import {SeriesComponent} from './series/series.component';
 
 import {ImageUrlProvider} from "./utilities/image-url-provider";
+import { PersonCardComponent } from './person-card/person-card.component';
+import { StreamingProviderCardComponent } from './streaming-provider-card/streaming-provider-card.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {ImageUrlProvider} from "./utilities/image-url-provider";
     HomeComponent,
     SeriesComponent,
     MovieDetailComponent,
-    MovieSearchComponent
+    MovieSearchComponent,
+    PersonCardComponent,
+    StreamingProviderCardComponent
   ],
   imports: [
     BrowserModule,

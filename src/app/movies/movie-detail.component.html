@@ -128,78 +128,29 @@
         </div>
         <div class="flex flex-row overflow-x-auto space-x-4 px-4"
           *ngIf="!!getWatchProvidersForCurrentCountry()?.length">
-          <div *ngFor="let streamingProvider of getWatchProvidersForCurrentCountry()"
-            class="flex bg-red-500 min-w-[275px] p-4 rounded-md space-x-4">
-            <div class="flex items-center">
-              <img class="w-14 h-14 max-w-none rounded-md" alt="Logo of Streaming Provider"
-                src="{{getImagePath()}}{{streamingProvider.logoPath}}">
-            </div>
-
-            <div class="flex flex-col justify-center text-center w-full">
-              <div class="text-lg">{{streamingProvider.providerName}}</div>
-
-              <div class="flex flex-row w-full text-center items-center justify-center space-x-4 mt-4">
-                <div *ngIf="streamingProvider.isAvailableToBuy">
-                  <mat-icon aria-hidden="false" aria-label="Buy" fontIcon="sell"></mat-icon>
-                  Buy
-                </div>
-
-                <div *ngIf="streamingProvider.isAvailableForRent">
-                  <mat-icon aria-hidden="false" aria-label="Buy" fontIcon="hourglass_top"></mat-icon>
-                  Rent
-                </div>
-
-                <div *ngIf="streamingProvider.isAvailableInFlatrate">
-                  <mat-icon aria-hidden="false" aria-label="Buy" fontIcon="sync_saved_locally"></mat-icon>
-                  Flatrate
-                </div>
-
-              </div>
-            </div>
-          </div>
+          <app-streaming-provider-card *ngFor="let streamingProvider of getWatchProvidersForCurrentCountry()"
+            name="{{streamingProvider.providerName}}" logoPath="{{streamingProvider.logoPath}}"
+            [isAvailableForRent]="streamingProvider.isAvailableForRent"
+            [isAvailableInFlatrate]="streamingProvider.isAvailableInFlatrate"
+            [isAvailableToBuy]="streamingProvider.isAvailableToBuy">
+          </app-streaming-provider-card>
         </div>
 
-        <!-- Cast -->
         <div class="flex justify-center text-3xl font-bold my-8" *ngIf="movie?.cast && !!movie?.cast?.length">
           Cast
         </div>
         <div class="flex flex-row overflow-x-auto space-x-4 px-4" *ngIf="movie?.cast && !!movie?.cast?.length">
-          <div *ngFor="let castMember of movie?.cast" class="flex bg-amber-500 min-w-[275px] p-4 rounded-md">
-            <div class="flex items-center justify-center">
-              <img class="h-20 max-w-none rounded-md" alt="Logo of Streaming Provider"
-                src="{{castMember.profilePath}}">
-            </div>
-
-            <div class="flex flex-col justify-center text-center w-full">
-              <div class="text-lg">{{castMember.name}}</div>
-
-              <div>
-                {{castMember.character}}
-              </div>
-            </div>
-          </div>
+          <app-person-card *ngFor="let castMember of movie?.cast" name="{{castMember.name}}"
+            subtitle="{{castMember.character}}" profilePicturePath="{{castMember.profilePath}}"></app-person-card>
         </div>
 
 
-        <!-- Crew -->
         <div class="flex justify-center text-3xl font-bold my-8" *ngIf="movie?.crew && !!movie?.crew?.length">
           Crew
         </div>
         <div class="flex flex-row overflow-x-auto space-x-4 px-4">
-          <div *ngFor="let crewMember of movie?.crew" class="flex bg-amber-500 min-w-[275px] p-4 rounded-md">
-            <div class="flex items-center">
-              <img class="h-20 max-w-none rounded-md" alt="Logo of Streaming Provider"
-                src="{{crewMember.profilePath}}">
-            </div>
-
-            <div class="flex flex-col justify-center text-center w-full">
-              <div class="text-lg">{{crewMember.name}}</div>
-
-              <div>
-                {{crewMember.job}}
-              </div>
-            </div>
-          </div>
+          <app-person-card *ngFor="let crewMember of movie?.crew" name="{{crewMember.name}}"
+            subtitle="{{crewMember.job}}" profilePicturePath="{{crewMember.profilePath}}"></app-person-card>
         </div>
 
 
