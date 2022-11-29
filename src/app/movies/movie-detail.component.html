@@ -123,37 +123,40 @@
 
     <div class="xl:grow-0 xl:shrink-0 xl:basis-auto xl:w-2/3 mt-24 xl:mt-0">
       <div class="flex flex-col flex-1 px-4">
-        <div class="flex justify-center text-3xl font-bold my-8" *ngIf="!!getWatchProvidersForCurrentCountry()?.length">
-          Streaming Providers
-        </div>
-        <div class="flex flex-row overflow-x-auto space-x-4 px-4"
-          *ngIf="!!getWatchProvidersForCurrentCountry()?.length">
-          <app-streaming-provider-card *ngFor="let streamingProvider of getWatchProvidersForCurrentCountry()"
-            name="{{streamingProvider.providerName}}" logoPath="{{streamingProvider.logoPath}}"
-            [isAvailableForRent]="streamingProvider.isAvailableForRent"
-            [isAvailableInFlatrate]="streamingProvider.isAvailableInFlatrate"
-            [isAvailableToBuy]="streamingProvider.isAvailableToBuy">
-          </app-streaming-provider-card>
-        </div>
-
-        <div class="flex justify-center text-3xl font-bold my-8" *ngIf="movie?.cast && !!movie?.cast?.length">
-          Cast
-        </div>
-        <div class="flex flex-row overflow-x-auto space-x-4 px-4" *ngIf="movie?.cast && !!movie?.cast?.length">
-          <app-person-card *ngFor="let castMember of movie?.cast" name="{{castMember.name}}"
-            subtitle="{{castMember.character}}" profilePicturePath="{{castMember.profilePath}}"></app-person-card>
+        <div *ngIf="!!getWatchProvidersForCurrentCountry()?.length">
+          <div class="flex justify-center text-3xl font-bold my-8">
+            Streaming Providers
+          </div>
+          <div class="flex flex-row overflow-x-auto space-x-4 px-4">
+            <app-streaming-provider-card *ngFor="let streamingProvider of getWatchProvidersForCurrentCountry()"
+              name="{{streamingProvider.providerName}}" logoPath="{{streamingProvider.logoPath}}"
+              [isAvailableForRent]="streamingProvider.isAvailableForRent"
+              [isAvailableInFlatrate]="streamingProvider.isAvailableInFlatrate"
+              [isAvailableToBuy]="streamingProvider.isAvailableToBuy">
+            </app-streaming-provider-card>
+          </div>
         </div>
 
-
-        <div class="flex justify-center text-3xl font-bold my-8" *ngIf="movie?.crew && !!movie?.crew?.length">
-          Crew
+        <div *ngIf="movie?.cast && !!movie?.cast?.length">
+          <div class="flex justify-center text-3xl font-bold my-8">
+            Cast
+          </div>
+          <div class="flex flex-row overflow-x-auto space-x-4 px-4">
+            <app-person-card *ngFor="let castMember of movie?.cast" name="{{castMember.name}}"
+              subtitle="{{castMember.character}}" profilePicturePath="{{castMember.profilePath}}"></app-person-card>
+          </div>
         </div>
-        <div class="flex flex-row overflow-x-auto space-x-4 px-4">
-          <app-person-card *ngFor="let crewMember of movie?.crew" name="{{crewMember.name}}"
-            subtitle="{{crewMember.job}}" profilePicturePath="{{crewMember.profilePath}}"></app-person-card>
+
+        <div *ngIf="movie?.crew && !!movie?.crew?.length">
+          <div class="flex justify-center text-3xl font-bold my-8">
+            Crew
+          </div>
+          <div class="flex flex-row overflow-x-auto space-x-4 px-4">
+            <app-person-card *ngFor="let crewMember of movie?.crew" name="{{crewMember.name}}"
+              subtitle="{{crewMember.job}}" profilePicturePath="{{crewMember.profilePath}}"></app-person-card>
+          </div>
         </div>
-
-
+        
       </div>
     </div>
   </div>
