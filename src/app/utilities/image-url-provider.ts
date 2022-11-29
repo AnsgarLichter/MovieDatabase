@@ -26,6 +26,10 @@ export class ImageUrlProvider {
     return this.constructImageUrl(this.configuration?.images.posterSizes, posterPath);
   }
 
+  getLogoUrl(logoPath: string): string | null {
+    return this.constructImageUrl(this.configuration?.images.logoSizes, logoPath);
+  }
+
   private getImageBaseUrl(): string | undefined {
     return this.configuration?.images.baseUrl;
   }
