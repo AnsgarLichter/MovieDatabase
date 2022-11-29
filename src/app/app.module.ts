@@ -23,6 +23,7 @@ import {MovieDetailComponent} from './movies/movie-detail.component';
 import {SeriesComponent} from './series/series.component';
 
 import {ImageUrlProvider} from "./utilities/image-url-provider";
+import { TvShowOverviewComponent } from './tv-show-overview/tv-show-overview.component';
 import { PersonCardComponent } from './person-card/person-card.component';
 import { StreamingProviderCardComponent } from './streaming-provider-card/streaming-provider-card.component';
 import { CountrySelectComponent } from './country-select/country-select.component';
@@ -37,6 +38,8 @@ import { YearPickerComponent } from './year-picker/year-picker.component';
     MovieDetailComponent,
     MovieSearchComponent,
     PersonCardComponent,
+    StreamingProviderCardComponent,
+    TvShowOverviewComponent
     StreamingProviderCardComponent,
     CountrySelectComponent,
     YearPickerComponent

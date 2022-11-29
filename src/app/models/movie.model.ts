@@ -99,14 +99,14 @@ export class ProductionCompany {
 export class ProductionCountry {
   constructor(
     public name: string,
-    public iso31661: string
+    public iso_3166_1: string
   ) {
   }
 }
 
 export class SpokenLanguage {
   constructor(
-    public englishName: string,
+    public english_name: string,
     public name: string,
     public iso_639_1: string
   ) {

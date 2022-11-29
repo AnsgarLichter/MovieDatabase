@@ -33,7 +33,7 @@ export class TvShow {
     public vote_average: number,
     public vote_count: number,
     public next_episode_to_air?: string | undefined,
-    public poster_path?: string | undefined,
+    public poster_path?: string,
   ) {
   }
 }

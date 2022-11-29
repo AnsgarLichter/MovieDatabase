@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TvShow} from "../models/tv-show.model";
-import { TVShowService} from "../services/series.service";
+import { TVShowService} from "../services/tv-show.service";
 import {ActivatedRoute} from "@angular/router";
 import {Configuration} from "../models/configuration.model";
 import {ConfigurationService} from "../services/configuration.service";

@@ -23,7 +23,7 @@ export interface TMDB_TvShow {
   original_name: string;
   overview: string;
   popularity: number;
-  poster_path?: string;
+  poster_path: string;
   production_companies: TmdbProductionCompany[];
   production_countries: TmdbProductionCountry[];
   seasons: TMDB_tvShow_seasons[];

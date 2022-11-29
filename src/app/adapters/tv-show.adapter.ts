@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {Adapter} from "./base.adapter";
 import {GenreAdapter} from "./genre.adapter";
 
-import {CrewMember, DirectorOrWriter, Movie} from "../models/movie.model";
+import {CrewMember, DirectorOrWriter} from "../models/movie.model";
 import {TvShow} from "../models/tv-show.model";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
 import {TMDB_TvShow} from "../models/tmdb/tmdb-tv-show-model";
@@ -44,7 +44,7 @@ export class TvShowAdapter implements Adapter<TvShow> {
     return new TvShow(
       item.id,
       item.adult,
-      item.backdrop_path,
+      backdropPath,
       item.created_by,
       item.episode_run_time,
       item.first_air_date,
@@ -73,7 +73,7 @@ export class TvShowAdapter implements Adapter<TvShow> {
       item.vote_average,
       item.vote_count,
       item.next_episode_to_air,
-      item.poster_path,
+      posterPath,
     );
   }
 
