@@ -1,4 +1,10 @@
-import {TmdbGenre, TmdbProductionCompany, TmdbProductionCountry, TmdbSpokenLanguage} from "./tmdb-movie.model";
+import {
+  TmdbCredits,
+  TmdbGenre, TmdbKeyword, TmdbKeywords,
+  TmdbProductionCompany,
+  TmdbProductionCountry,
+  TmdbSpokenLanguage, TmdbWatchProviders
+} from "./tmdb-movie.model";
 
 export interface TMDB_TvShow {
   adult: boolean;
@@ -33,6 +39,9 @@ export interface TMDB_TvShow {
   type: string;
   vote_average: number;
   vote_count: number;
+  credits: TmdbCredits,
+  "watch/providers": TmdbWatchProviders,
+  keywords?: Tmdb_tvshow_Keywords
 }
 export interface TMDB_tvShow_episode_to_air {
   air_date: string;
@@ -63,4 +72,7 @@ export interface TMDB_tvShow_seasons {
   overview: string;
   poster_path: string;
   season_number: number;
+}
+export interface Tmdb_tvshow_Keywords {
+  results: TmdbKeyword[]
 }

@@ -147,9 +147,9 @@ export interface TmdbWatchProviderCountries {
 
 export interface TmdbWatchProviderInCountry {
   link: string,
-  buy: TmdbWatchProvider[],
-  rent: TmdbWatchProvider[],
-  flatrate: TmdbWatchProvider[]
+  buy?: TmdbWatchProvider[],
+  rent?: TmdbWatchProvider[],
+  flatrate?: TmdbWatchProvider[]
 }
 
 export interface TmdbWatchProvider {
