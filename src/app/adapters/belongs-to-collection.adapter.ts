@@ -3,7 +3,6 @@ import {Adapter} from "./base.adapter";
 
 import {TmdbBelongsToCollection} from "../models/tmdb/tmdb-movie.model";
 import {BelongsToCollection} from "../models/movie.model";
-import {Configuration} from "../models/configuration.model";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
 
 @Injectable({
