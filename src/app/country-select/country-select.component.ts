@@ -1,5 +1,5 @@
 import { countries, Country } from './country.model';
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 
@@ -17,7 +17,9 @@ import { MatSelectChange } from '@angular/material/select';
 })
 export class CountrySelectComponent implements OnInit, ControlValueAccessor {
 
-  @Output() public selectedCountryCode: string = "";
+  @Input() public isDeselectPossible = true;
+  @Input() @Output() public selectedCountryCode: string = "";
+  @Output() public selectionChange = new EventEmitter<MatSelectChange>();
 
   public countries: Country[] = countries;
 
@@ -36,6 +38,7 @@ export class CountrySelectComponent implements OnInit, ControlValueAccessor {
     this.selectedCountryCode = event.value;
 
     this.onChange(this.selectedCountryCode);
+    this.selectionChange.emit(event);
   }
 
   markAsTouched(): void {
