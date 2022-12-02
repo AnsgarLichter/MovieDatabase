@@ -1,6 +1,7 @@
 import { countries, Country } from './country.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-country-select',
@@ -16,8 +17,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator } from '@angular/for
 })
 export class CountrySelectComponent implements OnInit, ControlValueAccessor {
 
+  @Output() public selectedCountryCode: string = "";
+
   public countries: Country[] = countries;
-  public selectedCountryCode: string = "";
+
   public onChange = (selectedCountryCode: string) => { };
   public onTouched = () => { };
 
@@ -29,7 +32,9 @@ export class CountrySelectComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
   }
 
-  onSelectionChanged(): void {
+  onSelectionChanged(event: MatSelectChange): void {
+    this.selectedCountryCode = event.value;
+
     this.onChange(this.selectedCountryCode);
   }
 
