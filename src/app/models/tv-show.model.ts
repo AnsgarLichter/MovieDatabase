@@ -1,4 +1,12 @@
-import {Genre, ProductionCompany, ProductionCountry, SpokenLanguage} from "./movie.model";
+import {
+  CastMember,
+  CrewMember,
+  DirectorOrWriter,
+  Genre, Keyword,
+  ProductionCompany,
+  ProductionCountry,
+  SpokenLanguage, WatchProvider
+} from "./movie.model";
 
 export class TvShow {
   constructor(
@@ -7,12 +15,12 @@ export class TvShow {
     public backdrop_path: string,
     public created_by: ProductionCompany[],
     public episode_run_time: number[],
-    public first_air_date: string,
+    public first_air_date: Date,
     public genres: Genre[],
     public homepage: string,
     public in_production: boolean,
     public languages: string[],
-    public last_air_date: string,
+    public last_air_date: Date,
     public last_episode_to_air: tvShow_episode_to_air,
     public name: string,
     public networks: tvShow_networks[],
@@ -32,6 +40,11 @@ export class TvShow {
     public type: string,
     public vote_average: number,
     public vote_count: number,
+    public watchProvider: WatchProvider[],
+    public cast?: CastMember[],
+    public crew?: CrewMember[],
+    public directorsAndWriters?: DirectorOrWriter[],
+    public keywords?: Keyword[],
     public next_episode_to_air?: string | undefined,
     public poster_path?: string,
   ) {
