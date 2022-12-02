@@ -73,7 +73,6 @@ export interface TmdbCastMember {
   original_name: string,
   popularity: number,
   profile_path: string,
-  cast_id: number,
   character: string,
   credit_id: number,
   order: number

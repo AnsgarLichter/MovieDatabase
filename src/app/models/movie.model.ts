@@ -51,7 +51,6 @@ export class BelongsToCollection {
 export class CastMember {
   constructor(
     public id: number,
-    public castId: number,
     public creditId: number,
     public original_name: string,
     public name: string,
