@@ -17,3 +17,14 @@
 .button1 {
     background: #ffc107;
 }
+
+.footer {
+    background: #212529;
+    margin-top: 50px;
+    color: #fff;
+    padding-top: 30px;
+}
+
+.footer li a {
+    color: #fff;
+}
