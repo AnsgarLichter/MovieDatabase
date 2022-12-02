@@ -47,8 +47,8 @@ export class SeriesComponent implements OnInit {
   }
 
   getWatchProvidersForCurrentCountry(): WatchProvider[] | undefined {
-    return this.movie?.watchProviders
-      .filter(watchProvider => watchProvider.country === "DE") //TODO: Determine current country dynamically
+    return this.tvShow?.watchProvider
+      .filter(watchProvider => watchProvider.country === "DE")
       .sort((a: WatchProvider, b: WatchProvider) =>
         a.displayPriority - b.displayPriority
       );

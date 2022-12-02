@@ -8,22 +8,22 @@
     <div class="md:mr-24">
       <div class="flex flex-col items-center lg:flex-row mt-4 md:mt-0">
         <div class="flex flex-col md:grow md:shrink-0 md:basis-auto md:w-1/2">
-          <div class="text-2xl font-bold text-center">{{ tvShow.name }}</div>
-          <div class="flex justify-center mt-2 md:mt-4">{{ tvShow.tagline }}</div>
+          <div class="text-2xl font-bold text-center">{{ tvShow?.name }}</div>
+          <div class="flex justify-center mt-2 md:mt-4">{{ tvShow?.tagline }}</div>
         </div>
 
         <div class="flex flex-col mt-4 md:grow md:shrink-0 md:basis-auto md:w-1/2 md:mt-0 xl:mt-0">
           <div>
             <mat-chip-list class="flex justify-center" aria-label="Genres">
-              <mat-chip *ngFor="let genre of tvShow.genres">{{ genre.name }}</mat-chip>
+              <mat-chip *ngFor="let genre of tvShow?.genres">{{ genre.name }}</mat-chip>
             </mat-chip-list>
           </div>
           <div class="flex flex-row mt-2 md:mt-4">
             <div class="flex basis-1/2 justify-center">
-              {{ tvShow.first_air_date }} //toLocaleDateString
+              {{ tvShow?.first_air_date?.toLocaleDateString() }}
             </div>
             <div class="flex basis-1/2 justify-center">
-              {{ tvShow.episode_run_time }} Minutes
+              {{ tvShow?.episode_run_time }} Minutes
             </div>
           </div>
         </div>
@@ -34,13 +34,12 @@
           Overview
         </div>
         <div class="mt-2 md:mt-4">
-          {{ tvShow.overview }}
+          {{ tvShow?.overview }}
         </div>
       </div>
-
       <div class="flex flex-col md:flex-row justify-center mx-4 mt-4 md:mt-12">
         <div class="flex flex-col flex-1 justify-center mx-4 my-1"
-             *ngFor="let directorOrWriter of tvShow.created_by ">
+             *ngFor="let directorOrWriter of tvShow?.directorsAndWriters ">
           <div class="flex justify-center font-bold text-base">
             {{ directorOrWriter.name }}
           </div>
@@ -65,7 +64,6 @@
       </div>
     </div>
   </div>
-
   <div class="flex flex-col xl:flex-row mt-24 xl:mt-12">
     <div class="flex xl:grow xl:shrink-0 xl:basis-auto xl:w-1/3 justify-center items-center xl:mb-12">
       <div class="flex flex-col justify-center items-center space-y-4">
@@ -74,24 +72,24 @@
           <div class="flex justify-center">
             <mat-chip-list class="flex justify-center max-w-[80%] xl:max-w-[33%] center-mat-chips mt-4"
                            aria-label="Keywords">
-              <mat-chip *ngFor="let keyword of tvShow.type">{{keyword}}</mat-chip>
+              <mat-chip *ngFor="let keyword of tvShow?.keywords">{{keyword}}</mat-chip>
             </mat-chip-list>
           </div>
         </div>
 
         <div>
           <div class="text-xl font-bold text-center">Rating</div>
-          <div class="text-lg text-center">{{ tvShow.vote_average }}</div>
+          <div class="text-lg text-center">{{ tvShow?.vote_average }}</div>
         </div>
 
         <div>
           <div class="text-xl font-bold text-center">Original Language</div>
-          <div class="text-lg text-center">{{ tvShow.original_language }}</div>
+          <div class="text-lg text-center">{{ tvShow?.original_language }}</div>
         </div>
 
         <div>
           <div class="text-xl font-bold text-center">Status</div>
-          <div class="text-lg text-center">{{ tvShow.status }}</div>
+          <div class="text-lg text-center">{{ tvShow?.status }}</div>
         </div>
       </div>
     </div>
@@ -132,11 +130,9 @@
             </div>
           </div>
         </div>
-
-        <!-- Cast -->
         <div class="flex justify-center text-3xl font-bold my-8">Cast</div>
         <div class="flex flex-row overflow-x-auto space-x-4 px-4">
-          <div *ngFor="let castMember of tvShow."
+          <div *ngFor="let castMember of tvShow?.cast"
                class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
             <div class="flex items-center">
               <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
@@ -152,12 +148,9 @@
             </div>
           </div>
         </div>
-
-
-        <!-- Crew -->
         <div class="flex justify-center text-3xl font-bold my-8">Crew</div>
         <div class="flex flex-row overflow-x-auto space-x-4 px-4">
-          <div *ngFor="let crewMember of movie?.crew"
+          <div *ngFor="let crewMember of tvShow?.crew"
                class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
             <div class="flex items-center">
               <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
