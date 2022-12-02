@@ -7,6 +7,10 @@ import {CrewMember, DirectorOrWriter} from "../models/movie.model";
 import {TvShow} from "../models/tv-show.model";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
 import {TMDB_TvShow} from "../models/tmdb/tmdb-tv-show-model";
+import {CastAdapter} from "./cast.adapter";
+import {CrewAdapter} from "./crew.adapter";
+import {WatchProvidersAdapter} from "./watch-provider.adapter";
+import {KeywordAdapter} from "./keyword.adapter";
 
 
 @Injectable({
@@ -22,21 +26,21 @@ export class TvShowAdapter implements Adapter<TvShow> {
     private imagePathProvider: ImageUrlProvider,
     private genreAdapter: GenreAdapter,
     //private belongsToCollectionAdapter: BelongsToCollectionAdapter,
-    //private castAdapter: CastAdapter,
-    //private crewAdapter: CrewAdapter,
-    //private watchProvidersAdapter: WatchProvidersAdapter,
-    //private keywordAdapter: KeywordAdapter,
+    private castAdapter: CastAdapter,
+    private crewAdapter: CrewAdapter,
+    private watchProvidersAdapter: WatchProvidersAdapter,
+    private keywordAdapter: KeywordAdapter,
   ) {
   }
 
   adapt(item: TMDB_TvShow): TvShow {
     const genres = item.genres.map(genre => this.genreAdapter.adapt(genre));
     //const belongsToCollection = this.belongsToCollectionAdapter.adapt(item.belongs_to_collection);
-    //const castMembers = item.credits.cast.map(castMember => this.castAdapter.adapt(castMember));
-    //const crewMembers = item.credits.crew.map(crewMember => this.crewAdapter.adapt(crewMember));
-    //const directorsAndWriters = this.getDirectorsAndWriters(crewMembers);
-    //const watchProviders = this.watchProvidersAdapter.adapt(item["watch/providers"]);
-    //const keywords = item.keywords.keywords.map(keyword => this.keywordAdapter.adapt(keyword));
+    const castMembers = item.credits.cast.map(castMember => this.castAdapter.adapt(castMember));
+    const crewMembers = item.credits.crew.map(crewMember => this.crewAdapter.adapt(crewMember));
+    const directorsAndWriters = this.getDirectorsAndWriters(crewMembers);
+    const watchProviders = this.watchProvidersAdapter.adapt(item["watch/providers"]);
+    const keywords = item.keywords?.results.map(keyword => this.keywordAdapter.adapt(keyword));
 
     const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || "assets/fallbackPictureMovie.png";
     const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || "assets/fallbackPictureMovie.png";
@@ -46,13 +50,13 @@ export class TvShowAdapter implements Adapter<TvShow> {
       item.adult,
       backdropPath,
       item.created_by,
-      item.episode_run_time,
-      item.first_air_date,
+      item.episode_run_time.sort((n1,n2) => n1 - n2),
+      new Date(item.first_air_date),
       genres,
       item.homepage,
       item.in_production,
       item.languages,
-      item.last_air_date,
+      new Date(item.last_air_date),
       item.last_episode_to_air,
       item.name,
       item.networks,
@@ -72,6 +76,11 @@ export class TvShowAdapter implements Adapter<TvShow> {
       item.type,
       item.vote_average,
       item.vote_count,
+      watchProviders,
+      castMembers,
+      crewMembers,
+      directorsAndWriters,
+      keywords,
       item.next_episode_to_air,
       posterPath,
     );
