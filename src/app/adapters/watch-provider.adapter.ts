@@ -1,12 +1,16 @@
-import {Injectable} from "@angular/core";
-import {Adapter} from "./base.adapter";
-import {WatchProvider, WatchProviderType} from "../models/movie.model";
-import {TmdbWatchProvider, TmdbWatchProviders} from "../models/tmdb/tmdb-movie.model";
+import { Injectable } from "@angular/core";
+import { Adapter } from "./base.adapter";
+import { WatchProvider } from "../models/movie.model";
+import { TmdbWatchProvider, TmdbWatchProviders } from "../models/tmdb/tmdb-movie.model";
+import {ImageUrlProvider} from "../utilities/image-url-provider";
 
 @Injectable({
   providedIn: "root",
 })
 export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
+  constructor(private imagePathProvider: ImageUrlProvider) {
+  }
+
   adapt(item: TmdbWatchProviders): WatchProvider[] {
     const results = item.results;
     const watchProviders: WatchProvider[] = [];
@@ -20,11 +24,11 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
           true,
           false,
           false,
-          watchProvider.logo_path,
+          this.imagePathProvider.getLogoUrl(watchProvider.logo_path) || "",
           item,
           watchProvider.display_priority
         ))
-        ;
+          ;
       });
 
       results[item].rent?.forEach((watchProvider: TmdbWatchProvider) => {
@@ -43,7 +47,7 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
           false,
           true,
           false,
-          watchProvider.logo_path,
+          this.imagePathProvider.getLogoUrl(watchProvider.logo_path) || "",
           item,
           watchProvider.display_priority
         ));
@@ -65,7 +69,7 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
           false,
           false,
           true,
-          watchProvider.logo_path,
+          this.imagePathProvider.getLogoUrl(watchProvider.logo_path) || "",
           item,
           watchProvider.display_priority
         ));

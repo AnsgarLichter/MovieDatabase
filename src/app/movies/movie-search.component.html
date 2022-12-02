@@ -1,19 +1,62 @@
-<p>movie-search works!</p>
+<div class="flex flex-row justify-center items-center bg-gray-500 py-8 px-8 md:px-0">
+  <form class="flex flex-col" [formGroup]="searchForm" (ngSubmit)="onSearchSubmitted()">
+    <div class="flex flex-col md:flex-row md:space-x-8">
+      <mat-form-field appearance="outline">
+        <mat-label>Title:</mat-label>
+        <input matInput type="text" placeholder="Title ..." formControlName="title">
+      </mat-form-field>
 
-<p>Query: {{this.query}}</p>
+      <mat-form-field appearance="outline">
+        <mat-label>Release Year</mat-label>
+        <input matInput name="year" readonly [matDatepicker]="datePicker" formControlName="year">
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker
+                        startView="multi-year"
+                        (yearSelected)="onYearSelected($event, datePicker)">
+        </mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Country:</mat-label>
+        <mat-hint>Only affects the shown release date</mat-hint>
+        <mat-select formControlName="region">
+          <mat-option>-</mat-option>
+          <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="flex flex-row justify-center basis-full items-center mt-8 md:mt-0">
+      <button mat-button type="submit" color="accent" [disabled]="!searchForm.valid">
+        <mat-icon>search</mat-icon>
+        Search
+      </button>
+    </div>
+  </form>
+</div>
 
 
-<p>Search Results:</p>
 <div class="flex flex-row flex-wrap grow-0 shrink-0">
-  <div *ngFor="let movie of movies"
-       class="flex flex-col justify-center items-center w-1/6 my-4 rounded-xl space-y-4 space-x-4 pb-4">
+  <a *ngFor="let movie of movies"
+     class="flex flex-col justify-center items-center w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 my-4 rounded-xl space-y-4 space-x-4 pb-4"
+     [routerLink]="['/movies-detail', movie.id]">
     <div class="flex mt-4">
       <img class="h-96 max-w-none object-contain" alt="Profile Picture of cast member"
            src="{{movie.posterPath}}">
     </div>
 
     <div class="text-xl font-bold">{{movie.originalTitle}}</div>
+    <div class="text-base font-bold">{{movie.releaseDate.toLocaleDateString()}}</div>
 
-  </div>
+  </a>
 </div>
+
+<div class="py-8 flex justify-center items-center"
+     *ngIf="!!movies">
+  <button mat-button type="submit" color="accent" (click)="onLoadMoreResultsPressed()">
+    <mat-icon>load</mat-icon>
+    Load more Results ...
+  </button>
+</div>
+
 
