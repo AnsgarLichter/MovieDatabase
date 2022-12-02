@@ -127,7 +127,6 @@
           <div class="flex flex-col justify-center items-center text-3xl font-bold my-8">
             Streaming Providers
             <div class="flex flex-row w-full bg-red-500 px-8 items-center justify-center">
-              <!--TODO: A country always must be selected. Therefore the item '--' has to be removed-->
               <app-country-select [isDeselectPossible]="false" [selectedCountryCode]="selectedCountryCode"
                 (selectionChange)="onCountrySelectionChanged($event)">
               </app-country-select>
