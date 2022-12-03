@@ -51,7 +51,6 @@ export class MovieSearchComponent implements OnInit {
   }
 
   onSearchSubmitted(): void {
-    //TODO: Clear value of date field should be possible
     this.loadSearchResultsByFormValues();
   }
 
