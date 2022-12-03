@@ -28,7 +28,7 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
       }
 
       const watchProviderType = type as WatchProviderType;
-      watchProviderTypes[watchProviderType].forEach(watchProvider =>
+      watchProviderTypes[watchProviderType]?.forEach(watchProvider =>
         this.mapWatchProvider(
           watchProvider,
           watchProviderType,
