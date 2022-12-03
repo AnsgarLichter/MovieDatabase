@@ -1,6 +1,6 @@
 # MovieDatabase
 
-Movie Database is a project for the lecture software architectures labratory.
+Movie Database is a project for the lecture software architectures laboratory.
 
 ## Getting Started
 
