@@ -23,13 +23,13 @@ import {MovieDetailComponent} from './movies/movie-detail.component';
 import {SeriesComponent} from './series/series.component';
 
 import {ImageUrlProvider} from "./utilities/image-url-provider";
-import { TvShowOverviewComponent } from './tv-show-overview/tv-show-overview.component';
-import { PersonCardComponent } from './person-card/person-card.component';
-import { StreamingProviderCardComponent } from './streaming-provider-card/streaming-provider-card.component';
+import {TvShowOverviewComponent} from './tv-show-overview/tv-show-overview.component';
+import {PersonCardComponent} from './person-card/person-card.component';
+import {StreamingProviderCardComponent} from './streaming-provider-card/streaming-provider-card.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatExpansionModule} from "@angular/material/expansion";
-import { CountrySelectComponent } from './country-select/country-select.component';
-import { YearPickerComponent } from './year-picker/year-picker.component';
+import {CountrySelectComponent} from './country-select/country-select.component';
+import {YearPickerComponent} from './year-picker/year-picker.component';
 
 
 @NgModule({
@@ -39,30 +39,29 @@ import { YearPickerComponent } from './year-picker/year-picker.component';
     SeriesComponent,
     MovieDetailComponent,
     MovieSearchComponent,
+    TvShowOverviewComponent,
     PersonCardComponent,
-    StreamingProviderCardComponent,
-    TvShowOverviewComponent
     StreamingProviderCardComponent,
     CountrySelectComponent,
     YearPickerComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatInputModule,
-        MatChipsModule,
-        MatCardModule,
-        MatIconModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSelectModule,
-        MatProgressBarModule,
-        MatExpansionModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatChipsModule,
+    MatCardModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatProgressBarModule,
+    MatExpansionModule,
+  ],
   providers: [ImageUrlProvider],
   bootstrap: [AppComponent]
 })
