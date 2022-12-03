@@ -44,7 +44,6 @@ export class YearPickerDateAdapter extends NativeDateAdapter {
 export class MovieSearchComponent implements OnInit {
   private routeParamsSubscription: any;
 
-  public query: string | null | undefined;
   public movies: SearchMovie[] = [];
   private currentPage: number | undefined;
   private totalPages: number | undefined;
@@ -67,8 +66,13 @@ export class MovieSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeParamsSubscription = this.route.params.subscribe(params => {
-      this.query = params['query'];
-      this.loadSearchResultsByQuery();
+      const query = params['query'];
+      if(!query) {
+        return;
+      }
+
+      this.searchForm.get("title")?.setValue(query);
+      this.loadSearchResultsByFormValues();
     });
   }
 
@@ -78,10 +82,7 @@ export class MovieSearchComponent implements OnInit {
 
   onSearchSubmitted(): void {
     //TODO: Clear value of date field should be possible
-    const value = this.searchForm.value;
-
-    this.movies = [];
-    this.loadSearchResults(value.title, value.year?.getFullYear() || null, value.region || null);
+    this.loadSearchResultsByFormValues();
   }
 
   onYearSelected(value: any, datePicker: any): void {
@@ -103,12 +104,11 @@ export class MovieSearchComponent implements OnInit {
     );
   }
 
-  private loadSearchResultsByQuery(): void {
-    if (!this.query) {
-      return;
-    }
+  private loadSearchResultsByFormValues(): void {
+    const value = this.searchForm.value;
 
-    this.loadSearchResults(this.query);
+    this.movies = [];
+    this.loadSearchResults(value.title, value.year?.getFullYear() || null, value.region || null);
   }
 
   private loadSearchResults(movieTitle: string, year?: number, region?: string, page?: number): void {
