@@ -126,7 +126,7 @@
         <div>
           <div class="flex flex-col justify-center items-center font-bold my-8">
             <div class="text-3xl">
-              Streaming Providers
+              Watch Providers
             </div>
             <div class="flex flex-row w-full bg-red-500 p-8 items-center justify-center">
               <form class="flex flex-col" [formGroup]="countryForm">
@@ -139,15 +139,22 @@
               </form>
             </div>
           </div>
-          <div class="flex flex-row overflow-x-auto space-x-4 px-4">
-            <app-streaming-provider-card *ngFor="let streamingProvider of watchProvidersInCurrentCountry"
-                                         name="{{streamingProvider.providerName}}"
-                                         logoPath="{{streamingProvider.logoPath}}"
-                                         [isAvailableForRent]="streamingProvider.isAvailableForRent"
-                                         [isAvailableInFlatrate]="streamingProvider.isAvailableInFlatrate"
-                                         [isAvailableToBuy]="streamingProvider.isAvailableToBuy">
+          <div *ngIf="watchProvidersInCurrentCountry?.length; else noStreamingProvidersFound"
+               class="flex flex-row overflow-x-auto space-x-4 px-4">
+            <app-streaming-provider-card
+              *ngFor="let streamingProvider of watchProvidersInCurrentCountry"
+              name="{{streamingProvider.providerName}}"
+              logoPath="{{streamingProvider.logoPath}}"
+              [isAvailableForRent]="streamingProvider.isAvailableForRent"
+              [isAvailableInFlatrate]="streamingProvider.isAvailableInFlatrate"
+              [isAvailableToBuy]="streamingProvider.isAvailableToBuy">
             </app-streaming-provider-card>
           </div>
+          <ng-template #noStreamingProvidersFound>
+            <div class="flex flex-row justify-center items-center">
+              No Watch Providers available in the selected country.
+            </div>
+          </ng-template>
         </div>
 
         <div *ngIf="movie?.cast && !!movie?.cast?.length">
