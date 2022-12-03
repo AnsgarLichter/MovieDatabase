@@ -1,10 +1,3 @@
-export interface TmdbSearchMovieResults { //TODO: Obsolete
-  page: string,
-  total_results: number,
-  total_pages: number,
-  results: TmdbSearchMovie[],
-}
-
 export interface TmdbSearchMovie {
   id: number,
   original_title: string,
