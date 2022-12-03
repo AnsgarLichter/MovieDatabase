@@ -1,0 +1,12 @@
+<form [formGroup]="yearForm">
+  <mat-form-field appearance="outline">
+    <mat-label>Release Year</mat-label>
+    <input matInput name="year" readonly [matDatepicker]="datePicker" formControlName="year">
+    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+    <mat-datepicker-toggle matSuffix (click)="clear()">
+      <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #datePicker startView="multi-year" (yearSelected)="onYearSelected($event, datePicker)">
+    </mat-datepicker>
+  </mat-form-field>
+</form>

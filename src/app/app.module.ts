@@ -26,6 +26,7 @@ import {ImageUrlProvider} from "./utilities/image-url-provider";
 import { PersonCardComponent } from './person-card/person-card.component';
 import { StreamingProviderCardComponent } from './streaming-provider-card/streaming-provider-card.component';
 import { CountrySelectComponent } from './country-select/country-select.component';
+import { YearPickerComponent } from './year-picker/year-picker.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { CountrySelectComponent } from './country-select/country-select.componen
     MovieSearchComponent,
     PersonCardComponent,
     StreamingProviderCardComponent,
-    CountrySelectComponent
+    CountrySelectComponent,
+    YearPickerComponent
   ],
   imports: [
     BrowserModule,

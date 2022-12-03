@@ -6,13 +6,7 @@
         <input matInput type="text" placeholder="Title ..." formControlName="title">
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Release Year</mat-label>
-        <input matInput name="year" readonly [matDatepicker]="datePicker" formControlName="year">
-        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-        <mat-datepicker #datePicker startView="multi-year" (yearSelected)="onYearSelected($event, datePicker)">
-        </mat-datepicker>
-      </mat-form-field>
+      <app-year-picker formControlName="year"></app-year-picker>
 
       <app-country-select formControlName="region"></app-country-select>
     </div>
@@ -29,8 +23,8 @@
 
 <div class="flex flex-row flex-wrap grow-0 shrink-0">
   <a *ngFor="let movie of movies"
-    class="flex flex-col justify-center items-center w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 my-4 rounded-xl space-y-4 space-x-4 pb-4"
-    [routerLink]="['/movies-detail', movie.id]">
+     class="flex flex-col justify-center items-center w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 my-4 rounded-xl space-y-4 space-x-4 pb-4"
+     [routerLink]="['/movies-detail', movie.id]">
     <div class="flex mt-4">
       <img class="h-96 max-w-none object-contain" alt="Profile Picture of cast member" src="{{movie.posterPath}}">
     </div>
