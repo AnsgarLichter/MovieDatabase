@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Adapter } from "./base.adapter";
-import { WatchProvider } from "../models/movie.model";
-import { TmdbWatchProvider, TmdbWatchProviders } from "../models/tmdb/tmdb-movie.model";
+import {Injectable} from "@angular/core";
+import {Adapter} from "./base.adapter";
+import {WatchProvider, WatchProviderType} from "../models/movie.model";
+import {TmdbWatchProvider, TmdbWatchProviderInCountry, TmdbWatchProviders} from "../models/tmdb/tmdb-movie.model";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
 
 @Injectable({
@@ -13,69 +13,65 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
 
   adapt(item: TmdbWatchProviders): WatchProvider[] {
     const results = item.results;
-    const watchProviders: WatchProvider[] = [];
+    const adaptedWatchProviders: WatchProvider[] = [];
 
-    (Object.keys(results) as (keyof typeof results)[]).forEach(item => {
-      //TODO: Object.keys of results[item] but exclude property "link"
-      results[item].buy?.forEach((watchProvider: TmdbWatchProvider) => {
-        watchProviders.push(new WatchProvider(
-          watchProvider.provider_id,
-          watchProvider.provider_name,
-          true,
-          false,
-          false,
-          this.imagePathProvider.getLogoUrl(watchProvider.logo_path) || "",
-          item,
-          watchProvider.display_priority
-        ))
-          ;
-      });
+    (Object.keys(results) as (keyof typeof results)[])
+      .forEach(region => this.mapRegion(region, results[region], adaptedWatchProviders));
 
-      results[item].rent?.forEach((watchProvider: TmdbWatchProvider) => {
-        const adaptedWatchProvider = watchProviders.find(
-          includedWatchProvider => includedWatchProvider.providerName === watchProvider.provider_name
-            && includedWatchProvider.country === item
-        );
-        if (adaptedWatchProvider) {
-          adaptedWatchProvider.isAvailableForRent = true;
-          return;
-        }
+    return adaptedWatchProviders;
+  }
 
-        watchProviders.push(new WatchProvider(
-          watchProvider.provider_id,
-          watchProvider.provider_name,
-          false,
-          true,
-          false,
-          this.imagePathProvider.getLogoUrl(watchProvider.logo_path) || "",
-          item,
-          watchProvider.display_priority
-        ));
-      });
+  private mapRegion(region: string, watchProviderTypes: TmdbWatchProviderInCountry, adaptedWatchProviders: WatchProvider[]) {
+    (Object.keys(watchProviderTypes) as (keyof typeof watchProviderTypes)[]).forEach(type => {
+      if (typeof watchProviderTypes[type] === "string") {
+        return;
+      }
 
-      results[item].flatrate?.forEach((watchProvider: TmdbWatchProvider) => {
-        const adaptedWatchProvider = watchProviders.find(
-          includedWatchProvider => includedWatchProvider.providerName === watchProvider.provider_name
-            && includedWatchProvider.country === item
-        );
-        if (adaptedWatchProvider) {
-          adaptedWatchProvider.isAvailableInFlatrate = true;
-          return;
-        }
-
-        watchProviders.push(new WatchProvider(
-          watchProvider.provider_id,
-          watchProvider.provider_name,
-          false,
-          false,
-          true,
-          this.imagePathProvider.getLogoUrl(watchProvider.logo_path) || "",
-          item,
-          watchProvider.display_priority
-        ));
-      });
+      const watchProviderType = type as WatchProviderType;
+      watchProviderTypes[watchProviderType].forEach(watchProvider =>
+        this.mapWatchProvider(
+          watchProvider,
+          watchProviderType,
+          region,
+          adaptedWatchProviders
+        )
+      );
     });
+  }
 
-    return watchProviders;
+  private mapWatchProvider(watchProvider: TmdbWatchProvider, type: WatchProviderType, region: string, adaptedWatchProviders: WatchProvider[]) {
+    let adaptedWatchProvider = adaptedWatchProviders.find(
+      includedWatchProvider => includedWatchProvider.providerName === watchProvider.provider_name
+        && includedWatchProvider.country === region
+    );
+    if (!adaptedWatchProvider) {
+      adaptedWatchProvider = new WatchProvider(
+        watchProvider.provider_id,
+        watchProvider.provider_name,
+        false,
+        false,
+        false,
+        this.imagePathProvider.getLogoUrl(watchProvider.logo_path) || "assets/fallbackPictureWatchProvider.svg",
+        region,
+        watchProvider.display_priority
+      );
+      adaptedWatchProviders.push(adaptedWatchProvider);
+    }
+
+    this.mapAvailabilityType(type, adaptedWatchProvider);
+  }
+
+  private mapAvailabilityType(type: WatchProviderType, adaptedWatchProvider: WatchProvider) {
+    switch (type) {
+      case "buy":
+        adaptedWatchProvider.isAvailableToBuy = true;
+        break;
+      case "flatrate":
+        adaptedWatchProvider.isAvailableInFlatrate = true;
+        break;
+      case "rent":
+        adaptedWatchProvider.isAvailableForRent = true;
+        break;
+    }
   }
 }
