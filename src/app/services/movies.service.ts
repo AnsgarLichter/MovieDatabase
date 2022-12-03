@@ -20,7 +20,6 @@ export class MoviesService extends MovieDbService {
     const requestUrl = `${this.getBaselineUrl()}/movie/${movieId}}`;
     const parameters = this.getBaseParameters();
 
-    //TODO: URL has to be valid even if only 1 further request should be included
     const appendToResponse: string[] = [];
     if (includeCredits) {
       appendToResponse.push(`credits`);
