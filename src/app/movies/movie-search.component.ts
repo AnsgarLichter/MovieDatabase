@@ -77,7 +77,6 @@ export class MovieSearchComponent implements OnInit {
   }
 
   onSearchSubmitted(): void {
-    //TODO: Region value should be code2
     //TODO: Clear value of date field should be possible
     const value = this.searchForm.value;
 

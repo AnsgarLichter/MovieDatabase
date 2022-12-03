@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ViewEncapsulation } from '@angular/core';
-import { MatSelectChange } from '@angular/material/select';
+import {Component, OnInit} from '@angular/core';
+import {ViewEncapsulation} from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
-import { Movie, WatchProvider } from '../models/movie.model';
+import {Movie, WatchProvider} from '../models/movie.model';
 
-import { MoviesService } from '../services/movies.service';
+import {MoviesService} from '../services/movies.service';
+import {FormControl, FormGroup} from "@angular/forms";
 
 
 @Component({
@@ -18,7 +18,7 @@ import { MoviesService } from '../services/movies.service';
 export class MovieDetailComponent implements OnInit {
   public movie: Movie | undefined;
   public watchProvidersInCurrentCountry: WatchProvider[] | undefined;
-  public selectedCountryCode: string = "";
+  public countryForm: FormGroup;
 
   private routeParamsSubscription: any;
 
@@ -26,11 +26,14 @@ export class MovieDetailComponent implements OnInit {
     private moviesService: MoviesService,
     private route: ActivatedRoute,
   ) {
+    const region = this.getCurrentCountryCodeByNavigatorLanguage();
+
+    this.countryForm = new FormGroup({
+      region: new FormControl(region),
+    });
   }
 
   ngOnInit(): void {
-    this.determineCurrentCountryCodeByNavigatorLanguage();
-
     this.routeParamsSubscription = this.route.params.subscribe(params => {
       this.loadMovieDetails(+params['id']);
     });
@@ -40,29 +43,29 @@ export class MovieDetailComponent implements OnInit {
     this.routeParamsSubscription.unsubscribe();
   }
 
-  onCountrySelectionChanged(event: MatSelectChange): void {
-    this.selectedCountryCode = event.value;
+  onCountrySelectionChanged(): void {
     this.updateWatchProviders();
   }
 
-  private determineCurrentCountryCodeByNavigatorLanguage(): void {
+  private getCurrentCountryCodeByNavigatorLanguage(): string | null {
     const regex = /^(?:(en-GB-oed|i-ami|i-bnn|i-default|i-enochian|i-hak|i-klingon|i-lux|i-mingo|i-navajo|i-pwn|i-tao|i-tay|i-tsu|sgn-BE-FR|sgn-BE-NL|sgn-CH-DE)|(art-lojban|cel-gaulish|no-bok|no-nyn|zh-guoyu|zh-hakka|zh-min|zh-min-nan|zh-xiang))$|^((?:[a-z]{2,3}(?:(?:-[a-z]{3}){1,3})?)|[a-z]{4}|[a-z]{5,8})(?:-([a-z]{4}))?(?:-([a-z]{2}|\d{3}))?((?:-(?:[\da-z]{5,8}|\d[\da-z]{3}))*)?((?:-[\da-wy-z](?:-[\da-z]{2,8})+)*)?(-x(?:-[\da-z]{1,8})+)?$|^(x(?:-[\da-z]{1,8})+)$/i;
 
     const result = regex.exec(navigator.language);
     if (!result || !result.length || !result[5]) {
-      return;
+      return null;
     }
 
-    this.selectedCountryCode = result[5];
+    return result[5];
   }
 
   private updateWatchProviders(): void {
-    if (!this.selectedCountryCode) {
+    const selectedCountryCode = this.countryForm.value.region;
+    if (!selectedCountryCode) {
       return;
     }
 
     this.watchProvidersInCurrentCountry = this.movie?.watchProviders
-      .filter(watchProvider => watchProvider.country === this.selectedCountryCode)
+      .filter(watchProvider => watchProvider.country === selectedCountryCode)
       .sort((a: WatchProvider, b: WatchProvider) =>
         a.displayPriority - b.displayPriority
       );
