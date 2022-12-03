@@ -13,8 +13,8 @@ export class BelongsToCollectionAdapter implements Adapter<BelongsToCollection> 
   }
 
   adapt(item: TmdbBelongsToCollection): BelongsToCollection {
-    const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || ""; //TODO: Fallback picture
-    const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || ""; //TODO: Fallback picture
+    const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || "assets/fallbackPictureMovie.png";
+    const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || "assets/fallbackPictureMovie.png";
 
     return new BelongsToCollection(
       item.id,
