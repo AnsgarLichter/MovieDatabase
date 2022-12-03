@@ -1,7 +1,7 @@
 <div class="my-12 mx-8 ">
   <div class="flex flex-col items-center md:flex-row">
     <div class="flex flex-col flex justify-center items-center">
-      <img class="max-w-none h-80 w-80 md:h-auto md:w-auto md:max-w-[100%] lg:max-w-[80%] xl:max-w-[60%]"
+      <img loading="lazy" class="max-w-none h-80 w-80 md:h-auto md:w-auto md:max-w-[100%] lg:max-w-[80%] xl:max-w-[60%]"
            src="{{ tvShow?.poster_path }}"
            alt="Movie Poster">
     </div>
@@ -105,7 +105,7 @@
               </mat-expansion-panel-header>
               <div class="grid overflow-hidden grid-cols-auto grid-rows-auto gap-5">
                 <div class="box row-span-2">
-                  <img class="max-w-none h-80 w-80 md:h-auto md:w-auto md:max-w-[100%] lg:max-w-[80%] xl:max-w-[80%]" alt="Season {{ season.season_number }} poster" src="{{ season.poster_path }}">
+                  <img loading="lazy" class="max-w-none h-80 w-80 md:h-auto md:w-auto md:max-w-[100%] lg:max-w-[80%] xl:max-w-[80%]" alt="Season {{ season.season_number }} poster" src="{{ season.poster_path }}">
                 </div>
                 <div class="box col-start-2 col-span-2">
                   <p>{{ season.overview }}</p>
@@ -118,7 +118,7 @@
           <div *ngFor="let streamingProvider of getWatchProvidersForCurrentCountry()"
                class="flex bg-red-500 min-w-[275px] p-4 rounded-xl space-x-4">
             <div class="flex items-center">
-              <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
+              <img loading="lazy" class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
                    src="{{getImagePath()}}{{streamingProvider.logoPath}}">
             </div>
 
@@ -152,7 +152,7 @@
           <div *ngFor="let castMember of tvShow?.cast"
                class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
             <div class="flex items-center">
-              <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
+              <img loading="lazy" class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
                    src="{{castMember.profilePath}}">
             </div>
 
@@ -170,7 +170,7 @@
           <div *ngFor="let crewMember of tvShow?.crew"
                class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
             <div class="flex items-center">
-              <img class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
+              <img loading="lazy" class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
                    src="{{crewMember.profilePath}}">
             </div>
 
