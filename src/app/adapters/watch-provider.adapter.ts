@@ -51,7 +51,7 @@ export class WatchProvidersAdapter implements Adapter<WatchProvider[]> {
         false,
         false,
         false,
-        this.imagePathProvider.getLogoUrl(watchProvider.logo_path) || "", //TODO: backup image
+        this.imagePathProvider.getLogoUrl(watchProvider.logo_path) || "assets/fallbackPictureWatchProvider",
         region,
         watchProvider.display_priority
       );
