@@ -11,6 +11,7 @@ import {CastAdapter} from "./cast.adapter";
 import {CrewAdapter} from "./crew.adapter";
 import {WatchProvidersAdapter} from "./watch-provider.adapter";
 import {KeywordAdapter} from "./keyword.adapter";
+import {TvSeasonsAdapter} from "./tv-season.adapter";
 
 
 @Injectable({
@@ -28,6 +29,7 @@ export class TvShowAdapter implements Adapter<TvShow> {
     //private belongsToCollectionAdapter: BelongsToCollectionAdapter,
     private castAdapter: CastAdapter,
     private crewAdapter: CrewAdapter,
+    private tvSeasonsAdapter: TvSeasonsAdapter,
     private watchProvidersAdapter: WatchProvidersAdapter,
     private keywordAdapter: KeywordAdapter,
   ) {
@@ -35,9 +37,9 @@ export class TvShowAdapter implements Adapter<TvShow> {
 
   adapt(item: TMDB_TvShow): TvShow {
     const genres = item.genres.map(genre => this.genreAdapter.adapt(genre));
-    //const belongsToCollection = this.belongsToCollectionAdapter.adapt(item.belongs_to_collection);
     const castMembers = item.credits.cast.map(castMember => this.castAdapter.adapt(castMember));
     const crewMembers = item.credits.crew.map(crewMember => this.crewAdapter.adapt(crewMember));
+    const seasons = item.seasons.map(seasons => this.tvSeasonsAdapter.adapt(seasons));
     const directorsAndWriters = this.getDirectorsAndWriters(crewMembers);
     const watchProviders = this.watchProvidersAdapter.adapt(item["watch/providers"]);
     const keywords = item.keywords?.results.map(keyword => this.keywordAdapter.adapt(keyword));
@@ -69,12 +71,12 @@ export class TvShowAdapter implements Adapter<TvShow> {
       item.popularity,
       item.production_companies,
       item.production_countries,
-      item.seasons,
+      seasons,
       item.spoken_languages,
       item.status,
       item.tagline,
       item.type,
-      item.vote_average,
+      item.vote_average * 10,
       item.vote_count,
       watchProviders,
       castMembers,

@@ -89,7 +89,7 @@ export class tvShow_networks {
 }
 export class tvShow_seasons {
   constructor(
-    public air_date: string,
+    public air_date: Date,
     public episode_count: number,
     public id: number,
     public name: string,

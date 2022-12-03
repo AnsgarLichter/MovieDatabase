@@ -26,6 +26,8 @@ import {ImageUrlProvider} from "./utilities/image-url-provider";
 import { TvShowOverviewComponent } from './tv-show-overview/tv-show-overview.component';
 import { PersonCardComponent } from './person-card/person-card.component';
 import { StreamingProviderCardComponent } from './streaming-provider-card/streaming-provider-card.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatExpansionModule} from "@angular/material/expansion";
 import { CountrySelectComponent } from './country-select/country-select.component';
 import { YearPickerComponent } from './year-picker/year-picker.component';
 
@@ -44,21 +46,23 @@ import { YearPickerComponent } from './year-picker/year-picker.component';
     CountrySelectComponent,
     YearPickerComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatChipsModule,
-    MatCardModule,
-    MatIconModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatInputModule,
+        MatChipsModule,
+        MatCardModule,
+        MatIconModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatProgressBarModule,
+        MatExpansionModule,
+    ],
   providers: [ImageUrlProvider],
   bootstrap: [AppComponent]
 })
