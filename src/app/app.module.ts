@@ -25,6 +25,8 @@ import {SeriesComponent} from './series/series.component';
 import {ImageUrlProvider} from "./utilities/image-url-provider";
 import { PersonCardComponent } from './person-card/person-card.component';
 import { StreamingProviderCardComponent } from './streaming-provider-card/streaming-provider-card.component';
+import { ActorsDetailComponent } from './actors/actors-detail.component';
+import { ActorsSearchComponent } from './actors/actors-search.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { StreamingProviderCardComponent } from './streaming-provider-card/stream
     MovieDetailComponent,
     MovieSearchComponent,
     PersonCardComponent,
-    StreamingProviderCardComponent
+    StreamingProviderCardComponent,
+    ActorsDetailComponent,
+    ActorsSearchComponent
   ],
   imports: [
     BrowserModule,
