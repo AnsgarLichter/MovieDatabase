@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Actors } from '../models/actors.model';
-import { Movie } from '../models/movie.model';
+import { ActorsSearch } from '../models/search-actors.model';
+import { ActorsSearchService } from '../services/actors-search.service';
 import { ActorsService } from '../services/actors.service';
 import { MoviesService } from '../services/movies.service';
 
@@ -12,11 +13,13 @@ import { MoviesService } from '../services/movies.service';
 })
 export class ActorsDetailComponent implements OnInit {
 
-  public actors: Actors | undefined;
+  public actorSearch: ActorsSearch | undefined;
+  public actor: Actors | undefined; 
 
   private routeParamsSubscription: any;
 
   constructor(
+    private actorsSearchService: ActorsSearchService,
     private actorsService: ActorsService,
     private route: ActivatedRoute,
   ) {
@@ -24,16 +27,24 @@ export class ActorsDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeParamsSubscription = this.route.params.subscribe(params => {
-      this.loadActorsDetails("Vin%Diesel");
+      this.loadActorsSearchDetails("Vin%Diesel");
+      this.loadActorsDetails(12835);
     });
   }
 
-  private loadActorsDetails(query: string): void {
-    this.actorsService.getActors(query)
-      .subscribe((actors: Actors) => {
-        console.log("Component", actors);
-        this.actors = actors;
+  private loadActorsSearchDetails(query: string): void {
+    this.actorsSearchService.getActors(query)
+      .subscribe((actor: ActorsSearch) => {
+        console.log("Component", actor);
+        this.actorSearch = actor;
       });
+  }
+
+  private loadActorsDetails(idActor: number): void {
+    this.actorsService.getActors(idActor).subscribe((result) => {
+      console.log("Details", result);
+      this.actor = result;
+    });
   }
 
 }

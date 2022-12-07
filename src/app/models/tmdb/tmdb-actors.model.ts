@@ -1,35 +1,16 @@
-export interface TmdbSearchActorsResult {
-    page: number,
-    total_pages: number,
-    total_results: number,
-    results: TmdbActors[]
-}
-
 export interface TmdbActors{
     adult: boolean,
+    also_known_as: string[],
+    biography: string,
+    birthday: string,
+    deathday: string | null,
     gender: number,
+    homepage: string | null,
     id: number,
-    known_for: KnownFor[],
-    known_for_department: string
+    imdb_id: string,
+    known_for_department: string,
     name: string,
-    popularity: number
-    profile_path: string,
-}
-
-interface KnownFor {
-    poster_path: string,
-    adult: boolean,
-    overview: string,
-    release_date: string,
-    original_title: string,
-    genre_ids: number[],
-    id: number,
-    media_type: string,
-    original_language: string,
-    title: string,
-    backdrop_path: string,
+    place_of_birth: string,
     popularity: number,
-    vote_count: number,
-    video: boolean,
-    vote_average: number
+    profile_path: string
 }
