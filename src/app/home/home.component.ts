@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
       .subscribe((seriesTrends) => {
       this.seriesTrends = seriesTrends;
       this.initSliderSeries(seriesTrends);
-      //console.log(seriesTrends);
     });
   }
 
@@ -73,26 +72,26 @@ export class HomeComponent implements OnInit {
           count++;
         }
       }
-      //this.fillElements(6 - value, movieTrends);
+      this.fillElementsMovies(6 - value, movieTrends);
   }
 
-  public initSliderSeries(seriesTrens: SeriesTrends){
-    if(!seriesTrens.results){
+  public initSliderSeries(seriesTrends: SeriesTrends){
+    if(!seriesTrends.results){
       return;
     }
-      var arrayRows = Math.ceil(seriesTrens.results?.length / 6);
-      var maxArrayLength = seriesTrens.results?.length;
+      var arrayRows = Math.ceil(seriesTrends.results?.length / 6);
+      var maxArrayLength = seriesTrends.results?.length;
       var count = 0;
       var value = 0;
       for(var i = 0; i < arrayRows; i++){
         this.seriesList[i] = [];
         value = this.checkCount(maxArrayLength, count);
         for(var a = 0; a < value; a++){
-          this.seriesList[i][a] = seriesTrens.results[count];
+          this.seriesList[i][a] = seriesTrends.results[count];
           count++;
         }
       }
-      //this.fillElements(6 - value, movieTrends);
+      this.fillElementsSeries(6 - value, seriesTrends);
   }
 
 
@@ -106,16 +105,25 @@ export class HomeComponent implements OnInit {
     return 6;
   }
 
-  public fillElements(elm: number, movieTrends: MovieTrends){
+  public fillElementsMovies(elm: number, movieTrends: MovieTrends){
       if(elm === 0){
         return;
       }
       var movieListLength = this.movieList.length - 1;
       for(var i = 0; i < elm; i++){
-        //console.log(movieTrends.results[i]);
         this.movieList[movieListLength].push(movieTrends.results[i]);
       }
   }
+
+  public fillElementsSeries(elm: number, seriesTrends: SeriesTrends){
+    if(elm === 0){
+      return;
+    }
+    var seriesListLength = this.seriesList.length - 1;
+    for(var i = 0; i < elm; i++){
+      this.seriesList[seriesListLength].push(seriesTrends.results[i]);
+    }
+}
 
   getDate(date: string | undefined): string {
     if(date !== undefined) {
@@ -125,42 +133,4 @@ export class HomeComponent implements OnInit {
 
     return "Test";
   }
-
-
-  // poster_path
-  // original_title
-  // vote average
-  // release-date
-
-
-  /*
-  <div class="carousel-inner">
-        <div class="carousel-item " [ngClass]="{active:isFirst}" *ngFor="let caroiselProduct of caroiselProducts;
-        index as i;first as isFirst">
-            <img src="{{caroiselProduct.img_src}}" alt="Los Angeles" width="1100px" height="400px">
-            <div class="carousel-caption">
-                <h3>{{caroiselProduct.product_name}}</h3>
-                <p>{{caroiselProduct.productsortdisc}}</p>
-            </div>
-        </div>
-    </div>
-
-      caroiselProducts=[
-    {
-      "img_src":"../../assets/demo1.jpg",
-      "product_name":"Demo1",
-      "productsortdisc": "this is caroisel discription"
-    },
-    {
-      "img_src":"../../assets/demo1.jpg",
-      "product_name":"Demo2",
-      "productsortdisc": "this is caroisel discription"
-    },
-    {
-      "img_src":"../../assets/demo1.jpg",
-      "product_name":"Demo3",
-      "productsortdisc": "this is caroisel discription"
-    }
-  ];
-  */
 }
