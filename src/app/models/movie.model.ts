@@ -17,10 +17,13 @@ export class Movie {
     public posterPath: string,
     public status: string,
     public genres: Genre[],
-    public belongsToCollection: BelongsToCollection,
+    public belongsToCollection: BelongsToCollection | null,
     public cast: CastMember[],
     public crew: CrewMember[],
     public directorsAndWriters: DirectorOrWriter[],
+    public productionCompanies: ProductionCompany[],
+    public productionCountries: ProductionCountry[],
+    public spokenLanguages: SpokenLanguage[],
     public watchProviders: WatchProvider[],
     public keywords: Keyword[],
   ) {
@@ -48,7 +51,6 @@ export class BelongsToCollection {
 export class CastMember {
   constructor(
     public id: number,
-    public castId: number,
     public creditId: number,
     public original_name: string,
     public name: string,
@@ -87,8 +89,8 @@ export class ProductionCompany {
   constructor(
     public id: number,
     public name: string,
-    public originCountry: string,
-    public logoPath: string,
+    public origin_country: string,
+    public logo_path: string,
   ) {
   }
 }
@@ -96,16 +98,16 @@ export class ProductionCompany {
 export class ProductionCountry {
   constructor(
     public name: string,
-    public iso31661: string
+    public iso_3166_1: string
   ) {
   }
 }
 
 export class SpokenLanguage {
   constructor(
-    public englishName: string,
+    public english_name: string,
     public name: string,
-    public iso6391: string
+    public iso_639_1: string
   ) {
   }
 }

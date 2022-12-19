@@ -73,7 +73,6 @@ export interface TmdbCastMember {
   original_name: string,
   popularity: number,
   profile_path: string,
-  cast_id: number,
   character: string,
   credit_id: number,
   order: number
@@ -148,9 +147,9 @@ export interface TmdbWatchProviderCountries {
 
 export interface TmdbWatchProviderInCountry {
   link: string,
-  buy: TmdbWatchProvider[],
-  rent: TmdbWatchProvider[],
-  flatrate: TmdbWatchProvider[]
+  buy?: TmdbWatchProvider[],
+  rent?: TmdbWatchProvider[],
+  flatrate?: TmdbWatchProvider[]
 }
 
 export interface TmdbWatchProvider {

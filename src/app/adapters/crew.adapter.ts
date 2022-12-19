@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {Adapter} from "./base.adapter";
 import {CrewMember} from "../models/movie.model";
 import {TmdbCrewMember} from "../models/tmdb/tmdb-movie.model";
-import {ImageUrlProvider} from "../utilities/image-url-provider";
 
 @Injectable({
   providedIn: "root",

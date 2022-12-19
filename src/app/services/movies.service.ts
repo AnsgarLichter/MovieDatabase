@@ -17,21 +17,32 @@ export class MoviesService extends MovieDbService {
   }
 
   public getMovie(movieId: number, includeCredits: boolean, includeWatchProviders: boolean, includeKeywords: boolean): Observable<Movie> {
-    let requestUrl = `${this.getBaselineUrl()}/movie/${movieId}?${this.getQueryParameterForApiKey()}`;
-    //TODO: URL has to be valid even if only 1 further request should be included
+    const requestUrl = `${this.getBaselineUrl()}/movie/${movieId}}`;
+    const parameters = this.getBaseParameters();
+
+    const appendToResponse: string[] = [];
     if (includeCredits) {
-      requestUrl += `&append_to_response=credits`;
+      appendToResponse.push(`credits`);
     }
 
     if (includeWatchProviders) {
-      requestUrl += `,watch/providers`
+      appendToResponse.push(`watch/providers`);
     }
 
     if (includeKeywords) {
-      requestUrl += ",keywords"
+      appendToResponse.push(`keywords`);
     }
 
-    return this.httpClient.get<TmdbMovie>(requestUrl).pipe(
+    if(appendToResponse.length) {
+      parameters[`append_to_response`] = appendToResponse.join(`,`);
+    }
+
+    return this.httpClient.get<TmdbMovie>(
+      requestUrl,
+      {
+        params: parameters
+      }
+    ).pipe(
       map((movie: TmdbMovie) => this.adapter.adapt(movie))
     );
   }

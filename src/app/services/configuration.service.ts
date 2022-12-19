@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
-import {map, Observable, of} from 'rxjs';
-import {MovieDbService} from './movie-db.service';
-import {TmdbConfiguration} from "../models/tmdb/tmdb-configuration.model";
-import {TmdbMovie} from "../models/tmdb/tmdb-movie.model";
 import {HttpClient} from "@angular/common/http";
+
+import {map, Observable, of} from 'rxjs';
+
+import {MovieDbService} from './movie-db.service';
+
+import {TmdbConfiguration} from "../models/tmdb/tmdb-configuration.model";
 import {Configuration} from "../models/configuration.model";
+
 import {ConfigurationAdapter} from "../adapters/configuration.adapter";
 
 @Injectable({
@@ -24,7 +27,10 @@ export class ConfigurationService extends MovieDbService {
     }
 
     const observable = this.httpClient.get<TmdbConfiguration>(
-      `${this.getBaselineUrl()}/configuration?${this.getQueryParameterForApiKey()}`
+      `${this.getBaselineUrl()}/configuration`,
+      {
+        params: this.getBaseParameters()
+      }
     ).pipe(
       map((configuration: TmdbConfiguration) => this.adapter.adapt(configuration))
     );
