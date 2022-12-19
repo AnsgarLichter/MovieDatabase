@@ -75,12 +75,14 @@
       <div class="carousel-item " [ngClass]="{active:isFirst}" *ngFor="let row of movieList; first as isFirst">
         <div class="container-fluid marketing">
             <div class="row">
-                <div class="col-lg-2 element-slider" *ngFor="let movies of row">
-                    <div class="poster-image"><img src="{{getPosterImages(movies?.poster_path)}}" width="200" height="300"></div>
-                    <div class="ratings"><b>{{getRatings(movies?.vote_average)}}%</b></div>
-                    <div class="release"><b>{{movies?.original_title}}</b></div>
-                    <div class="release">{{getDate(movies?.release_date)}}</div>
+                <div class="col-lg-2 element-slider" *ngFor="let movie of row">
+                  <a [routerLink]="['/movies-detail', movie.id]">
+                    <div class="poster-image"><img src="{{getPosterImages(movie?.poster_path)}}" width="200" height="300"></div>
+                    <div class="ratings"><b>{{getRatings(movie?.vote_average)}}%</b></div>
+                    <div class="release"><b>{{movie?.original_title}}</b></div>
+                    <div class="release">{{getDate(movie?.release_date)}}</div>
                     <div class="carousel-caption d-none d-md-block"></div>
+                  </a>
                 </div>
             </div>
         </div>
@@ -113,11 +115,13 @@
         <div class="container-fluid marketing">
             <div class="row">
                 <div class="col-lg-2 element-slider" *ngFor="let series of row">
-                    <div class="poster-image"><img src="{{getPosterImages(series?.poster_path)}}" width="200" height="300"></div>
-                    <div class="ratings"><b>{{getRatings(series?.vote_average)}}%</b></div>
-                    <div class="release"><b>{{series?.name}}</b></div>
-                    <div class="release">{{getDate(series?.first_air_date)}}</div>
-                    <div class="carousel-caption d-none d-md-block"></div>
+                    <a [routerLink]="['/series', series.id]">
+                      <div class="poster-image"><img src="{{getPosterImages(series?.poster_path)}}" width="200" height="300"></div>
+                      <div class="ratings"><b>{{getRatings(series?.vote_average)}}%</b></div>
+                      <div class="release"><b>{{series?.name}}</b></div>
+                      <div class="release">{{getDate(series?.first_air_date)}}</div>
+                      <div class="carousel-caption d-none d-md-block"></div>
+                    </a>
                 </div>
             </div>
         </div>
