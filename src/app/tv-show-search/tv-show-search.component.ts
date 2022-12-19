@@ -2,19 +2,19 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
-import {SearchMovieService} from "../services/search-movie.service";
-
-import {SearchMovie, SearchResults} from "../models/search-movie.model";
+import {TVShowService} from "../services/tv-show.service";
+import {SearchResults} from "../models/search-movie.model";
+import {SearchTVShow} from "../models/search-tv-show.model";
 
 @Component({
-  selector: 'app-movie-search',
-  templateUrl: './movie-search.component.html',
-  styleUrls: ['./movie-search.component.css'],
+  selector: 'app-tv-show-search',
+  templateUrl: './tv-show-search.component.html',
+  styleUrls: ['./tv-show-search.component.css']
 })
-export class MovieSearchComponent implements OnInit {
+export class TVShowSearchComponent implements OnInit {
   private routeParamsSubscription: any;
 
-  public movies: SearchMovie[] = [];
+  public tvShows: SearchTVShow[] = [];
   private currentPage: number | undefined;
   private totalPages: number | undefined;
 
@@ -22,13 +22,13 @@ export class MovieSearchComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private searchService: SearchMovieService,
+    private searchService: TVShowService,
   ) {
     this.searchForm = new FormGroup({
       title: new FormControl(null, Validators.required),
       year: new FormControl(
         null,
-        [Validators.minLength(4), Validators.maxLength(4)]
+        [Validators.minLength(4), Validators.maxLength(4), Validators.min(1800), Validators.max(new Date().getFullYear())]
       ),
       region: new FormControl(null),
     });
@@ -76,20 +76,20 @@ export class MovieSearchComponent implements OnInit {
   private loadSearchResultsByFormValues(): void {
     const value = this.searchForm.value;
 
-    this.movies = [];
+    this.tvShows = [];
     this.loadSearchResults(value.title, value.year?.getFullYear() || null, value.region || null);
   }
 
-  private loadSearchResults(movieTitle: string, year?: number, region?: string, page?: number): void {
-    if (!movieTitle) {
+  private loadSearchResults(tvShowName: string, year?: number, region?: string, page?: number): void {
+    if (!tvShowName) {
       return;
     }
 
-    this.searchService.searchMovies(movieTitle, year, region, page)
-      .subscribe((results: SearchResults<SearchMovie>) => {
+    this.searchService.searchTVShows(tvShowName, year, region, page)
+      .subscribe((results: SearchResults<SearchTVShow>) => {
         this.currentPage = results.page;
         this.totalPages = results.totalPages;
-        this.movies?.push(...results.results);
+        this.tvShows?.push(...results.results);
       });
   }
 

@@ -10,8 +10,7 @@ import { MovieDetailComponent } from './movies/movie-detail.component';
 import {MovieSearchComponent} from "./movies/movie-search.component";
 
 import { SeriesComponent } from './series/series.component';
-import {TvShowOverviewComponent} from "./tv-show-overview/tv-show-overview.component";
-import { ActorsSearchComponent } from './actors/actors-search.component';
+import {TVShowSearchComponent} from "./tv-show-search/tv-show-search.component";
 import { ActorsDetailComponent } from './actors/actors-detail.component';
 
 
@@ -21,7 +20,7 @@ const routes: Routes = [
   { path: Paths.actors, component: ActorsDetailComponent},
   { path: Paths.movieSearch, component: MovieSearchComponent},
   { path: Paths.movieDetail, component: MovieDetailComponent},
-  { path: Paths.series, component: TvShowOverviewComponent},
+  { path: Paths.series, component: TVShowSearchComponent},
   { path: Paths.seriesDetail, component: SeriesComponent}
 ];
 
