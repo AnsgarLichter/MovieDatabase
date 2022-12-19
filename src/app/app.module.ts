@@ -43,7 +43,11 @@ import { ActorsSearchComponent } from './actors/actors-search.component';
     MovieSearchComponent,
     TvShowOverviewComponent,
     PersonCardComponent,
-    StreamingProviderCardComponent
+    StreamingProviderCardComponent,
+    CountrySelectComponent,
+    YearPickerComponent,
+    ActorsDetailComponent,
+    ActorsSearchComponent,
   ],
   imports: [
     BrowserModule,
