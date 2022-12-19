@@ -3,19 +3,19 @@ export interface MovieTrends {
     results: ResultsMovie[] 
 }
 
-interface ResultsMovie {
+export interface ResultsMovie {
     adult: boolean,
-    backdrop_path: String,
+    backdrop_path: string,
     id: number,
-    title: String,
-    original_language: String,
-    original_title: String,
-    overview: String,
-    poster_path: String,
-    media_type: String,
+    title: string,
+    original_language: string,
+    original_title: string,
+    overview: string,
+    poster_path: string,
+    media_type: string,
     genre_ids: number[],
     popularity: number,
-    release_date: String,
+    release_date: string,
     video: boolean,
     vote_average: number,
     vote_count: number
@@ -26,20 +26,20 @@ export interface SeriesTrends {
     results: ResultsSeries[] 
 }
 
-interface ResultsSeries {
+export interface ResultsSeries {
     adult: boolean,
-    backdrop_path: String,
+    backdrop_path: string,
     id: number,
-    name: String,
-    original_language: String,
-    original_title: String,
-    overview: String,
-    poster_path: String,
-    media_type: String,
+    name: string,
+    original_language: string,
+    original_title: string,
+    overview: string,
+    poster_path: string,
+    media_type: string,
     genre_ids: number[],
     popularity: number,
-    first_air_date: String,
+    first_air_date: string,
     vote_average: number,
     vote_count: number,
-    origin_country: String[]
+    origin_country: string[]
 }
