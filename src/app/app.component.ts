@@ -12,4 +12,5 @@ export class AppComponent {
   linkMovie = Paths.movieSearch;
   linkSeries = Paths.series;
   linkHome = Paths.home;
+  linkActors = Paths.actors;
 }

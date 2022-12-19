@@ -30,6 +30,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {CountrySelectComponent} from './country-select/country-select.component';
 import {YearPickerComponent} from './year-picker/year-picker.component';
+import { ActorsDetailComponent } from './actors/actors-detail.component';
+import { ActorsSearchComponent } from './actors/actors-search.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import {YearPickerComponent} from './year-picker/year-picker.component';
     PersonCardComponent,
     StreamingProviderCardComponent,
     CountrySelectComponent,
-    YearPickerComponent
+    YearPickerComponent,
+    ActorsDetailComponent,
+    ActorsSearchComponent,
   ],
   imports: [
     BrowserModule,

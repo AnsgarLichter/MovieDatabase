@@ -18,26 +18,43 @@
   background: #ffc107;
 }
 
-/* Scrollbar styling */
-html {
-  --scrollbarBackground: #ffffff;
-  --thumbBackground: #007fad;
+#page-container {
+  position: relative;
+  min-height: 100vh;
 }
 
-body::-webkit-scrollbar, .scroll-container::-webkit-scrollbar {
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: var(--scrollbarBackground);
+.main {
+  padding-bottom: 75px;
 }
 
-/* Firefox */
-body, .scroll-container {
-  scrollbar-width: thin;
-  scrollbar-color: var(--thumbBackground) var(--scrollbarBackground);
+.footer {
+  background: #212529;
+  margin-top: 50px;
+  color: #fff;
+  margin-top: 268px;
+  padding: 10px 0 10px 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
-body::-webkit-scrollbar-thumb, .scroll-container::-webkit-scrollbar-thumb {
-  background-color: var(--thumbBackground);
-  border-radius: 0.25rem;
+.footer li a {
+    color: #fff;
 }
 
+.footer .title h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.footer .copyright {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.footer .copyright p {
+  text-align: right;
+  padding: 0;
+  margin: 0;
+}
