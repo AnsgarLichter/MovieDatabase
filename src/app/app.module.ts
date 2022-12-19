@@ -47,7 +47,19 @@ import {YearPickerComponent} from './year-picker/year-picker.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatChipsModule,
+    MatCardModule,
+    MatIconModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatProgressBarModule,
+    MatExpansionModule
   ],
   providers: [ImageUrlProvider],
   bootstrap: [AppComponent]
