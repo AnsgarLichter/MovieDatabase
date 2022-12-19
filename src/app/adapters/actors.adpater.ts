@@ -16,7 +16,7 @@ export class ActorsAdapter implements Adapter<Actors> {
   adapt(item: TmdbActors): Actors {
     let actor: TmdbActors | undefined;
     
-    console.log(item);
+    //console.log(item);
     //const test = item.results.map((item) => actors = item);
     //const actors = item?.results?.map((item) => actor = item);
 

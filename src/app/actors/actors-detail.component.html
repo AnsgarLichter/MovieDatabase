@@ -1,28 +1,71 @@
-<div class="my-12 mx-8">
+<div class="flex flex-row justify-center items-center bg-gray-500 py-8 px-8 md:px-0">
+    <form class="flex flex-row" [formGroup]="searchForm" (ngSubmit)="onSearchSubmitted()">
+      <div class="flex flex-col md:flex-row md:space-x-8">
+        <mat-form-field appearance="outline">
+          <mat-label>Actors:</mat-label>
+          <input matInput type="text" placeholder="Search for Actor ..." formControlName="query">
+        </mat-form-field>
+      </div>
+      <div class="flex flex-col justify-center basis-full items-center mt-8 md:mt-0">
+        <button mat-button type="submit" color="accent" [disabled]="!searchForm.valid">
+          <mat-icon>search</mat-icon>
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+
+<div class="my-12 mx-8" *ngIf="foundResult">
     <div class="container">
-    <div class="flex flex-col items-center md:flex-row">
-        <div class="flex flex-col justify-center items-center min-w-[33%]">
-            <img class="max-w-none h-80 w-80 md:h-auto md:w-auto md:max-w-[100%] lg:max-w-[40%] xl:max-w-[40%]"
-              src="{{actorSearch?.profile_path}}" alt="Movie Poster">
-          </div>
-        <div class="md:mr-24 min-w-[67%]">
-            <div class="flex flex-col items-center lg:flex-row mt-4 md:mt-0">
-                <div class="title"><h3>{{actorSearch?.name}}</h3></div>
+        <div class="flex flex-col items-center md:flex-row">
+            <div class="flex flex-col justify-center items-center min-w-[33%]">
+                <img class="max-w-none h-80 w-80 md:h-auto md:w-auto md:max-w-[100%] lg:max-w-[60%] xl:max-w-[60%]"
+                src="{{actorSearch?.profile_path}}" alt="Movie Poster">
             </div>
-            <div class="flex flex-col items-center lg:flex-row mt-4 md:mt-0">
-                <div class="biography"><p>{{actor?.biography}}</p></div>
-            <div>
+            <div class="md:mr-24 min-w-[67%]">
+                <div class="flex flex-col items-center lg:flex-row mt-4 md:mt-0">
+                    <div class="title"><h2>{{actorSearch?.name}}</h2></div>
+                </div>
+                <div class="flex flex-col items-center lg:flex-row mt-4 md:mt-0">
+                    <div class="biography"><p [innerHTML]="biography"></p></div>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="flex flex-col mt-24 xl:mt-12">
-        <h3>Movies</h3>
-        <div class="known-for" *ngFor="let known_for of actorSearch?.known_for">
-            <p>{{known_for?.original_title}} ({{known_for?.release_date}})</p>
-            <p>{{known_for?.overview}}</p>
+<div class="container" *ngIf="foundResult">
+    <div class="flex flex-col mt-6 md:flex-row">
+        <div class="flex flex-col pr-6 min-w-[33%] information-spacer">
+            <mat-card>
+                <mat-card-content>
+                    <div class="title">
+                        <h2>Details</h2>
+                    </div>
+                    <p>Name: {{actor?.name}}</p>
+                    <p>Known for: {{actor?.known_for_department}}</p>
+                    <p>Birthday: {{actor?.birthday}}</p>
+                    <p>Place of birth: {{actor?.place_of_birth}}</p>
+                    <p *ngIf="actor?.deathday !== null">Deathday: {{actor?.deathday}}</p>
+                    <div class="also-known-spacer mt-8">
+                        <p><b>Also known as:</b></p>
+                        <div class="also-known-as" *ngFor="let elm of actor?.also_known_as">
+                            <p>{{elm}}</p>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="flex flex-col min-w-[67%]">
+            <mat-card>
+                <mat-card-content>
+                    <h2>Movies</h2>
+                    <div class="known-for" *ngFor="let known_for of actorSearch?.known_for">
+                        <p>{{known_for?.original_title}} ({{known_for?.release_date}})</p>
+                        <p>{{known_for?.overview}}</p>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 </div>

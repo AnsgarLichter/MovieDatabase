@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Actors } from '../models/actors.model';
 import { ActorsSearch } from '../models/search-actors.model';
@@ -15,6 +16,9 @@ export class ActorsDetailComponent implements OnInit {
 
   public actorSearch: ActorsSearch | undefined;
   public actor: Actors | undefined; 
+  public biography: string | undefined;
+  public searchForm: FormGroup;
+  public foundResult: boolean = false;
 
   private routeParamsSubscription: any;
 
@@ -23,26 +27,32 @@ export class ActorsDetailComponent implements OnInit {
     private actorsService: ActorsService,
     private route: ActivatedRoute,
   ) {
+    this.searchForm = new FormGroup({
+      query: new FormControl(null, Validators.required),
+    });
+  }
+
+  onSearchSubmitted(): void {
+    const value = this.searchForm.value;
+    const searchQuery = String(value.query).replace(' ', '%');
+    this.loadActorsSearchDetails(searchQuery);
   }
 
   ngOnInit(): void {
-    this.routeParamsSubscription = this.route.params.subscribe(params => {
-      this.loadActorsSearchDetails("Vin%Diesel");
-      this.loadActorsDetails(12835);
-    });
   }
 
   private loadActorsSearchDetails(query: string): void {
     this.actorsSearchService.getActors(query)
       .subscribe((actor: ActorsSearch) => {
-        console.log("Component", actor);
         this.actorSearch = actor;
+        this.loadActorsDetails(actor.id);
+        this.foundResult = true;
       });
   }
 
   private loadActorsDetails(idActor: number): void {
     this.actorsService.getActors(idActor).subscribe((result) => {
-      console.log("Details", result);
+      this.biography = result.biography.replace(/(?:\r\n|\r|\n)/g, '<br>');
       this.actor = result;
     });
   }
