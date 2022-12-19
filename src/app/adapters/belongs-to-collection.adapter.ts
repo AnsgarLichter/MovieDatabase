@@ -3,7 +3,6 @@ import {Adapter} from "./base.adapter";
 
 import {TmdbBelongsToCollection} from "../models/tmdb/tmdb-movie.model";
 import {BelongsToCollection} from "../models/movie.model";
-import {Configuration} from "../models/configuration.model";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
 
 @Injectable({
@@ -14,8 +13,8 @@ export class BelongsToCollectionAdapter implements Adapter<BelongsToCollection> 
   }
 
   adapt(item: TmdbBelongsToCollection): BelongsToCollection {
-    const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || ""; //TODO: Fallback picture
-    const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || ""; //TODO: Fallback picture
+    const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || "assets/fallbackPictureMovie.png";
+    const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || "assets/fallbackPictureMovie.png";
 
     return new BelongsToCollection(
       item.id,

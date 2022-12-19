@@ -1,10 +1,9 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {map, Observable} from 'rxjs';
 import {MovieDbService} from './movie-db.service';
 import {SearchMovie, SearchResults} from "../models/search-movie.model";
-import {TmdbSearchMovie, TmdbSearchMovieResults} from "../models/tmdb/tmdb-search-movie.model";
-import {SearchMovieAdapter} from "../adapters/search-movie.adapter";
+import {TmdbSearchMovie} from "../models/tmdb/tmdb-search-movie.model";
 import {TmdbSearchResults} from "../models/tmdb/tdmb-search-result.model";
 import {SearchResultsAdapter} from "../adapters/search-results.adapter";
 

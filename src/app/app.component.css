@@ -1,19 +1,62 @@
 .nav {
-    margin-left: 30px;
+  margin-left: 30px;
 }
 
 .logo {
-    display: flex;
-    justify-content: center;
-    align-content: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .logo p {
-    font-size: 25px;
-    margin-bottom: 0;
-    font-weight: 800;
+  font-size: 25px;
+  margin-bottom: 0;
+  font-weight: 800;
 }
 
 .button1 {
-    background: #ffc107;
+  background: #ffc107;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.main {
+  padding-bottom: 50px;
+}
+
+.footer {
+  background: #212529;
+  margin-top: 50px;
+  color: #fff;
+  margin-top: 268px;
+  /*padding-top: 30px;
+  padding-bottom: 50px;*/
+  padding: 10px 0 10px 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.footer li a {
+    color: #fff;
+}
+
+.footer .title h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.footer .copyright {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.footer .copyright p {
+  text-align: right;
+  padding: 0;
+  margin: 0;
 }

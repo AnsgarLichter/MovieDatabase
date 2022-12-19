@@ -1,0 +1,7 @@
+progress#progressBar:hover:after {
+  display: inline;
+  content: attr(value);
+  text-align: center;
+  position: relative;
+  top: 0;
+}

@@ -1,3 +1,96 @@
 .search h2 { text-align: center; }
 ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex { background: #f0f0f0 !important; }
 ::ng-deep #mat-form-field-label-1 { color: #000; }
+
+.carousel-caption { bottom: 10.25rem; }
+
+.header-image img { opacity: 0.8; }
+.header-image .carousel-item {
+    display: flex;
+    background: rgba(0,0,0,0.4);
+    width: 100%;
+}
+
+.carousel-control-next-icon {
+    right: 0;
+    position: absolute;
+}
+.carousel-control-prev-icon {
+    left: 0;
+    position: absolute;
+}
+
+
+.movies-slider, .series-slider {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.series-slider {
+    margin-top: 50px;
+}
+
+.movies-slider .header {
+    text-align: center;
+}
+
+.movies-slider .element-slider {
+    text-align: center;
+}
+
+
+.series-slider .header {
+    text-align: center;
+}
+
+.series-slider .element-slider {
+    text-align: center;
+}
+
+.element-slider {
+    position: relative;
+}
+
+.element-slider .ratings {
+    top: 0px;
+    position: absolute;
+    z-index: 100;
+    background: #ffc107;
+    color: #000;
+    padding: 10px 10px;
+    left: 18%;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    z-index: 100;
+    width: 2%;
+}
+
+.carousel-indicators button {
+    background-color:#000;
+}
+
+.carousel-indicators {
+    margin-bottom: 0;
+}
+
+
+.series-slider .carousel-control-next-icon, .movies-slider .carousel-control-next-icon {
+    right: 0;
+    position: absolute;
+    background-color: #000;
+}
+.series-slider .carousel-control-prev-icon, .movies-slider .carousel-control-prev-icon {
+    left: 0;
+    position: absolute;
+    background-color:#000;
+}
+
+.home {
+    margin-bottom: 50px;
+}
+
+.poster-image {
+    display: flex;
+    justify-content: center;
+}

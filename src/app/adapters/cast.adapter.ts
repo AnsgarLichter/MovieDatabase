@@ -22,7 +22,6 @@ export class CastAdapter implements Adapter<CastMember> {
 
     return new CastMember(
       item.id,
-      item.cast_id,
       item.credit_id,
       item.original_name,
       item.name,
