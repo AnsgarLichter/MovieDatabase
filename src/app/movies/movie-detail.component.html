@@ -1,0 +1,186 @@
+<div class="my-12 mx-8">
+  <div class="flex flex-col items-center md:flex-row">
+    <div class="flex flex-col justify-center items-center min-w-[33%]">
+      <img loading="lazy" class="max-w-none h-80 w-80 md:h-full md:w-full md:max-w-[100%] lg:max-w-[80%] xl:max-w-[80%]"
+           src="{{movie?.posterPath}}" alt="Movie Poster">
+    </div>
+    <div class="md:mr-24 min-w-[67%]">
+      <div class="flex flex-col items-center lg:flex-row mt-4 md:mt-0">
+        <div class="flex flex-col md:grow md:shrink-0 md:basis-auto md:w-1/2">
+          <div class="text-2xl font-bold text-center">{{movie?.originalTitle}}</div>
+          <div class="flex justify-center mt-2 md:mt-4">{{movie?.tagline}}</div>
+        </div>
+
+        <div class="flex flex-col mt-4 md:grow md:shrink-0 md:basis-auto md:w-1/2 md:mt-0 xl:mt-0">
+          <div>
+            <mat-chip-list class="flex justify-center" aria-label="Genres">
+              <mat-chip *ngFor="let genre of movie?.genres">{{genre.name}}</mat-chip>
+            </mat-chip-list>
+          </div>
+          <div class="flex flex-row mt-2 md:mt-4">
+            <div class="flex basis-1/2 justify-center">
+              {{movie?.releaseDate?.toLocaleDateString()}}
+            </div>
+            <div class="flex basis-1/2 justify-center">
+              {{movie?.runtime}} Minutes
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col mx-8 md:mx-24 mt-2 md:mt-12">
+        <div class="flex justify-center text-xl font-bold">
+          Overview
+        </div>
+        <div class="mt-2 md:mt-4">
+          {{movie?.overview}}
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-center mx-4 mt-4 md:mt-12">
+        <div class="flex flex-col flex-1 justify-center mx-4 my-1"
+             *ngFor="let directorOrWriter of movie?.directorsAndWriters">
+          <div class="flex justify-center font-bold text-base">
+            {{directorOrWriter.name}}
+          </div>
+          <div class="mx-8">
+            <div class="flex justify-center">
+              <div *ngIf="directorOrWriter.isDirector && directorOrWriter.isWriter; else director">
+                Director, Writer
+              </div>
+              <ng-template #director>
+                <div *ngIf="directorOrWriter.isDirector; else writer">
+                  Director
+                </div>
+              </ng-template>
+              <ng-template #writer>
+                <div *ngIf="directorOrWriter.isWriter">
+                  Writer
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col xl:flex-row mt-24 xl:mt-12">
+    <div class="flex xl:grow xl:shrink-0 xl:basis-auto xl:w-1/3 justify-center items-center xl:mb-12">
+      <div class="flex flex-col justify-center items-center space-y-4">
+        <div>
+          <div class="text-xl font-bold text-center">Keywords</div>
+          <div>
+            <div class="flex justify-center" *ngIf="movie?.keywords; else keywordsFallback">
+              <mat-chip-list class="flex justify-center max-w-[80%] xl:max-w-[33%] center-mat-chips mt-4"
+                             aria-label="Keywords">
+                <mat-chip *ngFor="let keyword of movie?.keywords">{{keyword.name}}</mat-chip>
+              </mat-chip-list>
+            </div>
+            <ng-template #keywordsFallback>-</ng-template>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Rating</div>
+          <div class="text-lg text-center">
+            <div *ngIf="movie?.voteAverage; else voteFallback">{{movie?.voteAverage}}</div>
+            <ng-template #voteFallback>-</ng-template>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Budget</div>
+          <div class="text-lg text-center">
+            <div *ngIf="movie?.budget; else budgetFallback">{{movie?.budget}}</div>
+            <ng-template #budgetFallback>-</ng-template>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Revenue</div>
+          <div class="text-lg text-center">
+            <div *ngIf="movie?.revenue; else revenueFallback">{{movie?.revenue}}</div>
+            <ng-template #revenueFallback>-</ng-template>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Original Language</div>
+          <div class="text-lg text-center">
+            <div *ngIf="movie?.originalLanguage; else originalLanguageFallback">{{movie?.originalLanguage}}
+            </div>
+            <ng-template #originalLanguageFallback>-</ng-template>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-xl font-bold text-center">Status</div>
+          <div class="text-lg text-center">{{movie?.status}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="xl:grow-0 xl:shrink-0 xl:basis-auto xl:w-2/3 mt-24 xl:mt-0">
+      <div class="flex flex-col flex-1 px-4">
+        <div>
+          <div class="flex flex-col justify-center items-center font-bold my-8">
+            <div class="text-3xl">
+              Watch Providers
+            </div>
+            <div class="flex flex-row w-full bg-red-500 p-8 items-center justify-center">
+              <form class="flex flex-col" [formGroup]="countryForm">
+                <div class="flex flex-col md:flex-row md:space-x-8">
+                  <app-country-select class="w-full" formControlName="region"
+                                      [isDeselectPossible]="false"
+                                      (selectionChange)="onCountrySelectionChanged()">
+                  </app-country-select>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div *ngIf="watchProvidersInCurrentCountry?.length; else noStreamingProvidersFound"
+               class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2">
+            <app-streaming-provider-card
+              *ngFor="let streamingProvider of watchProvidersInCurrentCountry"
+              name="{{streamingProvider.providerName}}"
+              logoPath="{{streamingProvider.logoPath}}"
+              [isAvailableForRent]="streamingProvider.isAvailableForRent"
+              [isAvailableInFlatrate]="streamingProvider.isAvailableInFlatrate"
+              [isAvailableToBuy]="streamingProvider.isAvailableToBuy">
+            </app-streaming-provider-card>
+          </div>
+          <ng-template #noStreamingProvidersFound>
+            <div class="flex flex-row justify-center items-center">
+              No Watch Providers available in the selected country.
+            </div>
+          </ng-template>
+        </div>
+
+        <div *ngIf="movie?.cast && !!movie?.cast?.length">
+          <div class="flex justify-center text-3xl font-bold my-8">
+            Cast
+          </div>
+          <div class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2">
+            <app-person-card *ngFor="let castMember of movie?.cast" name="{{castMember.name}}"
+                             subtitle="{{castMember.character}}"
+                             profilePicturePath="{{castMember.profilePath}}"></app-person-card>
+          </div>
+        </div>
+
+        <div *ngIf="movie?.crew && !!movie?.crew?.length">
+          <div class="flex justify-center text-3xl font-bold my-8">
+            Crew
+          </div>
+          <div class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2">
+            <app-person-card *ngFor="let crewMember of movie?.crew" name="{{crewMember.name}}"
+                             subtitle="{{crewMember.job}}"
+                             profilePicturePath="{{crewMember.profilePath}}"></app-person-card>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
