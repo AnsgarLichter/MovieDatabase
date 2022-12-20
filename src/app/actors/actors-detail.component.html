@@ -1,21 +1,4 @@
-<div class="flex flex-row justify-center items-center bg-gray-500 py-8 px-8 md:px-0">
-    <form class="flex flex-col" [formGroup]="searchForm" (ngSubmit)="onSearchSubmitted()">
-      <div class="flex flex-col md:flex-row md:space-x-8">
-        <mat-form-field appearance="outline">
-          <mat-label>Actors:</mat-label>
-          <input matInput type="text" placeholder="Search for Actor ..." formControlName="query">
-        </mat-form-field>
-      </div>
-      <div class="flex flex-col justify-center basis-full items-center mt-8 md:mt-0">
-        <button mat-button type="submit" color="accent" [disabled]="!searchForm.valid">
-          <mat-icon>search</mat-icon>
-          Search
-        </button>
-      </div>
-    </form>
-  </div>
-
-<div class="my-12 mx-8" *ngIf="foundResult">
+<div class="my-12 mx-8">
     <div class="container">
         <div class="flex flex-col items-center md:flex-row">
             <div class="flex flex-col justify-center items-center min-w-[33%]">
@@ -34,7 +17,7 @@
     </div>
 </div>
 
-<div class="container" *ngIf="foundResult">
+<div class="container">
     <div class="flex flex-col mt-6 md:flex-row">
         <div class="flex flex-col pr-6 min-w-[33%] information-spacer">
             <mat-card>

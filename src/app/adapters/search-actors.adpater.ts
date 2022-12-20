@@ -24,12 +24,44 @@ export class ActorsSearchAdapter implements Adapter<ActorsSearchNew[]> {
       actorsSearchList.push({
         id: actors.id,
         name: actors.name,
-        profile_path: this.imagePathProvider.getProfileUrl(actors.profile_path),
+        profilePath: this.imagePathProvider.getProfileUrl(actors.profile_path),
       });
     });
 
     return actorsSearchList;
   }
+
+  adaptNew(item: TmdbSearchActorsResult): ActorsSearch {
+    let actors: TmdbActorsSearch | undefined;
+    var actorsSearchList: ActorsSearchNew[] = [];
+
+    item.results.forEach((actors) => {
+      actorsSearchList.push({
+        id: actors.id,
+        name: actors.name,
+        profilePath: actors.profile_path,
+      });
+    });
+    console.log(actorsSearchList);
+
+    const test = item.results.map((item) => (actors = item));
+
+    const profile_path = this.imagePathProvider.getProfileUrl(
+      test[0].profile_path
+    );
+
+    return new ActorsSearch(
+      test[0].adult,
+      test[0].gender,
+      test[0].id,
+      test[0].known_for,
+      test[0].known_for_department,
+      test[0].name,
+      test[0].popularity,
+      profile_path
+    );
+  }
+
 
   
   /*adapt(item: TmdbSearchActorsResult): ActorsSearch {
@@ -64,7 +96,7 @@ export class ActorsSearchAdapter implements Adapter<ActorsSearchNew[]> {
   }*/
 
   
-  private adaptActors(actors: TmdbActorsSearch): ActorsSearch {
+  /*private adaptActors(actors: TmdbActorsSearch): ActorsSearch {
     console.log('Adapt', actors);
     return new ActorsSearch(
       actors.adult,
@@ -88,7 +120,7 @@ export class ActorsSearchAdapter implements Adapter<ActorsSearchNew[]> {
       knownFor.original_language,
       knownFor.original_title,
       knownFor.overview,
-      knownFor.poster_path,
+      knownFor.posterPath,
       knownFor.release_date,
       knownFor.title,
       //knownFor.popularity,
@@ -96,5 +128,5 @@ export class ActorsSearchAdapter implements Adapter<ActorsSearchNew[]> {
       knownFor.vote_average,
       knownFor.vote_count
     );
-  }
+  }*/
 }

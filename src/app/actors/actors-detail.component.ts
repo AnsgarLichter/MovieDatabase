@@ -15,11 +15,12 @@ import { MoviesService } from '../services/movies.service';
 })
 export class ActorsDetailComponent implements OnInit {
 
-  public actorSearch: ActorsSearchNew | undefined;
+  public actorSearch: ActorsSearch | undefined;
   public actor: Actors | undefined; 
   public biography: string | undefined;
   public searchForm: FormGroup;
   public foundResult: boolean = false;
+  public actorName: string | undefined;
 
   private routeParamsSubscription: any;
 
@@ -37,14 +38,18 @@ export class ActorsDetailComponent implements OnInit {
     const value = this.searchForm.value;
     const searchQuery = String(value.query).replace(' ', '%');
     this.loadActorsSearchDetails(searchQuery);
+    this.loadActorsDetails(2888);
   }
 
   ngOnInit(): void {
+    this.routeParamsSubscription = this.route.params.subscribe(params => {
+      this.loadActorsDetails(+params['id']);
+    });
   }
 
   private loadActorsSearchDetails(query: string): void {
-    this.actorsSearchService.getActors(query)
-      .subscribe((actor: ActorsSearchNew) => {
+    this.actorsService.getActorsDetails(query)
+      .subscribe((actor: ActorsSearch) => {
         this.actorSearch = actor;
         this.loadActorsDetails(actor.id);
         this.foundResult = true;
@@ -55,6 +60,8 @@ export class ActorsDetailComponent implements OnInit {
     this.actorsService.getActors(idActor).subscribe((result) => {
       this.biography = result.biography.replace(/(?:\r\n|\r|\n)/g, '<br>');
       this.actor = result;
+      this.actorName = String(result.name).replace(' ', '%');;
+      this.loadActorsSearchDetails(this.actorName);
     });
   }
 

@@ -16,7 +16,7 @@ import { MovieDbService } from './movie-db.service';
 })
 export class ActorsService extends MovieDbService {
 
-  constructor(protected override httpClient: HttpClient, private adapter: ActorsAdapter) {
+  constructor(protected override httpClient: HttpClient, private adapter: ActorsAdapter, private adapterActors: ActorsSearchAdapter) {
     super(httpClient)
     this.adapter = adapter;
    }
@@ -34,6 +34,25 @@ export class ActorsService extends MovieDbService {
     ).pipe(
       map((tmdbActors: TmdbActors) => {
         return this.adapter.adapt(tmdbActors);
+      }
+      )
+    );
+  } 
+
+  public getActorsDetails(inputText: string): Observable<ActorsSearch>{
+    const requestUrl = `${this.getBaselineUrl()}/search/person`;
+    const parameters = this.getBaseParameters();
+
+      parameters[`query`] = inputText;
+
+    return this.httpClient.get<TmdbSearchActorsResult>(
+      requestUrl,
+      {
+        params: parameters
+      }
+    ).pipe(
+      map((TmdbActorsSearch: TmdbSearchActorsResult) => {
+        return this.adapterActors.adaptNew(TmdbActorsSearch);
       }
       )
     );

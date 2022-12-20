@@ -21,7 +21,7 @@ export class ActorsSearchService extends MovieDbService {
     this.adapter = adapter;
    }
 
-  public getActors(inputText: string): Observable<ActorsSearchNew>{
+  public getActors(inputText: string): Observable<ActorsSearchNew[]>{
     const requestUrl = `${this.getBaselineUrl()}/search/person`;
     const parameters = this.getBaseParameters();
 
