@@ -5,6 +5,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Configuration} from "../models/configuration.model";
 import {ConfigurationService} from "../services/configuration.service";
 import {WatchProvider} from "../models/movie.model";
+import {FormControl, FormGroup} from "@angular/forms";
+import {MovieDetailComponent} from "../movies/movie-detail.component";
 
 @Component({
   selector: 'app-series',
@@ -14,12 +16,20 @@ import {WatchProvider} from "../models/movie.model";
 export class SeriesComponent implements OnInit {
 
   constructor(private tvShowService: TVShowService, private route: ActivatedRoute, private configurationService: ConfigurationService) {
-    this.route.params.subscribe(params => this.showID = params["id"])
+    this.route.params.subscribe(params => this.showID = params["id"]);
+
+    const region = MovieDetailComponent.getCurrentCountryCodeByNavigatorLanguage();
+    this.countryForm = new FormGroup({
+      region: new FormControl(region),
+    });
   }
 
   public tvShow: TvShow | undefined;
   private showID: number = 0;
   public configuration: Configuration | undefined;
+  public watchProvidersInCurrentCountry: WatchProvider[] | undefined;
+  public countryForm: FormGroup;
+
 
   ngOnInit(): void {
     this.loadConfiguration()
@@ -31,26 +41,25 @@ export class SeriesComponent implements OnInit {
       this.tvShow = tvShow;
     });
   }
-
-  getImagePath(): string {
-    if (!this.configuration?.images?.baseUrl || !this.configuration.images.backdropSizes.length) {
-      return "";
-    }
-
-    return this.configuration?.images?.baseUrl + this.configuration?.images?.backdropSizes[2].toString()
-  }
-
   private loadConfiguration(): void {
     this.configurationService.getConfiguration().subscribe((configuration: Configuration) => {
       this.configuration = configuration;
     });
   }
+  private updateWatchProviders(): void {
+    const selectedCountryCode = this.countryForm.value.region;
+    if (!selectedCountryCode) {
+      return;
+    }
 
-  getWatchProvidersForCurrentCountry(): WatchProvider[] | undefined {
-    return this.tvShow?.watchProvider
-      .filter(watchProvider => watchProvider.country === "DE")
+    this.watchProvidersInCurrentCountry = this.tvShow?.watchProvider
+      .filter(watchProvider => watchProvider.country === selectedCountryCode)
       .sort((a: WatchProvider, b: WatchProvider) =>
         a.displayPriority - b.displayPriority
       );
+  }
+
+  onCountrySelectionChanged(): void {
+    this.updateWatchProviders();
   }
 }

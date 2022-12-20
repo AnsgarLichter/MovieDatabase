@@ -113,40 +113,39 @@
               </div>
             </mat-expansion-panel>
           <br>
-        <div class="flex justify-center text-3xl font-bold my-8">Streaming Providers</div>
-        <div class="flex flex-row overflow-x-auto space-x-4 px-4">
-          <div *ngFor="let streamingProvider of getWatchProvidersForCurrentCountry()"
-               class="flex bg-red-500 min-w-[275px] p-4 rounded-xl space-x-4">
-            <div class="flex items-center">
-              <img loading="lazy" class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
-                   src="{{getImagePath()}}{{streamingProvider.logoPath}}">
-            </div>
-
-            <div class="flex flex-col justify-center text-center w-full">
-              <div class="text-lg">{{streamingProvider.providerName}}</div>
-
-              <div class="flex flex-row w-full text-center items-center justify-center space-x-4 mt-4">
-                <div *ngIf="streamingProvider.isAvailableToBuy">
-                  <mat-icon aria-hidden="false" aria-label="Buy" fontIcon="sell"></mat-icon>
-                  Buy
-                </div>
-
-                <div *ngIf="streamingProvider.isAvailableForRent">
-                  <mat-icon aria-hidden="false"
-                            aria-label="Buy" fontIcon="hourglass_top"></mat-icon>
-                  Rent
-                </div>
-
-                <div *ngIf="streamingProvider.isAvailableInFlatrate">
-                  <mat-icon aria-hidden="false" aria-label="Buy"
-                            fontIcon="sync_saved_locally"></mat-icon>
-                  Flatrate
-                </div>
-
+          <div>
+            <div class="flex flex-col justify-center items-center font-bold my-8">
+              <div class="text-3xl">
+                Watch Providers
+              </div>
+              <div class="flex flex-row w-full bg-red-500 p-8 items-center justify-center">
+                <form class="flex flex-col" [formGroup]="countryForm">
+                  <div class="flex flex-col md:flex-row md:space-x-8">
+                    <app-country-select class="w-full" formControlName="region"
+                                        [isDeselectPossible]="false"
+                                        (selectionChange)="onCountrySelectionChanged()">
+                    </app-country-select>
+                  </div>
+                </form>
               </div>
             </div>
+            <div *ngIf="watchProvidersInCurrentCountry?.length; else noStreamingProvidersFound"
+                 class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2">
+              <app-streaming-provider-card
+                *ngFor="let streamingProvider of watchProvidersInCurrentCountry"
+                name="{{streamingProvider.providerName}}"
+                logoPath="{{streamingProvider.logoPath}}"
+                [isAvailableForRent]="streamingProvider.isAvailableForRent"
+                [isAvailableInFlatrate]="streamingProvider.isAvailableInFlatrate"
+                [isAvailableToBuy]="streamingProvider.isAvailableToBuy">
+              </app-streaming-provider-card>
+            </div>
+            <ng-template #noStreamingProvidersFound>
+              <div class="flex flex-row justify-center items-center">
+                No Watch Providers available in the selected country.
+              </div>
+            </ng-template>
           </div>
-        </div>
         <div class="flex justify-center text-3xl font-bold my-8">Cast</div>
         <div class="flex flex-row overflow-x-auto space-x-4 px-4">
           <div class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2">
