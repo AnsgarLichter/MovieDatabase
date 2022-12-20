@@ -9,8 +9,7 @@ import {SearchResults} from "../models/search-movie.model";
 import {SearchTVShow} from "../models/search-tv-show.model";
 import {TmdbSearchResults} from "../models/tmdb/tdmb-search-result.model";
 import {TmdbSearchTVShow} from "../models/tmdb/tmdb-search-tv-show.model";
-import {SearchResultsAdapter, SearchTVShowResultsAdapter} from "../adapters/search-results.adapter";
-import {SearchTVShowAdapter} from "../adapters/search-tv-show.adapter";
+import {SearchTVShowResultsAdapter} from "../adapters/search-results.adapter";
 
 @Injectable({
   providedIn: 'root'
