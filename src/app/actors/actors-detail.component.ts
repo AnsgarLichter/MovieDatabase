@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Actors } from '../models/actors.model';
+import { ActorsSearchNew } from '../models/search-actors-new.model';
 import { ActorsSearch } from '../models/search-actors.model';
 import { ActorsSearchService } from '../services/actors-search.service';
 import { ActorsService } from '../services/actors.service';
@@ -14,7 +15,7 @@ import { MoviesService } from '../services/movies.service';
 })
 export class ActorsDetailComponent implements OnInit {
 
-  public actorSearch: ActorsSearch | undefined;
+  public actorSearch: ActorsSearchNew | undefined;
   public actor: Actors | undefined; 
   public biography: string | undefined;
   public searchForm: FormGroup;
@@ -43,7 +44,7 @@ export class ActorsDetailComponent implements OnInit {
 
   private loadActorsSearchDetails(query: string): void {
     this.actorsSearchService.getActors(query)
-      .subscribe((actor: ActorsSearch) => {
+      .subscribe((actor: ActorsSearchNew) => {
         this.actorSearch = actor;
         this.loadActorsDetails(actor.id);
         this.foundResult = true;

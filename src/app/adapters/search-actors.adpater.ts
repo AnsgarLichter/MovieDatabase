@@ -1,25 +1,56 @@
-import { Injectable } from "@angular/core";
-import { Adapter } from "./base.adapter";
-import { ActorsSearch, KnownFor } from "../models/search-actors.model";
-import { TmdbActorsSearch, TmdbSearchActorsResult } from "../models/tmdb/tmdb-search-actors.model";
-import { TmdbSearchResults } from "../models/tmdb/tdmb-search-result.model";
-import { TmdbSearchSimpleResult } from "../models/tmdb/tmdb-search-simple-result.model";
-import { ImageUrlProvider } from "../utilities/image-url-provider";
+import { Injectable } from '@angular/core';
+import { Adapter } from './base.adapter';
+import { ActorsSearch, KnownFor } from '../models/search-actors.model';
+import {
+  TmdbActorsSearch,
+  TmdbSearchActorsResult,
+} from '../models/tmdb/tmdb-search-actors.model';
+import { TmdbSearchResults } from '../models/tmdb/tdmb-search-result.model';
+import { TmdbSearchSimpleResult } from '../models/tmdb/tmdb-search-simple-result.model';
+import { ImageUrlProvider } from '../utilities/image-url-provider';
+import { ActorsSearchNew } from '../models/search-actors-new.model';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
-export class ActorsSearchAdapter implements Adapter<ActorsSearch> {
+export class ActorsSearchAdapter implements Adapter<ActorsSearchNew[]> {
+  constructor(private imagePathProvider: ImageUrlProvider) {}
 
-  constructor(private imagePathProvider: ImageUrlProvider){}
-
-  adapt(item: TmdbSearchActorsResult): ActorsSearch {
+  adapt(item: TmdbSearchActorsResult): ActorsSearchNew[] {
     let actors: TmdbActorsSearch | undefined;
-    
-    const test = item.results.map((item) => actors = item);
+    var actorsSearchList: ActorsSearchNew[] = [];
 
-    const profile_path = this.imagePathProvider.getProfileUrl(test[0].profile_path);
-   
+    item.results.forEach((actors) => {
+      actorsSearchList.push({
+        id: actors.id,
+        name: actors.name,
+        profile_path: this.imagePathProvider.getProfileUrl(actors.profile_path),
+      });
+    });
+
+    return actorsSearchList;
+  }
+
+  
+  /*adapt(item: TmdbSearchActorsResult): ActorsSearch {
+    let actors: TmdbActorsSearch | undefined;
+    var actorsSearchList: ActorsSearchNew[] = [];
+
+    item.results.forEach((actors) => {
+      actorsSearchList.push({
+        id: actors.id,
+        name: actors.name,
+        profile_path: actors.profile_path,
+      });
+    });
+    console.log(actorsSearchList);
+
+    const test = item.results.map((item) => (actors = item));
+
+    const profile_path = this.imagePathProvider.getProfileUrl(
+      test[0].profile_path
+    );
+
     return new ActorsSearch(
       test[0].adult,
       test[0].gender,
@@ -30,10 +61,11 @@ export class ActorsSearchAdapter implements Adapter<ActorsSearch> {
       test[0].popularity,
       profile_path
     );
-  }
+  }*/
 
+  
   private adaptActors(actors: TmdbActorsSearch): ActorsSearch {
-    console.log("Adapt", actors);
+    console.log('Adapt', actors);
     return new ActorsSearch(
       actors.adult,
       actors.gender,
@@ -43,10 +75,10 @@ export class ActorsSearchAdapter implements Adapter<ActorsSearch> {
       actors.name,
       actors.popularity,
       actors.profile_path
-    )
+    );
   }
 
-  private knownForAdapter(knownFor: KnownFor): KnownFor{
+  private knownForAdapter(knownFor: KnownFor): KnownFor {
     return new KnownFor(
       knownFor.adult,
       knownFor.backdrop_path,
