@@ -10,7 +10,7 @@ import {SearchResultsAdapter} from "../adapters/search-results.adapter";
 @Injectable({
   providedIn: 'root'
 })
-export class SearchService extends MovieDbService {
+export class SearchMovieService extends MovieDbService {
   constructor(protected override httpClient: HttpClient, private adapter: SearchResultsAdapter) {
     super(httpClient);
   }

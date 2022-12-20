@@ -23,7 +23,7 @@ import {MovieDetailComponent} from './movies/movie-detail.component';
 import {SeriesComponent} from './series/series.component';
 
 import {ImageUrlProvider} from "./utilities/image-url-provider";
-import {TvShowOverviewComponent} from './tv-show-overview/tv-show-overview.component';
+import {TVShowSearchComponent} from "./tv-show-search/tv-show-search.component";
 import {PersonCardComponent} from './person-card/person-card.component';
 import {StreamingProviderCardComponent} from './streaming-provider-card/streaming-provider-card.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
@@ -41,7 +41,7 @@ import { ActorsSearchComponent } from './actors/actors-search.component';
     SeriesComponent,
     MovieDetailComponent,
     MovieSearchComponent,
-    TvShowOverviewComponent,
+    TVShowSearchComponent,
     PersonCardComponent,
     StreamingProviderCardComponent,
     CountrySelectComponent,
