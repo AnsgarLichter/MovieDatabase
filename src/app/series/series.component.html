@@ -149,38 +149,18 @@
         </div>
         <div class="flex justify-center text-3xl font-bold my-8">Cast</div>
         <div class="flex flex-row overflow-x-auto space-x-4 px-4">
-          <div *ngFor="let castMember of tvShow?.cast"
-               class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
-            <div class="flex items-center">
-              <img loading="lazy" class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
-                   src="{{castMember.profilePath}}">
-            </div>
-
-            <div class="flex flex-col justify-center text-center w-full">
-              <div class="text-lg">{{castMember.name}}</div>
-
-              <div>
-                {{castMember.character}}
-              </div>
-            </div>
+          <div class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2">
+            <app-person-card *ngFor="let castMember of tvShow?.cast" name="{{castMember.name}}"
+                             subtitle="{{castMember.character}}"
+                             profilePicturePath="{{castMember.profilePath}}"></app-person-card>
           </div>
         </div>
         <div class="flex justify-center text-3xl font-bold my-8">Crew</div>
         <div class="flex flex-row overflow-x-auto space-x-4 px-4">
-          <div *ngFor="let crewMember of tvShow?.crew"
-               class="flex bg-amber-500 min-w-[275px] p-4 rounded-xl">
-            <div class="flex items-center">
-              <img loading="lazy" class="w-14 h-14 max-w-none rounded-full" alt="Logo of Streaming Provider"
-                   src="{{crewMember.profilePath}}">
-            </div>
-
-            <div class="flex flex-col justify-center text-center w-full">
-              <div class="text-lg">{{crewMember.name}}</div>
-
-              <div>
-                {{crewMember.job}}
-              </div>
-            </div>
+          <div class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2">
+            <app-person-card *ngFor="let crewMember of tvShow?.crew" name="{{crewMember.name}}"
+                             subtitle="{{crewMember.job}}"
+                             profilePicturePath="{{crewMember.profilePath}}"></app-person-card>
           </div>
         </div>
       </div>
