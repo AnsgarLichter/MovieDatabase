@@ -1,3 +1,11 @@
 .mat-chip-list-wrapper {
   justify-content: center;
 }
+
+.scroll-background {
+  --scrollbarBackground: #6b7280;
+}
+
+.thumb-background {
+  --thumbBackground: #92DCE5;
+}
