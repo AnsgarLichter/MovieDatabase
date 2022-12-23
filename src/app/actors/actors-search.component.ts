@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActorsSearchFlat } from '../models/search-actors-new.model';
+import { ActorsSearchFlat } from '../models/search-actors-flat.model';
 import { ActorsSearchService } from '../services/actors-search.service';
 
 @Component({

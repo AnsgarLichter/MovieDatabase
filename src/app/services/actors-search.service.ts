@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ActorsSearchAdapter } from '../adapters/search-actors.adpater';
-import { ActorsSearchFlat } from '../models/search-actors-new.model';
+import { ActorsSearchFlat } from '../models/search-actors-flat.model';
 import { TmdbSearchActorsResult } from '../models/tmdb/tmdb-search-actors.model';
 import { MovieDbService } from './movie-db.service';
 

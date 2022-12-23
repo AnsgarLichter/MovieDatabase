@@ -7,7 +7,7 @@ import {
   TmdbSearchActorsResult,
 } from '../models/tmdb/tmdb-search-actors.model';
 import { ImageUrlProvider } from '../utilities/image-url-provider';
-import { ActorsSearchFlat } from '../models/search-actors-new.model';
+import { ActorsSearchFlat } from '../models/search-actors-flat.model';
 
 @Injectable({
   providedIn: 'root',
