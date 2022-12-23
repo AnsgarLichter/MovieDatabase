@@ -1,6 +1,7 @@
 <div class="flex justify-center w-full h-full" [ngStyle]="{ 'background-image': 'url(' + movie?.backdropPath + ')'}">
   <div class="background-image-opacity">
-    <div class="relative flex flex-col items-center justify-center rounded-xl max-w-[80rem] h-full lg:flex-row xl:my-12">
+    <div
+      class="relative flex flex-col items-center justify-center rounded-xl max-w-[80rem] h-full lg:flex-row xl:my-12">
       <div class="flex flex-col justify-center items-center min-w-[50%] xl:min-w-[40%]">
         <img loading="lazy"
              class="max-w-none h-96 w-64 lg:h-full lg:max-h-[45rem] lg:w-full lg:max-w-[20rem] rounded-xl"
@@ -15,7 +16,7 @@
 
           <div class="flex flex-col mt-2 lg:grow lg:shrink-0 lg:basis-auto lg:w-1/2 lg:mt-4 xl:mt-0">
             <div>
-              <mat-chip-list class="flex justify-center" aria-label="Genres">
+              <mat-chip-list class="flex justify-center genre-background-color" aria-label="Genres">
                 <mat-chip *ngFor="let genre of movie?.genres">{{genre.name}}</mat-chip>
               </mat-chip-list>
             </div>
@@ -69,15 +70,14 @@
   </div>
 </div>
 
-
-<div class="flex flex-col items-center my-24 mx-24 xl:flex-row xl:items-start xl:space-x-8">
-  <div class="w-[75%] md:w-[40%] xl:w-[80%] bg-gray-500 rounded-xl py-8">
+<div class="flex flex-col items-center lg:flex-row lg:items-start lg:space-x-8 bg-[#212529] px-8 md:px-32 py-12">
+  <div class="w-full lg:w-[80%] bg-[#3D414B] rounded-xl py-8">
     <div class="flex flex-col justify-center items-center space-y-4 mt-4">
       <div>
         <div class="text-xl font-bold text-center text-white">Keywords</div>
         <div>
           <div class="flex justify-center" *ngIf="movie?.keywords; else keywordsFallback">
-            <mat-chip-list class="flex justify-center max-w-[80%] center-mat-chips mt-4"
+            <mat-chip-list class="flex justify-center max-w-[80%] center-mat-chips mt-4 keyword-background-color"
                            aria-label="Keywords">
               <mat-chip *ngFor="let keyword of movie?.keywords">{{keyword.name}}</mat-chip>
             </mat-chip-list>
@@ -126,10 +126,10 @@
     </div>
   </div>
 
-  <div class="grow-0 shrink-0 basis-auto w-full xl:w-2/3 mt-24 xl:mt-0">
-    <div class="flex flex-col flex-1 pl-4">
-      <div class="bg-gray-500 pb-4 rounded-xl">
-        <div class="flex flex-col justify-center items-center font-bold my-8">
+  <div class="grow-0 shrink-0 basis-auto w-full lg:w-2/3 mt-12 lg:mt-0 my-24">
+    <div class="flex flex-col flex-1">
+      <div class="bg-[#3D414B] pb-4 rounded-xl">
+        <div class="flex flex-col justify-center items-center font-bold mt-8">
           <div class="text-3xl text-white">
             Watch Providers
           </div>
@@ -151,7 +151,7 @@
                                        [isAvailableForRent]="streamingProvider.isAvailableForRent"
                                        [isAvailableInFlatrate]="streamingProvider.isAvailableInFlatrate"
                                        [isAvailableToBuy]="streamingProvider.isAvailableToBuy"
-                                       customClasses="bg-[#92DCE5]">
+                                       customClasses="bg-[#212529] text-white">
           </app-streaming-provider-card>
         </div>
         <ng-template #noStreamingProvidersFound>
@@ -161,7 +161,7 @@
         </ng-template>
       </div>
 
-      <div class="bg-gray-500 mt-8 pb-4 rounded-xl" *ngIf="movie?.cast && !!movie?.cast?.length">
+      <div class="bg-[#3D414B] mt-8 pb-4 rounded-xl" *ngIf="movie?.cast && !!movie?.cast?.length">
         <div class="flex justify-center text-3xl font-bold my-8 text-white">
           Cast
         </div>
@@ -169,11 +169,11 @@
           <app-person-card *ngFor="let castMember of movie?.cast" name="{{castMember.name}}"
                            subtitle="{{castMember.character}}"
                            profilePicturePath="{{castMember.profilePath}}"
-                           customClasses="bg-[#92DCE5]"></app-person-card>
+                           customClasses="bg-[#212529] text-white"></app-person-card>
         </div>
       </div>
 
-      <div class="bg-gray-500 mt-8 pb-4 rounded-xl" *ngIf="movie?.crew && !!movie?.crew?.length">
+      <div class="bg-[#3D414B] mt-8 pb-4 rounded-xl" *ngIf="movie?.crew && !!movie?.crew?.length">
         <div class="flex justify-center text-3xl font-bold my-8 text-white">
           Crew
         </div>
@@ -181,7 +181,7 @@
           <app-person-card *ngFor="let crewMember of movie?.crew" name="{{crewMember.name}}"
                            subtitle="{{crewMember.job}}"
                            profilePicturePath="{{crewMember.profilePath}}"
-                           customClasses="bg-[#92DCE5]"></app-person-card>
+                           customClasses="bg-[#212529] text-white"></app-person-card>
         </div>
       </div>
 

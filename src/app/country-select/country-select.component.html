@@ -1,4 +1,4 @@
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" class="w-full">
     <mat-label>Country:</mat-label>
     <mat-hint *ngIf="!!hint?.length">{{hint}}</mat-hint>
     <mat-select [disabled]="isDisabled" [value]="selectedCountryCode" (selectionChange)="onSelectionChanged($event)">

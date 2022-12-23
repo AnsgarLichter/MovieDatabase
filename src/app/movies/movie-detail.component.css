@@ -3,11 +3,11 @@
 }
 
 .scroll-background {
-  --scrollbarBackground: #6b7280;
+  --scrollbarBackground: #3D414B;
 }
 
 .thumb-background {
-  --thumbBackground: #92DCE5;
+  --thumbBackground: #212529;
 }
 
 .background-image-opacity::before {
@@ -20,3 +20,10 @@
   background-color: rgba(0, 0, 0, 0.25);
 }
 
+.keyword-background-color .mat-chip.mat-standard-chip {
+  background-color: #212529;
+}
+
+.genre-background-color .mat-chip.mat-standard-chip {
+  background-color: #3D414B;
+}

@@ -15,8 +15,8 @@ export class MovieSearchComponent implements OnInit {
   private routeParamsSubscription: any;
 
   public movies: SearchMovie[] = [];
-  private currentPage: number | undefined;
-  private totalPages: number | undefined;
+  public currentPage: number = 0;
+  public totalPages: number = 0;
 
   public searchForm: FormGroup;
 
