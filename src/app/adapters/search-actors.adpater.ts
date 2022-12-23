@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Adapter } from './base.adapter';
-import { ActorsSearch, KnownFor } from '../models/search-actors.model';
+import { ActorsSearch, KnownForSearch } from '../models/search-actors.model';
 import {
   TmdbActorsSearch,
+  TmdbKnownFor,
   TmdbSearchActorsResult,
 } from '../models/tmdb/tmdb-search-actors.model';
-import { TmdbSearchResults } from '../models/tmdb/tdmb-search-result.model';
-import { TmdbSearchSimpleResult } from '../models/tmdb/tmdb-search-simple-result.model';
 import { ImageUrlProvider } from '../utilities/image-url-provider';
-import { ActorsSearchNew } from '../models/search-actors-new.model';
+import { ActorsSearchFlat } from '../models/search-actors-new.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ActorsSearchAdapter implements Adapter<ActorsSearchNew[]> {
+export class ActorsSearchAdapter implements Adapter<ActorsSearchFlat[]> {
   constructor(private imagePathProvider: ImageUrlProvider) {}
 
-  adapt(item: TmdbSearchActorsResult): ActorsSearchNew[] {
-    let actors: TmdbActorsSearch | undefined;
-    var actorsSearchList: ActorsSearchNew[] = [];
+  adapt(item: TmdbSearchActorsResult): ActorsSearchFlat[] {
+    var actorsSearchList: ActorsSearchFlat[] = [];
 
     item.results.forEach((actors) => {
       actorsSearchList.push({
@@ -33,7 +31,7 @@ export class ActorsSearchAdapter implements Adapter<ActorsSearchNew[]> {
 
   adaptNew(item: TmdbSearchActorsResult): ActorsSearch {
     let actors: TmdbActorsSearch | undefined;
-    var actorsSearchList: ActorsSearchNew[] = [];
+    var actorsSearchList: ActorsSearchFlat[] = [];
 
     item.results.forEach((actors) => {
       actorsSearchList.push({
@@ -42,7 +40,6 @@ export class ActorsSearchAdapter implements Adapter<ActorsSearchNew[]> {
         profilePath: actors.profile_path,
       });
     });
-    console.log(actorsSearchList);
 
     const test = item.results.map((item) => (actors = item));
 
@@ -50,83 +47,40 @@ export class ActorsSearchAdapter implements Adapter<ActorsSearchNew[]> {
       test[0].profile_path
     );
 
-    return new ActorsSearch(
-      test[0].adult,
-      test[0].gender,
-      test[0].id,
-      test[0].known_for,
-      test[0].known_for_department,
-      test[0].name,
-      test[0].popularity,
-      profile_path
-    );
-  }
+    var knownForList: KnownForSearch[] = []
 
-
-  
-  /*adapt(item: TmdbSearchActorsResult): ActorsSearch {
-    let actors: TmdbActorsSearch | undefined;
-    var actorsSearchList: ActorsSearchNew[] = [];
-
-    item.results.forEach((actors) => {
-      actorsSearchList.push({
-        id: actors.id,
-        name: actors.name,
-        profile_path: actors.profile_path,
-      });
+    test[0].known_for.forEach((knownFor) => {
+      knownForList.push(this.knownForAdapter(knownFor))
     });
-    console.log(actorsSearchList);
-
-    const test = item.results.map((item) => (actors = item));
-
-    const profile_path = this.imagePathProvider.getProfileUrl(
-      test[0].profile_path
-    );
 
     return new ActorsSearch(
       test[0].adult,
       test[0].gender,
       test[0].id,
-      test[0].known_for,
+      knownForList,
       test[0].known_for_department,
       test[0].name,
       test[0].popularity,
       profile_path
     );
-  }*/
-
-  
-  /*private adaptActors(actors: TmdbActorsSearch): ActorsSearch {
-    console.log('Adapt', actors);
-    return new ActorsSearch(
-      actors.adult,
-      actors.gender,
-      actors.id,
-      actors.known_for,
-      actors.known_for_department,
-      actors.name,
-      actors.popularity,
-      actors.profile_path
-    );
   }
 
-  private knownForAdapter(knownFor: KnownFor): KnownFor {
-    return new KnownFor(
+  private knownForAdapter(knownFor: TmdbKnownFor): KnownForSearch {
+    return new KnownForSearch(
       knownFor.adult,
       knownFor.backdrop_path,
       knownFor.genre_ids,
       knownFor.id,
       knownFor.media_type,
-      knownFor.original_language,
       knownFor.original_title,
+      knownFor.original_language,
       knownFor.overview,
-      knownFor.posterPath,
-      knownFor.release_date,
+      knownFor.poster_path,
+      new Date(knownFor.release_date),
       knownFor.title,
-      //knownFor.popularity,
       knownFor.video,
       knownFor.vote_average,
       knownFor.vote_count
     );
-  }*/
+  }
 }

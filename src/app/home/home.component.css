@@ -94,3 +94,18 @@
     display: flex;
     justify-content: center;
 }
+
+.mat-button {
+    background: #ffc107;
+    color: #000;
+}
+
+.button-spacer {
+    display: flex;
+    grid-column-gap: 15px;
+    justify-content: center;
+}
+
+#carouselExampleInterval .carousel-caption {
+    bottom: 13.25rem;
+}

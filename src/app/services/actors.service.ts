@@ -5,10 +5,8 @@ import { ActorsAdapter } from '../adapters/actors.adpater';
 import { ActorsSearchAdapter } from '../adapters/search-actors.adpater';
 import { Actors } from '../models/actors.model';
 import { ActorsSearch } from '../models/search-actors.model';
-import { TmdbSearchResults } from '../models/tmdb/tdmb-search-result.model';
 import { TmdbActors } from '../models/tmdb/tmdb-actors.model';
-import { TmdbActorsSearch, TmdbSearchActorsResult } from '../models/tmdb/tmdb-search-actors.model';
-import { TmdbSearchSimpleResult } from '../models/tmdb/tmdb-search-simple-result.model';
+import { TmdbSearchActorsResult } from '../models/tmdb/tmdb-search-actors.model';
 import { MovieDbService } from './movie-db.service';
 
 @Injectable({

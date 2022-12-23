@@ -1,14 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { ActorsAdapter } from '../adapters/actors.adpater';
 import { ActorsSearchAdapter } from '../adapters/search-actors.adpater';
-import { Actors } from '../models/actors.model';
-import { ActorsSearchNew } from '../models/search-actors-new.model';
-import { ActorsSearch } from '../models/search-actors.model';
-import { TmdbSearchResults } from '../models/tmdb/tdmb-search-result.model';
+import { ActorsSearchFlat } from '../models/search-actors-new.model';
 import { TmdbSearchActorsResult } from '../models/tmdb/tmdb-search-actors.model';
-import { TmdbSearchSimpleResult } from '../models/tmdb/tmdb-search-simple-result.model';
 import { MovieDbService } from './movie-db.service';
 
 @Injectable({
@@ -21,7 +16,7 @@ export class ActorsSearchService extends MovieDbService {
     this.adapter = adapter;
    }
 
-  public getActors(inputText: string): Observable<ActorsSearchNew[]>{
+  public getActors(inputText: string): Observable<ActorsSearchFlat[]>{
     const requestUrl = `${this.getBaselineUrl()}/search/person`;
     const parameters = this.getBaseParameters();
 

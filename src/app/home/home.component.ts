@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { __values } from 'tslib';
 import { MovieTrends, ResultsMovie, SeriesTrends, ResultsSeries } from '../models/trends.model';
+import { Paths } from '../paths';
 import { TrendsService } from '../services/trends.service';
 import { ImageUrlProvider } from '../utilities/image-url-provider';
 
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   public seriesList: ResultsSeries[][] = [];
   public movieTrends:  MovieTrends | undefined;
   public seriesTrends: SeriesTrends | undefined;
+  public linkMovies: string = Paths.actors;
 
   constructor(private trendsService: TrendsService, private imageUrlProvider: ImageUrlProvider) { }
 
@@ -46,7 +48,7 @@ export class HomeComponent implements OnInit {
     if(posterPath !== undefined){
       return this.imageUrlProvider.getPosterUrl(posterPath);
     }
-    return "Test";
+    return "Not found";
   }
 
   getRatings(ratingNumber: number | undefined) : string {
@@ -97,11 +99,8 @@ export class HomeComponent implements OnInit {
 
   public checkCount(maxArrayLength: number, counter: number): number{
     if((maxArrayLength - counter) < 6){
-      // 20 - 18
-      console.log("Max: " + maxArrayLength, "Actual: " + counter);
       return maxArrayLength - counter;
     }
-    console.log("Max: " + maxArrayLength, "Actual: " + counter);
     return 6;
   }
 
@@ -131,6 +130,6 @@ export class HomeComponent implements OnInit {
       return dateTest.toLocaleDateString();
     }
 
-    return "Test";
+    return "Undefined";
   }
 }

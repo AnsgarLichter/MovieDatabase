@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Actors } from '../models/actors.model';
-import { ActorsSearchNew } from '../models/search-actors-new.model';
 import { ActorsSearch } from '../models/search-actors.model';
-import { ActorsSearchService } from '../services/actors-search.service';
 import { ActorsService } from '../services/actors.service';
-import { MoviesService } from '../services/movies.service';
 
 @Component({
   selector: 'app-actors-detail',
@@ -22,10 +19,7 @@ export class ActorsDetailComponent implements OnInit {
   public foundResult: boolean = false;
   public actorName: string | undefined;
 
-  private routeParamsSubscription: any;
-
   constructor(
-    private actorsSearchService: ActorsSearchService,
     private actorsService: ActorsService,
     private route: ActivatedRoute,
   ) {
@@ -34,15 +28,8 @@ export class ActorsDetailComponent implements OnInit {
     });
   }
 
-  onSearchSubmitted(): void {
-    const value = this.searchForm.value;
-    const searchQuery = String(value.query).replace(' ', '%');
-    this.loadActorsSearchDetails(searchQuery);
-    this.loadActorsDetails(2888);
-  }
-
   ngOnInit(): void {
-    this.routeParamsSubscription = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.loadActorsDetails(+params['id']);
     });
   }
@@ -51,7 +38,6 @@ export class ActorsDetailComponent implements OnInit {
     this.actorsService.getActorsDetails(query)
       .subscribe((actor: ActorsSearch) => {
         this.actorSearch = actor;
-        this.loadActorsDetails(actor.id);
         this.foundResult = true;
       });
   }

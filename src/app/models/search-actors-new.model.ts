@@ -1,4 +1,4 @@
-export class ActorsSearchNew{
+export class ActorsSearchFlat{
     constructor(
         public id: number,
         public name: string,

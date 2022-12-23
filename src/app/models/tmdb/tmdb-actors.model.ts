@@ -3,7 +3,7 @@ export interface TmdbActors{
     also_known_as: string[],
     biography: string,
     birthday: string,
-    deathday: string | null,
+    deathday: string,
     gender: number,
     homepage: string | null,
     id: number,

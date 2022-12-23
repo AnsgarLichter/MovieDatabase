@@ -9,14 +9,14 @@ export interface TmdbActorsSearch{
     adult: boolean,
     gender: number,
     id: number,
-    known_for: KnownFor[],
+    known_for: TmdbKnownFor[],
     known_for_department: string
     name: string,
     popularity: number
     profile_path: string,
 }
 
-interface KnownFor {
+export interface TmdbKnownFor {
     poster_path: string,
     adult: boolean,
     overview: string,
