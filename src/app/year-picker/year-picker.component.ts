@@ -24,7 +24,7 @@ import {YearPickerDateAdapter} from "../country-select/year-picker-date.adapter"
 export class YearPickerComponent implements OnInit, ControlValueAccessor {
 
   public yearForm: FormGroup;
-  public onChange = (value: string) => {
+  public onChange = (value: any) => {
   };
 
   public onTouched = () => {
@@ -55,6 +55,9 @@ export class YearPickerComponent implements OnInit, ControlValueAccessor {
 
   clear(): void {
     this.yearForm.reset();
+
+    this.writeValue(null);
+    this.onChange(null);
   }
 
   markAsTouched(): void {
@@ -66,7 +69,7 @@ export class YearPickerComponent implements OnInit, ControlValueAccessor {
     this.onTouched();
   }
 
-  writeValue(value: string): void {
+  writeValue(value: any): void {
     this.yearForm.get('year')?.setValue(value);
   }
 
