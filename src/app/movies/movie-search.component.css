@@ -1,3 +1,20 @@
 .mat-accent {
   background-color: #212529;
 }
+
+::ng-deep input.mat-input-element {
+  color: white;
+}
+
+::ng-deep .mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: white !important;
+}
+
+::ng-deep .mat-form-field-label {
+  color: white !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white !important;
+}
