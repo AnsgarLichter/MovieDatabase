@@ -169,7 +169,8 @@
           <app-person-card *ngFor="let castMember of movie?.cast" name="{{castMember.name}}"
                            subtitle="{{castMember.character}}"
                            profilePicturePath="{{castMember.profilePath}}"
-                           customClasses="bg-[#212529] text-white"></app-person-card>
+                           customClasses="bg-[#212529] text-white cursor-pointer"
+                           [routerLink]="['/actors', castMember.id]"></app-person-card>
         </div>
       </div>
 
@@ -181,7 +182,8 @@
           <app-person-card *ngFor="let crewMember of movie?.crew" name="{{crewMember.name}}"
                            subtitle="{{crewMember.job}}"
                            profilePicturePath="{{crewMember.profilePath}}"
-                           customClasses="bg-[#212529] text-white"></app-person-card>
+                           customClasses="bg-[#212529] text-white cursor-pointer"
+                           [routerLink]="['/actors', crewMember.id]"></app-person-card>
         </div>
       </div>
 
