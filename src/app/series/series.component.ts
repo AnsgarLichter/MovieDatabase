@@ -6,7 +6,7 @@ import {Configuration} from "../models/configuration.model";
 import {ConfigurationService} from "../services/configuration.service";
 import {WatchProvider} from "../models/movie.model";
 import {FormControl, FormGroup} from "@angular/forms";
-import {MovieDetailComponent} from "../movies/movie-detail.component";
+import {getCurrentCountryCodeByNavigatorLanguage} from "../utilities/functions";
 
 @Component({
   selector: 'app-series',
@@ -18,7 +18,7 @@ export class SeriesComponent implements OnInit {
   constructor(private tvShowService: TVShowService, private route: ActivatedRoute, private configurationService: ConfigurationService) {
     this.route.params.subscribe(params => this.showID = params["id"]);
 
-    const region = MovieDetailComponent.getCurrentCountryCodeByNavigatorLanguage();
+    const region = getCurrentCountryCodeByNavigatorLanguage();
     this.countryForm = new FormGroup({
       region: new FormControl(region),
     });
