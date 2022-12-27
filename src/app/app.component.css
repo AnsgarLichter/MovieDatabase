@@ -72,24 +72,6 @@ body {
   margin: 0;
 }
 
-/* Scrollbar styling */
-html {
-  --scrollbarBackground: #ffffff;
-  --thumbBackground: #007fad;
-}
-
-body::-webkit-scrollbar, .scroll-container::-webkit-scrollbar {
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: var(--scrollbarBackground);
-}
-
-/* Firefox */
-body, .scroll-container {
-  scrollbar-width: thin;
-  scrollbar-color: var(--thumbBackground) var(--scrollbarBackground);
-}
-
 body::-webkit-scrollbar-thumb, .scroll-container::-webkit-scrollbar-thumb {
   background-color: var(--thumbBackground);
   border-radius: 0.25rem;
@@ -106,9 +88,10 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   -webkit-text-fill-color: white;
-  -webkit-box-shadow: 0 0 0px 1000px #3D414B inset;
+  -webkit-box-shadow: 0 0 0 1000px #3D414B inset;
 }
 
+/* Change style of all material inputs because applying a custom theme to angular material is really difficult */
 input.mat-input-element,
 input.mat-input-element::placeholder {
   color: white;
@@ -126,4 +109,23 @@ input.mat-input-element::placeholder {
 .mat-form-field-appearance-outline.ng-untouched .mat-form-field-outline,
 .mat-form-field-appearance-outline:not(.ng-invalid) .mat-form-field-outline {
   color: white !important;
+}
+
+
+/* Scrollbar styling */
+html {
+  --scrollbarBackground: #ffffff;
+  --thumbBackground: #007fad;
+}
+
+body::-webkit-scrollbar, .scroll-container::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: var(--scrollbarBackground);
+}
+
+/* Firefox */
+body, .scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBackground) var(--scrollbarBackground);
 }
