@@ -11,8 +11,8 @@ import {CrewMember, DirectorOrWriter, Movie} from "../models/movie.model";
 import {TmdbMovie} from "../models/tmdb/tmdb-movie.model";
 import {KeywordAdapter} from "./keyword.adapter";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
-import {ProductionCompanyAdapter} from "./production-country.adapter";
-import {ProductionCountryAdapter} from "./production-company.adapter";
+import {ProductionCountryAdapter} from "./production-country.adapter";
+import {ProductionCompanyAdapter} from "./production-company.adapter";
 import {SpokenLanguageAdapter} from "./spoken-language.adapter";
 
 

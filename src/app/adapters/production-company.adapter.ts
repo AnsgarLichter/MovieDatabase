@@ -2,18 +2,20 @@ import {Injectable} from "@angular/core";
 
 import {Adapter} from "./base.adapter";
 
-import {ProductionCountry} from "../models/movie.model";
-import {TmdbProductionCountry} from "../models/tmdb/tmdb-movie.model";
+import {ProductionCompany} from "../models/movie.model";
+import {TmdbProductionCompany} from "../models/tmdb/tmdb-movie.model";
 
 
 @Injectable({
   providedIn: "root",
 })
-export class ProductionCountryAdapter implements Adapter<ProductionCountry> {
-  adapt(item: TmdbProductionCountry): ProductionCountry {
-    return new ProductionCountry(
+export class ProductionCompanyAdapter implements Adapter<ProductionCompany> {
+  adapt(item: TmdbProductionCompany): ProductionCompany {
+    return new ProductionCompany(
+      item.id,
       item.name,
-      item.iso_3166_1,
+      item.origin_country,
+      item.logo_path,
     );
   }
 }
