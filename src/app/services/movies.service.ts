@@ -10,6 +10,11 @@ import {Movie} from "../models/movie.model";
   providedIn: 'root'
 })
 export class MoviesService extends MovieDbService {
+  private readonly PATH: string = '/movie/{movie_id}'
+  private readonly SUB_PATH_CREDITS: string = 'credits';
+  private readonly SUB_PATH_WATCH_PROVIDERS: string = 'watch/providers';
+  private readonly SUB_PATH_KEYWORDS: string = 'keywords';
+
   constructor(protected override httpClient: HttpClient, private adapter: MovieAdapter) {
     super(httpClient);
 
@@ -17,24 +22,24 @@ export class MoviesService extends MovieDbService {
   }
 
   public getMovie(movieId: number, includeCredits: boolean, includeWatchProviders: boolean, includeKeywords: boolean): Observable<Movie> {
-    const requestUrl = `${this.getBaselineUrl()}/movie/${movieId}}`;
+    const requestUrl = `${this.getBaselineUrl()}${this.PATH.replace('{movie_id}', String(movieId))}`;
     const parameters = this.getBaseParameters();
 
     const appendToResponse: string[] = [];
     if (includeCredits) {
-      appendToResponse.push(`credits`);
+      appendToResponse.push(this.SUB_PATH_CREDITS);
     }
 
     if (includeWatchProviders) {
-      appendToResponse.push(`watch/providers`);
+      appendToResponse.push(this.SUB_PATH_WATCH_PROVIDERS);
     }
 
     if (includeKeywords) {
-      appendToResponse.push(`keywords`);
+      appendToResponse.push(this.SUB_PATH_KEYWORDS);
     }
 
-    if(appendToResponse.length) {
-      parameters[`append_to_response`] = appendToResponse.join(`,`);
+    if (appendToResponse.length) {
+      parameters[this.PARAMETER_NAME_APPEND_TO_RESPONSE] = appendToResponse.join(`,`);
     }
 
     return this.httpClient.get<TmdbMovie>(
