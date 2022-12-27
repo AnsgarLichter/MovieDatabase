@@ -2,22 +2,4 @@
   background-color: #212529;
 }
 
-/* TODO: Replace ::ng-deep */
-::ng-deep input.mat-input-element {
-  color: white;
-}
 
-::ng-deep .mat-form-field-ripple {
-  /*change color of underline when focused*/
-  background-color: white !important;
-}
-
-::ng-deep .mat-form-field.ng-untouched .mat-form-field-label,
-::ng-deep .mat-form-field:not(.ng-invalid) .mat-form-field-label {
-  color: white !important;
-}
-
-::ng-deep .mat-form-field-appearance-outline.ng-untouched .mat-form-field-outline,
-::ng-deep .mat-form-field-appearance-outline:not(.ng-invalid) .mat-form-field-outline  {
-  color: white !important;
-}
