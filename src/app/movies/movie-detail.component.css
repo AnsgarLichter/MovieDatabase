@@ -1,3 +1,30 @@
 .mat-chip-list-wrapper {
   justify-content: center;
 }
+
+.keyword-background-color .mat-chip.mat-standard-chip {
+  background-color: #212529;
+}
+
+.genre-background-color .mat-chip.mat-standard-chip {
+  background-color: #3D414B;
+}
+
+.background-image-opacity::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Scrollbar Styling for crew and cast lists */
+.scroll-background {
+  --scrollbarBackground: #3D414B;
+}
+
+.thumb-background {
+  --thumbBackground: #212529;
+}

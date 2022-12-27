@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
@@ -11,12 +11,12 @@ import {SearchMovie, SearchResults} from "../models/search-movie.model";
   templateUrl: './movie-search.component.html',
   styleUrls: ['./movie-search.component.css'],
 })
-export class MovieSearchComponent implements OnInit {
+export class MovieSearchComponent implements OnInit, OnDestroy {
   private routeParamsSubscription: any;
 
   public movies: SearchMovie[] = [];
-  private currentPage: number | undefined;
-  private totalPages: number | undefined;
+  public currentPage: number = 0;
+  public totalPages: number = 0;
 
   public searchForm: FormGroup;
 
@@ -52,11 +52,6 @@ export class MovieSearchComponent implements OnInit {
 
   onSearchSubmitted(): void {
     this.loadSearchResultsByFormValues();
-  }
-
-  onYearSelected(value: any, datePicker: any): void {
-    datePicker.close();
-    this.searchForm.get("year")?.setValue(value);
   }
 
   onLoadMoreResultsPressed(): void {

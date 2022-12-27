@@ -16,6 +16,7 @@ import {ConfigurationAdapter} from "../adapters/configuration.adapter";
 export class ConfigurationService extends MovieDbService {
 
   private configuration: Configuration | undefined;
+  private readonly PATH: string = '/configuration'
 
   constructor(protected override httpClient: HttpClient, private adapter: ConfigurationAdapter) {
     super(httpClient);
@@ -27,7 +28,7 @@ export class ConfigurationService extends MovieDbService {
     }
 
     const observable = this.httpClient.get<TmdbConfiguration>(
-      `${this.getBaselineUrl()}/configuration`,
+      `${this.getBaselineUrl()}${this.PATH}`,
       {
         params: this.getBaseParameters()
       }

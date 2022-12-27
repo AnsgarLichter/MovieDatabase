@@ -11,8 +11,8 @@ import {CrewMember, DirectorOrWriter, Movie} from "../models/movie.model";
 import {TmdbMovie} from "../models/tmdb/tmdb-movie.model";
 import {KeywordAdapter} from "./keyword.adapter";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
-import {ProductionCompanyAdapter} from "./production-country.adapter";
-import {ProductionCountryAdapter} from "./production-company.adapter";
+import {ProductionCountryAdapter} from "./production-country.adapter";
+import {ProductionCompanyAdapter} from "./production-company.adapter";
 import {SpokenLanguageAdapter} from "./spoken-language.adapter";
 
 
@@ -53,7 +53,7 @@ export class MovieAdapter implements Adapter<Movie> {
       ? this.belongsToCollectionAdapter.adapt(item.belongs_to_collection)
       : null;
 
-    const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || "assets/fallbackPictureMovie.png";
+    const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || "assets/header_images/guardian_of_the_galaxy.jpg";
     const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || "assets/fallbackPictureMovie.png";
 
     return new Movie(
