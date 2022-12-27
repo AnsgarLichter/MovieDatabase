@@ -2,12 +2,12 @@
   justify-content: center;
 }
 
-.scroll-background {
-  --scrollbarBackground: #3D414B;
+.keyword-background-color .mat-chip.mat-standard-chip {
+  background-color: #212529;
 }
 
-.thumb-background {
-  --thumbBackground: #212529;
+.genre-background-color .mat-chip.mat-standard-chip {
+  background-color: #3D414B;
 }
 
 .background-image-opacity::before {
@@ -20,10 +20,11 @@
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.keyword-background-color .mat-chip.mat-standard-chip {
-  background-color: #212529;
+/* Scrollbar Styling for crew and cast lists */
+.scroll-background {
+  --scrollbarBackground: #3D414B;
 }
 
-.genre-background-color .mat-chip.mat-standard-chip {
-  background-color: #3D414B;
+.thumb-background {
+  --thumbBackground: #212529;
 }
