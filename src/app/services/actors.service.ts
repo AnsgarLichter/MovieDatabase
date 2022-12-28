@@ -19,10 +19,18 @@ export class ActorsService extends MovieDbService {
     this.adapter = adapter;
    }
 
-   public getActors(idActor: number): Observable<Actors>{
+   public getActors(idActor: number, includeCombinedCredits: boolean): Observable<Actors>{
     const requestUrl = `${this.getBaselineUrl()}/person/${idActor}`;
     const parameters = this.getBaseParameters();
 
+    const appendToResponse: string[] = [];
+    if (includeCombinedCredits) {
+      appendToResponse.push(`combined_credits`);
+    }
+
+    if(appendToResponse.length) {
+      parameters[`append_to_response`] = appendToResponse.join(`,`);
+    }
 
     return this.httpClient.get<TmdbActors>(
       requestUrl,
@@ -36,24 +44,4 @@ export class ActorsService extends MovieDbService {
       )
     );
   } 
-
-  public getActorsDetails(inputText: string): Observable<ActorsSearch>{
-    const requestUrl = `${this.getBaselineUrl()}/search/person`;
-    const parameters = this.getBaseParameters();
-
-      parameters[`query`] = inputText;
-
-    return this.httpClient.get<TmdbSearchActorsResult>(
-      requestUrl,
-      {
-        params: parameters
-      }
-    ).pipe(
-      map((TmdbActorsSearch: TmdbSearchActorsResult) => {
-        return this.adapterActors.adaptNew(TmdbActorsSearch);
-      }
-      )
-    );
-  } 
-
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Actors } from '../models/actors.model';
+import { Actors, Cast, CombinedCredits, Crew } from '../models/actors.model';
 import { ActorsSearch } from '../models/search-actors.model';
 import { ActorsService } from '../services/actors.service';
+import { ActorsSearchService } from '../services/search-actors.service';
 
 @Component({
   selector: 'app-actors-detail',
@@ -18,9 +19,13 @@ export class ActorsDetailComponent implements OnInit {
   public searchForm: FormGroup;
   public foundResult: boolean = false;
   public actorName: string | undefined;
+  public combinedCredits: CombinedCredits | undefined;
+  public cast: Cast[] = [];
+  public crew: Crew[] = [];
 
   constructor(
     private actorsService: ActorsService,
+    private actorsSearchService: ActorsSearchService,
     private route: ActivatedRoute,
   ) {
     this.searchForm = new FormGroup({
@@ -34,21 +39,25 @@ export class ActorsDetailComponent implements OnInit {
     });
   }
 
-  private loadActorsSearchDetails(query: string): void {
-    this.actorsService.getActorsDetails(query)
-      .subscribe((actor: ActorsSearch) => {
-        this.actorSearch = actor;
+  private loadActorsSearchDetails(query: string, id: number): void {
+    this.actorsSearchService.getActorsSearch(query, id)
+      .subscribe((results) => {
+        results.results.forEach((actor) => this.actorSearch = actor);
         this.foundResult = true;
       });
   }
 
   private loadActorsDetails(idActor: number): void {
-    this.actorsService.getActors(idActor).subscribe((result) => {
+    this.actorsService.getActors(idActor, true).subscribe((result) => {
       this.biography = result.biography.replace(/(?:\r\n|\r|\n)/g, '<br>');
       this.actor = result;
-      this.actorName = String(result.name).replace(' ', '%');;
-      this.loadActorsSearchDetails(this.actorName);
+      this.combinedCredits = result.combined_credits;
+      this.actorName = String(result.name).replace(' ', '%');
+      this.loadActorsSearchDetails(this.actorName, result.id);
+      this.cast = result.combined_credits.cast;
+      this.crew = result.combined_credits.crew;
+      console.log("Cast Test", result.combined_credits.cast);
+      console.log("Crew Test", result.combined_credits.crew);
     });
   }
-
 }

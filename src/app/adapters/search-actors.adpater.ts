@@ -4,64 +4,44 @@ import { ActorsSearch, KnownForSearch } from '../models/search-actors.model';
 import {
   TmdbActorsSearch,
   TmdbKnownFor,
-  TmdbSearchActorsResult,
 } from '../models/tmdb/tmdb-search-actors.model';
 import { ImageUrlProvider } from '../utilities/image-url-provider';
-import { ActorsSearchFlat } from '../models/search-actors-flat.model';
+import { TmdbSearchResults } from '../models/tmdb/tdmb-search-result.model';
+import { SearchResults } from '../models/search-movie.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ActorsSearchAdapter implements Adapter<ActorsSearchFlat[]> {
+export class ActorsSearchAdapter
+  implements Adapter<SearchResults<ActorsSearch>>
+{
   constructor(private imagePathProvider: ImageUrlProvider) {}
 
-  adapt(item: TmdbSearchActorsResult): ActorsSearchFlat[] {
-    var actorsSearchList: ActorsSearchFlat[] = [];
-
-    item.results.forEach((actors) => {
-      actorsSearchList.push({
-        id: actors.id,
-        name: actors.name,
-        profilePath: this.imagePathProvider.getProfileUrl(actors.profile_path),
-      });
-    });
-
-    return actorsSearchList;
-  }
-
-  adaptNew(item: TmdbSearchActorsResult): ActorsSearch {
-    let actors: TmdbActorsSearch | undefined;
-    var actorsSearchList: ActorsSearchFlat[] = [];
-
-    item.results.forEach((actors) => {
-      actorsSearchList.push({
-        id: actors.id,
-        name: actors.name,
-        profilePath: actors.profile_path,
-      });
-    });
-
-    const test = item.results.map((item) => (actors = item));
-
-    const profile_path = this.imagePathProvider.getProfileUrl(
-      test[0].profile_path
+  adapt(
+    item: TmdbSearchResults<TmdbActorsSearch>
+  ): SearchResults<ActorsSearch> {
+    var actorsSearchList: ActorsSearch[] = [];
+    item.results.forEach((results) =>
+      actorsSearchList.push(this.actorsSearchAdapter(results))
     );
 
-    var knownForList: KnownForSearch[] = []
+    return new SearchResults(item.page, actorsSearchList, item.total_pages);
+  }
 
-    test[0].known_for.forEach((knownFor) => {
-      knownForList.push(this.knownForAdapter(knownFor))
-    });
-
+  private actorsSearchAdapter(actorSearch: TmdbActorsSearch): ActorsSearch {
+    var knownForList: KnownForSearch[] = [];
+    actorSearch.known_for.forEach((result) =>
+      knownForList.push(this.knownForAdapter(result))
+    );
     return new ActorsSearch(
-      test[0].adult,
-      test[0].gender,
-      test[0].id,
+      actorSearch.adult,
+      actorSearch.gender,
+      actorSearch.id,
       knownForList,
-      test[0].known_for_department,
-      test[0].name,
-      test[0].popularity,
-      profile_path
+      actorSearch.known_for_department,
+      actorSearch.name,
+      actorSearch.popularity,
+      this.imagePathProvider.getProfileUrl(actorSearch.profile_path)
     );
   }
 
