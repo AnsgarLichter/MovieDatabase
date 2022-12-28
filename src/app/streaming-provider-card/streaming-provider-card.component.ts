@@ -13,6 +13,8 @@ export class StreamingProviderCardComponent implements OnInit {
   @Input() isAvailableForRent: boolean = false;
   @Input() isAvailableInFlatrate: boolean = false;
 
+  @Input() customClasses!: string | string[] | Set<string> | { [klass: string]: any; };
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,13 @@
+.mat-accent {
+  background-color: #212529;
+}
+
+app-country-select ::ng-deep .mat-hint {
+  color: white;
+}
+
+.mat-button-disabled {
+  background-color: #4D5256;
+  color: #797e83 !important;
+  border-color: #797e83 !important;
+}

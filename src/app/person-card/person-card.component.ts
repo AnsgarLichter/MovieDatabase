@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-person-card',
@@ -9,8 +9,10 @@ export class PersonCardComponent implements OnInit {
   @Input() profilePicturePath: string = "";
   @Input() name: string = "";
   @Input() subtitle: string = "";
+  @Input() customClasses!: string | string[] | Set<string> | { [klass: string]: any; };
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

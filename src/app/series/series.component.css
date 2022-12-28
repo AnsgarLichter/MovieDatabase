@@ -5,3 +5,7 @@ progress#progressBar:hover:after {
   position: relative;
   top: 0;
 }
+
+.mat-chip-list-wrapper {
+  justify-content: center;
+}

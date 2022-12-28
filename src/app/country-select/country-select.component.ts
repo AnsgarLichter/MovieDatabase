@@ -17,7 +17,8 @@ import { MatSelectChange } from '@angular/material/select';
 })
 export class CountrySelectComponent implements OnInit, ControlValueAccessor {
 
-  @Input() public isDeselectPossible = true;
+  @Input() public isDeselectPossible: boolean = true;
+  @Input() public hint: string = "";
   @Input() @Output() public selectedCountryCode: string = "";
   @Output() public selectionChange = new EventEmitter<MatSelectChange>();
 

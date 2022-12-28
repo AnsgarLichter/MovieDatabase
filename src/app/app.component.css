@@ -1,3 +1,21 @@
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 .nav {
   margin-left: 30px;
 }
@@ -18,28 +36,23 @@
   background: #ffc107;
 }
 
-#page-container {
+.scroll-container {
   position: relative;
-  min-height: 100vh;
-}
-
-.main {
-  padding-bottom: 75px;
+  height: calc(100% - 68px - 52px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .footer {
   background: #212529;
-  margin-top: 50px;
   color: #fff;
-  margin-top: 268px;
   padding: 10px 0 10px 0;
   width: 100%;
-  position: absolute;
   bottom: 0;
 }
 
 .footer li a {
-    color: #fff;
+  color: #fff;
 }
 
 .footer .title h2 {
@@ -59,11 +72,45 @@
   margin: 0;
 }
 
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+body::-webkit-scrollbar-thumb, .scroll-container::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBackground);
+  border-radius: 0.25rem;
 }
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0 1000px #3D414B inset;
+}
+
+/* Change style of all material inputs because applying a custom theme to angular material is really difficult */
+input.mat-input-element,
+input.mat-input-element::placeholder {
+  color: white;
+}
+
+.mat-form-field-ripple {
+  background-color: white !important;
+}
+
+.mat-form-field.ng-untouched .mat-form-field-label,
+.mat-form-field:not(.ng-invalid) .mat-form-field-label {
+  color: white !important;
+}
+
+.mat-form-field-appearance-outline.ng-untouched .mat-form-field-outline,
+.mat-form-field-appearance-outline:not(.ng-invalid) .mat-form-field-outline {
+  color: white !important;
+}
+
 
 /* Scrollbar styling */
 html {
@@ -81,9 +128,4 @@ body::-webkit-scrollbar, .scroll-container::-webkit-scrollbar {
 body, .scroll-container {
   scrollbar-width: thin;
   scrollbar-color: var(--thumbBackground) var(--scrollbarBackground);
-}
-
-body::-webkit-scrollbar-thumb, .scroll-container::-webkit-scrollbar-thumb {
-  background-color: var(--thumbBackground);
-  border-radius: 0.25rem;
 }

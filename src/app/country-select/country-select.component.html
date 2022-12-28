@@ -1,6 +1,6 @@
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" class="w-full">
     <mat-label>Country:</mat-label>
-    <mat-hint>Only affects the shown release date</mat-hint>
+    <mat-hint *ngIf="!!hint?.length">{{hint}}</mat-hint>
     <mat-select [disabled]="isDisabled" [value]="selectedCountryCode" (selectionChange)="onSelectionChanged($event)">
         <mat-option *ngIf="isDeselectPossible">-</mat-option>
         <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</mat-option>
