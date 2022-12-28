@@ -101,5 +101,16 @@
             </mat-card-content>
         </mat-card>
       </div>
+      <div class="flex flex-col flex-1 px-4">
+        <mat-card>
+            <mat-card-content>
+                <h2>Cast</h2>
+                <div class="known-for" *ngFor="let elm of crew">
+                    <p *ngIf="elm?.original_title !== undefined; else realeaseDateFallback">{{elm?.release_date?.toLocaleDateString()}} --> {{elm?.original_title}} (Job: {{elm?.job}})</p>
+                    <ng-template #realeaseDateFallback></ng-template>
+                </div>
+            </mat-card-content>
+        </mat-card>
+      </div>
     </div>
 </div>
