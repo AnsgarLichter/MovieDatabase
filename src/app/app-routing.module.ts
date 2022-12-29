@@ -12,12 +12,14 @@ import {MovieSearchComponent} from "./movies/movie-search.component";
 import { SeriesComponent } from './series/series.component';
 import {TVShowSearchComponent} from "./tv-show-search/tv-show-search.component";
 import { ActorsDetailComponent } from './actors/actors-detail.component';
+import { ActorsSearchComponent } from './actors/actors-search.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: Paths.home, pathMatch: 'full'},
   { path: Paths.home, component: HomeComponent},
-  { path: Paths.actors, component: ActorsDetailComponent},
+  { path: Paths.actors, component: ActorsSearchComponent},
+  { path: Paths.actorsDetail, component: ActorsDetailComponent},
   { path: Paths.movieSearch, component: MovieSearchComponent},
   { path: Paths.movieDetail, component: MovieDetailComponent},
   { path: Paths.series, component: TVShowSearchComponent},

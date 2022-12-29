@@ -3,7 +3,7 @@ export interface TmdbActors{
     also_known_as: string[],
     biography: string,
     birthday: string,
-    deathday: string | null,
+    deathday: string,
     gender: number,
     homepage: string | null,
     id: number,
@@ -12,5 +12,62 @@ export interface TmdbActors{
     name: string,
     place_of_birth: string,
     popularity: number,
-    profile_path: string
+    profile_path: string,
+    combined_credits: TmdbCombinedCredits
+}
+
+export interface TmdbCombinedCredits {
+    cast: TmdbCast[],
+    crew: TmdbCrew[],
+}
+
+export interface TmdbCast {
+    adult: boolean,
+    backdrop_path: string,
+    genre_ids: number[],
+    id: number,
+    origin_country: string[],
+    original_language: string,
+    original_name: string,
+    original_title: string,
+    overview: string,
+    popularity: number,
+    poster_path: string,
+    release_date: string,
+    title: string,
+    video: boolean,
+    vote_average: number,
+    vote_count: number,
+    character: string,
+    credit_id: string,
+    order: number,
+    media_type: string,
+    episode_count: number,
+    first_air_date: string,
+}
+
+export interface TmdbCrew {
+    id: number,
+    department: string,
+    original_language: string,
+    episode_count: number,
+    job: number,
+    overview: string,
+    origin_country: string[],
+    original_name: string,
+    vote_count: number,
+    name: string,
+    media_type: string,
+    popularity: number,
+    credit_id: string,
+    backdrop_path: string | null,
+    first_air_date: string,
+    vote_average: number,
+    genre_ids: number[],
+    poster_path: string | null,
+    original_title: string,
+    video: boolean,
+    title: string,
+    adult: boolean,
+    release_date: string,
 }

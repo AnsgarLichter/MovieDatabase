@@ -1,141 +1,282 @@
 <div class="home">
-  <div class="header-slider">
-    <div id="carouselExampleCaptions" class="carousel slide header-image" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="../../assets/header_images/black_adam.jpg" class="d-block w-100" alt="Test!">
-            <div class="carousel-caption d-none d-md-block">
-                <!-- div class="position-relative overflow-hidden p-2 p-md-2 m-md-2 text-center" -->
-                    <!-- div class="col-md-5 p-lg-5 mx-auto my-5 spacer-center">
-                      <h1 class="display-4 fw-normal">Search for your movies and series</h1>
-                      <p class="lead fw-normal">Here could be a search in the future</p>
-                      <a class="btn btn-primary" href="#">Search</a>
-                    </div -->
-                    <!-- div class="product-device shadow-sm d-none d-md-block"></div -->
-                    <!-- div class="product-device product-device-2 shadow-sm d-none d-md-block"></div -->
-                <!-- /div -->
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="../../assets/header_images/guardian_of_the_galaxy.jpg" class="d-block w-100" alt="Test!">
-            <div class="carousel-caption d-none d-md-block">
-                <!-- div class="position-relative overflow-hidden p-2 p-md-2 m-md-2 text-center" -->
-                    <!-- div class="col-md-5 p-lg-5 mx-auto my-5 spacer-center">
-                      <h1 class="display-4 fw-normal">Search for your movies and series</h1>
-                      <p class="lead fw-normal">Here could be a search in the future</p>
-                      <a class="btn btn-primary" href="#">Search</a>
-                    </div -->
-                    <!-- div class="product-device shadow-sm d-none d-md-block"></div -->
-                    <!-- div class="product-device product-device-2 shadow-sm d-none d-md-block"></div -->
-                <!-- /div -->
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="../../assets/header_images/andor.jpg" class="d-block w-100" alt="Test!">
-            <div class="carousel-caption d-none d-md-block">
-                <!-- div class="position-relative overflow-hidden p-2 p-md-2 m-md-2 text-center" -->
-                    <!-- div class="col-md-5 p-lg-5 mx-auto my-5 spacer-center">
-                      <h1 class="display-4 fw-normal">Search for your movies and series</h1>
-                      <p class="lead fw-normal">Here could be a search in the future</p>
-                      <a class="btn btn-primary" href="#">Search</a>
-                    </div -->
-                    <!-- div class="product-device shadow-sm d-none d-md-block"></div -->
-                    <!-- div class="product-device product-device-2 shadow-sm d-none d-md-block"></div -->
-                <!-- /div -->
-            </div>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-</div>
-
-<div id="carouselTest" class="carousel slide movies-slider bg-light" data-bs-ride="carousel">
-    <div class="header">
-        <h1>Movies Trends for this Week</h1>
-    </div>
+  <div
+    id="carouselExampleInterval"
+    class="carousel slide"
+    data-bs-ride="carousel"
+  >
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselTest" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselTest" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselTest" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carouselTest" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleInterval"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleInterval"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleInterval"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item " [ngClass]="{active:isFirst}" *ngFor="let row of movieList; first as isFirst">
+      <div class="carousel-item active" data-bs-interval="10000">
+        <img
+          src="../../assets/header_images/black_adam.jpg"
+          class="d-block w-100"
+          alt="Test!"
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h1>Welcome to the MovieDB!</h1>
+          <h2>Search for your favorite movies, series or actors!</h2>
+          <div class="button-spacer">
+            <button mat-button [routerLink]="['/movies-search']">
+              Search Movies
+            </button>
+            <button mat-button [routerLink]="['/series']">Search Series</button>
+            <button mat-button [routerLink]="['/actors']">
+              Search Actors
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img
+          src="../../assets/header_images/guardian_of_the_galaxy.jpg"
+          class="d-block w-100"
+          alt="Test!"
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h1>Welcome to the MovieDB!</h1>
+          <h2>Search for your favorite movies, series or actors!</h2>
+          <div class="button-spacer">
+            <button mat-button [routerLink]="['/movies-search']">
+              Search Movies
+            </button>
+            <button mat-button [routerLink]="['/series']">Search Series</button>
+            <button mat-button [routerLink]="['/actors']">
+              Search Actors
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img
+          src="../../assets/header_images/andor.jpg"
+          class="d-block w-100"
+          alt="Test!"
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h1>Welcome to the MovieDB!</h1>
+          <h2>Search for your favorite movies, series or actors!</h2>
+          <div class="button-spacer">
+            <button mat-button [routerLink]="['/movies-search']">
+              Search Movies
+            </button>
+            <button mat-button [routerLink]="['/series']">Search Series</button>
+            <button mat-button [routerLink]="['/actors']">
+              Search Actors
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleInterval"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleInterval"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div
+    id="carouselTest"
+    class="carousel slide movies-slider bg-[#3D414B] text-white border-b-2 border-[#007fad]"
+    data-bs-ride="carousel"
+  >
+    <div class="header">
+      <h1>Movies Trends for this Week</h1>
+    </div>
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#carouselTest"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselTest"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselTest"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselTest"
+        data-bs-slide-to="3"
+        aria-label="Slide 4"
+      ></button>
+    </div>
+    <div class="carousel-inner">
+      <div
+        class="carousel-item"
+        [ngClass]="{ active: isFirst }"
+        *ngFor="let row of movieList; first as isFirst"
+      >
         <div class="container-fluid marketing">
-            <div class="row">
-                <div class="col-lg-2 element-slider" *ngFor="let movie of row">
-                  <a [routerLink]="['/movies-detail', movie.id]">
-                    <div class="poster-image"><img src="{{getPosterImages(movie?.poster_path)}}" width="200" height="300"></div>
-                    <div class="ratings"><b>{{getRatings(movie?.vote_average)}}%</b></div>
-                    <div class="release"><b>{{movie?.original_title}}</b></div>
-                    <div class="release">{{getDate(movie?.release_date)}}</div>
-                    <div class="carousel-caption d-none d-md-block"></div>
-                  </a>
-                </div>
+          <div class="row">
+            <div class="col-lg-2 element-slider" *ngFor="let movie of row">
+              <a
+              class="flex flex-col items-center h-128 w-64 my-4 rounded-xl pb-4 bg-[#212529]"
+              [routerLink]="['/movies', movie.id]">
+             <div class="flex">
+               <img loading="lazy" class="w-64 h-96 rounded-t-xl" alt="Movie Picture of cast member"
+                    src="{{movie?.poster_path}}">
+             </div>
+             <div class="flex flex-col h-full justify-center mx-4 mt-4">
+              <div class="ratings"><b>{{ getRatings(movie?.vote_average) }}%</b></div>
+               <div class="text-center text-lg font-bold text-white">{{movie.original_title}}</div>
+               <div class="text-center text-lg font-bold text-white">{{movie.release_date}}</div>
+             </div>
+           </a>
             </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="buttons">
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselTest" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselTest" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>  
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselTest"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselTest"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-</div>
+  </div>
 
-<div id="carouselSeries" class="carousel slide movies-slider bg-light" data-bs-ride="carousel">
+  <div
+    id="carouselSeries"
+    class="carousel slide movies-slider bg-[#3D414B] text-white"
+    data-bs-ride="carousel"
+  >
     <div class="header">
-        <h1>Series Trends for this Week</h1>
+      <h1>Series Trends for this Week</h1>
     </div>
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselSeries" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselSeries" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselSeries" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carouselSeries" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      <button
+        type="button"
+        data-bs-target="#carouselSeries"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselSeries"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselSeries"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselSeries"
+        data-bs-slide-to="3"
+        aria-label="Slide 4"
+      ></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item " [ngClass]="{active:isFirst}" *ngFor="let row of seriesList; first as isFirst">
+      <div
+        class="carousel-item"
+        [ngClass]="{ active: isFirst }"
+        *ngFor="let row of seriesList; first as isFirst"
+      >
         <div class="container-fluid marketing">
-            <div class="row">
-                <div class="col-lg-2 element-slider" *ngFor="let series of row">
-                    <a [routerLink]="['/series', series.id]">
-                      <div class="poster-image"><img src="{{getPosterImages(series?.poster_path)}}" width="200" height="300"></div>
-                      <div class="ratings"><b>{{getRatings(series?.vote_average)}}%</b></div>
-                      <div class="release"><b>{{series?.name}}</b></div>
-                      <div class="release">{{getDate(series?.first_air_date)}}</div>
-                      <div class="carousel-caption d-none d-md-block"></div>
-                    </a>
-                </div>
+          <div class="row">
+            <div class="col-lg-2 element-slider" *ngFor="let series of row">
+              <a
+              class="flex flex-col items-center h-128 w-64 my-4 rounded-xl pb-4 bg-[#212529]"
+              [routerLink]="['/series', series.id]">
+             <div class="flex">
+               <img loading="lazy" class="w-64 h-96 rounded-t-xl" alt="Movie Picture of cast member"
+                    src="{{series?.poster_path}}">
+             </div>
+             <div class="flex flex-col h-full justify-center mx-4 mt-4">
+              <div class="ratings">
+                <b>{{ getRatings(series?.vote_average) }}%</b>
+              </div>
+               <div class="text-center text-lg font-bold text-white">{{series.name}}</div>
+               <div class="text-center text-lg font-bold text-white">{{series.first_air_date}}</div>
+             </div>
+           </a>
             </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="buttons">
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselSeries" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselSeries" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>  
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselSeries"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselSeries"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-</div>
+  </div>
 </div>

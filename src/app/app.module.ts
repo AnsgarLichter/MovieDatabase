@@ -32,6 +32,7 @@ import {CountrySelectComponent} from './country-select/country-select.component'
 import {YearPickerComponent} from './year-picker/year-picker.component';
 import { ActorsDetailComponent } from './actors/actors-detail.component';
 import { ActorsSearchComponent } from './actors/actors-search.component';
+import {MatDividerModule} from '@angular/material/divider'; 
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { ActorsSearchComponent } from './actors/actors-search.component';
     MatSelectModule,
     MatProgressBarModule,
     MatExpansionModule,
+    MatDividerModule,
   ],
   providers: [ImageUrlProvider],
   bootstrap: [AppComponent]

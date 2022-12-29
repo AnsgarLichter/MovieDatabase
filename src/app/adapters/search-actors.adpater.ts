@@ -1,65 +1,65 @@
-import { Injectable } from "@angular/core";
-import { Adapter } from "./base.adapter";
-import { ActorsSearch, KnownFor } from "../models/search-actors.model";
-import { TmdbActorsSearch, TmdbSearchActorsResult } from "../models/tmdb/tmdb-search-actors.model";
-import { TmdbSearchResults } from "../models/tmdb/tdmb-search-result.model";
-import { TmdbSearchSimpleResult } from "../models/tmdb/tmdb-search-simple-result.model";
-import { ImageUrlProvider } from "../utilities/image-url-provider";
+import { Injectable } from '@angular/core';
+import { Adapter } from './base.adapter';
+import { ActorsSearch, KnownForSearch } from '../models/search-actors.model';
+import {
+  TmdbActorsSearch,
+  TmdbKnownFor,
+} from '../models/tmdb/tmdb-search-actors.model';
+import { ImageUrlProvider } from '../utilities/image-url-provider';
+import { TmdbSearchResults } from '../models/tmdb/tdmb-search-result.model';
+import { SearchResults } from '../models/search-movie.model';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
-export class ActorsSearchAdapter implements Adapter<ActorsSearch> {
+export class ActorsSearchAdapter
+  implements Adapter<SearchResults<ActorsSearch>>
+{
+  constructor(private imagePathProvider: ImageUrlProvider) {}
 
-  constructor(private imagePathProvider: ImageUrlProvider){}
+  adapt(
+    item: TmdbSearchResults<TmdbActorsSearch>
+  ): SearchResults<ActorsSearch> {
+    var actorsSearchList: ActorsSearch[] = [];
+    item.results.forEach((results) =>
+      actorsSearchList.push(this.actorsSearchAdapter(results))
+    );
 
-  adapt(item: TmdbSearchActorsResult): ActorsSearch {
-    let actors: TmdbActorsSearch | undefined;
-    
-    const test = item.results.map((item) => actors = item);
+    return new SearchResults(item.page, actorsSearchList, item.total_pages);
+  }
 
-    const profile_path = this.imagePathProvider.getProfileUrl(test[0].profile_path);
-   
+  private actorsSearchAdapter(actorSearch: TmdbActorsSearch): ActorsSearch {
+    var knownForList: KnownForSearch[] = [];
+    const posterPath = this.imagePathProvider.getProfileUrl(actorSearch.profile_path) || "assets/fallbackPictureMovie.png"
+    actorSearch.known_for.forEach((result) =>
+      knownForList.push(this.knownForAdapter(result))
+    );
     return new ActorsSearch(
-      test[0].adult,
-      test[0].gender,
-      test[0].id,
-      test[0].known_for,
-      test[0].known_for_department,
-      test[0].name,
-      test[0].popularity,
-      profile_path
+      actorSearch.adult,
+      actorSearch.gender,
+      actorSearch.id,
+      knownForList,
+      actorSearch.known_for_department,
+      actorSearch.name,
+      actorSearch.popularity,
+      posterPath
     );
   }
 
-  private adaptActors(actors: TmdbActorsSearch): ActorsSearch {
-    console.log("Adapt", actors);
-    return new ActorsSearch(
-      actors.adult,
-      actors.gender,
-      actors.id,
-      actors.known_for,
-      actors.known_for_department,
-      actors.name,
-      actors.popularity,
-      actors.profile_path
-    )
-  }
-
-  private knownForAdapter(knownFor: KnownFor): KnownFor{
-    return new KnownFor(
+  private knownForAdapter(knownFor: TmdbKnownFor): KnownForSearch {
+    const posterPath = this.imagePathProvider.getProfileUrl(knownFor.poster_path) || "assets/fallbackPictureMovie.png"
+    return new KnownForSearch(
       knownFor.adult,
       knownFor.backdrop_path,
       knownFor.genre_ids,
       knownFor.id,
       knownFor.media_type,
-      knownFor.original_language,
       knownFor.original_title,
+      knownFor.original_language,
       knownFor.overview,
-      knownFor.poster_path,
-      knownFor.release_date,
+      posterPath,
+      new Date(knownFor.release_date),
       knownFor.title,
-      //knownFor.popularity,
       knownFor.video,
       knownFor.vote_average,
       knownFor.vote_count

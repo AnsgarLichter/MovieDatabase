@@ -3,7 +3,7 @@ export class ActorsSearch{
         public adult: boolean,
         public gender: number,
         public id: number,
-        public known_for: KnownFor[],
+        public known_for: KnownForSearch[],
         public known_for_department: string,
         public name: string,
         public popularity: number,
@@ -12,7 +12,7 @@ export class ActorsSearch{
     }
 }
 
-export class KnownFor{
+export class KnownForSearch{
     constructor(
         public adult: boolean,
         public backdrop_path: string,
@@ -23,7 +23,7 @@ export class KnownFor{
         public original_language: string,
         public overview: string,
         public poster_path: string,
-        public release_date: string,
+        public release_date: Date,
         public title: string,
         public video: boolean,
         public vote_average: number,

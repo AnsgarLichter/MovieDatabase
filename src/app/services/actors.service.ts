@@ -5,10 +5,8 @@ import { ActorsAdapter } from '../adapters/actors.adpater';
 import { ActorsSearchAdapter } from '../adapters/search-actors.adpater';
 import { Actors } from '../models/actors.model';
 import { ActorsSearch } from '../models/search-actors.model';
-import { TmdbSearchResults } from '../models/tmdb/tdmb-search-result.model';
 import { TmdbActors } from '../models/tmdb/tmdb-actors.model';
-import { TmdbActorsSearch, TmdbSearchActorsResult } from '../models/tmdb/tmdb-search-actors.model';
-import { TmdbSearchSimpleResult } from '../models/tmdb/tmdb-search-simple-result.model';
+import { TmdbSearchActorsResult } from '../models/tmdb/tmdb-search-actors.model';
 import { MovieDbService } from './movie-db.service';
 
 @Injectable({
@@ -16,15 +14,23 @@ import { MovieDbService } from './movie-db.service';
 })
 export class ActorsService extends MovieDbService {
 
-  constructor(protected override httpClient: HttpClient, private adapter: ActorsAdapter) {
+  constructor(protected override httpClient: HttpClient, private adapter: ActorsAdapter, private adapterActors: ActorsSearchAdapter) {
     super(httpClient)
     this.adapter = adapter;
    }
 
-   public getActors(idActor: number): Observable<Actors>{
+   public getActors(idActor: number, includeCombinedCredits: boolean): Observable<Actors>{
     const requestUrl = `${this.getBaselineUrl()}/person/${idActor}`;
     const parameters = this.getBaseParameters();
 
+    const appendToResponse: string[] = [];
+    if (includeCombinedCredits) {
+      appendToResponse.push(`combined_credits`);
+    }
+
+    if(appendToResponse.length) {
+      parameters[`append_to_response`] = appendToResponse.join(`,`);
+    }
 
     return this.httpClient.get<TmdbActors>(
       requestUrl,
@@ -38,5 +44,4 @@ export class ActorsService extends MovieDbService {
       )
     );
   } 
-
 }

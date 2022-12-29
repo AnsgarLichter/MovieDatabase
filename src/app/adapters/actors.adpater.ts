@@ -1,31 +1,26 @@
 import { Injectable } from "@angular/core";
 import { Adapter } from "./base.adapter";
-import { ActorsSearch, KnownFor } from "../models/search-actors.model";
-import { TmdbActorsSearch, TmdbSearchActorsResult } from "../models/tmdb/tmdb-search-actors.model";
-import { TmdbSearchResults } from "../models/tmdb/tdmb-search-result.model";
-import { TmdbSearchSimpleResult } from "../models/tmdb/tmdb-search-simple-result.model";
-import { Actors } from "../models/actors.model";
-import { TmdbActors } from "../models/tmdb/tmdb-actors.model";
+import { Actors, Cast, CombinedCredits, Crew } from "../models/actors.model";
+import { TmdbActors, TmdbCast, TmdbCombinedCredits, TmdbCrew } from "../models/tmdb/tmdb-actors.model";
+import { ImageUrlProvider } from "../utilities/image-url-provider";
+import { CombinedCreditsAdapter } from "./combined-credits.adapter";
 
 @Injectable({
   providedIn: "root",
 })
 export class ActorsAdapter implements Adapter<Actors> {
 
-
+  constructor(private imagePathProvider: ImageUrlProvider, private combinedCreditsAdapter: CombinedCreditsAdapter){}
+  
   adapt(item: TmdbActors): Actors {
-    let actor: TmdbActors | undefined;
-    
-    //console.log(item);
-    //const test = item.results.map((item) => actors = item);
-    //const actors = item?.results?.map((item) => actor = item);
-
+    const combinedCredits = this.combinedCreditsAdapter.adapt(item?.combined_credits);
+    const profilePath = this.imagePathProvider.getProfileUrl(item?.profile_path) || "assets/fallbackPictureMovie.png";
     return new Actors(
       item?.adult,
       item?.also_known_as,
       item?.biography,
-      item?.birthday,
-      item?.deathday,
+      this.checkDate(item?.birthday),
+      this.checkDate(item?.deathday),
       item?.gender,
       item?.homepage,
       item?.id,
@@ -34,7 +29,16 @@ export class ActorsAdapter implements Adapter<Actors> {
       item?.name,
       item?.place_of_birth,
       item?.popularity,
-      item?.profile_path
+      profilePath,
+      combinedCredits
     );
+  }
+  
+  checkDate(date: string): Date | null{
+    if(date === null){
+      return null;
+    }
+
+    return new Date(date);
   }
 }
