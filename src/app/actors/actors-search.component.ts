@@ -13,8 +13,8 @@ export class ActorsSearchComponent {
   public searchForm: FormGroup;
   public foundResult: boolean = false;
   public actorsList: ActorsSearchFlat[] = [];
-  private currentPage: number | undefined;
-  private totalPages: number | undefined;
+  public currentPage: number = 0;
+  public totalPages: number = 0;
 
   constructor(private actorsSearchService: ActorsSearchService) {
     this.searchForm = new FormGroup({

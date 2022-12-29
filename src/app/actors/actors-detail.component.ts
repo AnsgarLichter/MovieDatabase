@@ -56,8 +56,6 @@ export class ActorsDetailComponent implements OnInit {
       this.loadActorsSearchDetails(this.actorName, result.id);
       this.cast = result.combined_credits.cast;
       this.crew = result.combined_credits.crew;
-      console.log("Cast Test", result.combined_credits.cast);
-      console.log("Crew Test", result.combined_credits.crew);
     });
   }
 }

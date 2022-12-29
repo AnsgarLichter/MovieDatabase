@@ -30,6 +30,7 @@ export class ActorsSearchAdapter
 
   private actorsSearchAdapter(actorSearch: TmdbActorsSearch): ActorsSearch {
     var knownForList: KnownForSearch[] = [];
+    const posterPath = this.imagePathProvider.getProfileUrl(actorSearch.profile_path) || "assets/fallbackPictureMovie.png"
     actorSearch.known_for.forEach((result) =>
       knownForList.push(this.knownForAdapter(result))
     );
@@ -41,11 +42,12 @@ export class ActorsSearchAdapter
       actorSearch.known_for_department,
       actorSearch.name,
       actorSearch.popularity,
-      this.imagePathProvider.getProfileUrl(actorSearch.profile_path)
+      posterPath
     );
   }
 
   private knownForAdapter(knownFor: TmdbKnownFor): KnownForSearch {
+    const posterPath = this.imagePathProvider.getProfileUrl(knownFor.poster_path) || "assets/fallbackPictureMovie.png"
     return new KnownForSearch(
       knownFor.adult,
       knownFor.backdrop_path,
@@ -55,7 +57,7 @@ export class ActorsSearchAdapter
       knownFor.original_title,
       knownFor.original_language,
       knownFor.overview,
-      knownFor.poster_path,
+      posterPath,
       new Date(knownFor.release_date),
       knownFor.title,
       knownFor.video,

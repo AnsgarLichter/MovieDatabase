@@ -9,7 +9,6 @@ import { TmdbCast, TmdbCombinedCredits, TmdbCrew } from "../models/tmdb/tmdb-act
 export class CombinedCreditsAdapter implements Adapter<CombinedCredits> {
 
   adapt(combinedCredits: TmdbCombinedCredits): CombinedCredits {
-    console.log(combinedCredits);
     const cast = combinedCredits.cast.map((results) => (this.adaptCast(results))).sort((a, b) => +b.release_date - +a.release_date);
     const crew = combinedCredits.crew.map((results) => (this.adaptCrew(results))).sort((a, b) => +b.release_date - +a.release_date);
     return new CombinedCredits(
