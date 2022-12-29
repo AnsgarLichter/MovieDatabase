@@ -40,7 +40,7 @@ export class Cast {
         public overview: string,
         public popularity: number,
         public poster_path: string,
-        public release_date: Date,
+        public release_date: string,
         public title: string,
         public video: boolean,
         public vote_average: number,
@@ -50,7 +50,7 @@ export class Cast {
         public order: number,
         public media_type: string,
         public episode_count: number,
-        public first_air_date: Date,
+        //public first_air_date: Date,
     ){}
 }
 
@@ -65,7 +65,7 @@ export class Crew {
         public origin_country: string[],
         public original_name: string,
         public vote_count: number,
-        public release_date: Date, 
+        public release_date: string, 
         public name: string,
         public media_type: string,
         public popularity: number,

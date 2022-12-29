@@ -22,7 +22,7 @@ export class ActorsDetailComponent implements OnInit {
   public combinedCredits: CombinedCredits | undefined;
   public cast: Cast[] = [];
   public crew: Crew[] = [];
-
+  
   constructor(
     private actorsService: ActorsService,
     private actorsSearchService: ActorsSearchService,

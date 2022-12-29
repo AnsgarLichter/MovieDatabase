@@ -9,13 +9,39 @@ import { TmdbCast, TmdbCombinedCredits, TmdbCrew } from "../models/tmdb/tmdb-act
 export class CombinedCreditsAdapter implements Adapter<CombinedCredits> {
 
   adapt(combinedCredits: TmdbCombinedCredits): CombinedCredits {
-    const cast = combinedCredits.cast.map((results) => (this.adaptCast(results))).sort((a, b) => +b.release_date - +a.release_date);
+    const cast = combinedCredits.cast.map((results) => (this.adaptCast(results)));
+
+    const test = cast.sort((a, b) => +(new Date(b.release_date)) - +(new Date(a.release_date)));
+
+    /*const testCast: Cast[] = [];
+    cast.forEach((result) => {
+      if(result.release_date !== "Upcoming"){
+        testCast.push(result);
+      } 
+    });
+    const newCast = testCast.sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime());
+    console.log("TestCast: ", newCast);
+    console.log("Cast: ", cast);
+    const sortCast = cast.sort((a, b) => +(new Date(b.release_date)) - +(new Date(a.release_date)));*""
+
+    /*.sort((a, b) => +b.release_date - +a.release_date);*/
+    console.log("Test 1: ", test);
     const crew = combinedCredits.crew.map((results) => (this.adaptCrew(results))).sort((a, b) => +b.release_date - +a.release_date);
     return new CombinedCredits(
       cast,
       crew,
     );
   }
+/*
+  const test=cast.sort((a, b) => {
+    if(a.release_date < b.release_date){
+      return 1;
+    }
+    if(a.release_date > b.release_date){
+      return -1;
+    }
+    return 0;
+  })*/
 
   adaptCast(cast: TmdbCast): Cast {
     return new Cast(
@@ -30,7 +56,7 @@ export class CombinedCreditsAdapter implements Adapter<CombinedCredits> {
       cast.overview,
       cast.popularity,
       cast.poster_path,
-      new Date(cast.release_date),
+      this.adaptReleaseAndFirstAirDate(cast.release_date, cast.first_air_date),
       cast.title,
       cast.video,
       cast.vote_average,
@@ -40,8 +66,20 @@ export class CombinedCreditsAdapter implements Adapter<CombinedCredits> {
       cast.order,
       cast.media_type,
       cast.episode_count,
-      new Date(cast.first_air_date)
       );
+  }
+
+  adaptReleaseAndFirstAirDate(releaseDate: string, firstAirDate: string): string {
+    if(releaseDate === "" || firstAirDate === ""){
+        return "Upcoming";
+    }
+    if(releaseDate !== undefined && firstAirDate === undefined){
+      return new Date(releaseDate).toLocaleDateString();
+    }
+    if(firstAirDate !== undefined && releaseDate === undefined){
+      return new Date(firstAirDate).toLocaleDateString();
+    }
+    return "Upcoming";
   }
 
   adaptCrew(crew: TmdbCrew): Crew {
@@ -55,7 +93,7 @@ export class CombinedCreditsAdapter implements Adapter<CombinedCredits> {
       crew.origin_country,
       crew.original_name,
       crew.vote_count,
-      new Date(crew.release_date),
+      this.adaptReleaseDate(crew.release_date),
       crew.name,
       crew.media_type,
       crew.popularity,
@@ -70,5 +108,28 @@ export class CombinedCreditsAdapter implements Adapter<CombinedCredits> {
       crew.title,
       crew.adult,
     );
+  }
+
+  adaptDateOnlyInYear(releaseDate: string, firstAirDate: string) : string{
+    if(releaseDate === "" || firstAirDate === ""){
+      return "Upcoming";
+    }
+    if(releaseDate !== undefined && firstAirDate === undefined){
+      return new Date(releaseDate).toLocaleDateString();
+    }
+    if(firstAirDate !== undefined && releaseDate === undefined){
+      return new Date(firstAirDate).toLocaleDateString();
+    }
+    return "Upcoming";
+  }
+
+  adaptReleaseDate(releaseDate: string): string{
+    if(releaseDate === ""){
+      return "Upcoming";
+    }
+    if(releaseDate !== undefined){
+      return new Date(releaseDate).toLocaleDateString();
+    }
+    return "Upcoming";
   }
 }
