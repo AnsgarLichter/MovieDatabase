@@ -110,7 +110,7 @@
 
   <div
     id="carouselTest"
-    class="carousel slide movies-slider bg-light"
+    class="carousel slide movies-slider bg-[#3D414B] text-white border-b-2 border-[#007fad]"
     data-bs-ride="carousel"
   >
     <div class="header">
@@ -153,23 +153,19 @@
         <div class="container-fluid marketing">
           <div class="row">
             <div class="col-lg-2 element-slider" *ngFor="let movie of row">
-              <a [routerLink]="['/movies-detail', movie.id]">
-                <div class="poster-image">
-                  <img
-                    src="{{ getPosterImages(movie?.poster_path) }}"
-                    width="200"
-                    height="300"
-                  />
-                </div>
-                <div class="ratings">
-                  <b>{{ getRatings(movie?.vote_average) }}%</b>
-                </div>
-                <div class="release">
-                  <b>{{ movie?.original_title }}</b>
-                </div>
-                <div class="release">{{ getDate(movie?.release_date) }}</div>
-                <div class="carousel-caption d-none d-md-block"></div>
-              </a>
+              <a
+              class="flex flex-col items-center h-128 w-64 my-4 rounded-xl pb-4 bg-[#212529]"
+              [routerLink]="['/movies', movie.id]">
+             <div class="flex">
+               <img loading="lazy" class="w-64 h-96 rounded-t-xl" alt="Movie Picture of cast member"
+                    src="{{movie?.poster_path}}">
+             </div>
+             <div class="flex flex-col h-full justify-center mx-4 mt-4">
+              <div class="ratings"><b>{{ getRatings(movie?.vote_average) }}%</b></div>
+               <div class="text-center text-lg font-bold text-white">{{movie.original_title}}</div>
+               <div class="text-center text-lg font-bold text-white">{{movie.release_date}}</div>
+             </div>
+           </a>
             </div>
           </div>
         </div>
@@ -199,7 +195,7 @@
 
   <div
     id="carouselSeries"
-    class="carousel slide movies-slider bg-light"
+    class="carousel slide movies-slider bg-[#3D414B] text-white"
     data-bs-ride="carousel"
   >
     <div class="header">
@@ -242,23 +238,21 @@
         <div class="container-fluid marketing">
           <div class="row">
             <div class="col-lg-2 element-slider" *ngFor="let series of row">
-              <a [routerLink]="['/series', series.id]">
-                <div class="poster-image">
-                  <img
-                    src="{{ getPosterImages(series?.poster_path) }}"
-                    width="200"
-                    height="300"
-                  />
-                </div>
-                <div class="ratings">
-                  <b>{{ getRatings(series?.vote_average) }}%</b>
-                </div>
-                <div class="release">
-                  <b>{{ series?.name }}</b>
-                </div>
-                <div class="release">{{ getDate(series?.first_air_date) }}</div>
-                <div class="carousel-caption d-none d-md-block"></div>
-              </a>
+              <a
+              class="flex flex-col items-center h-128 w-64 my-4 rounded-xl pb-4 bg-[#212529]"
+              [routerLink]="['/series', series.id]">
+             <div class="flex">
+               <img loading="lazy" class="w-64 h-96 rounded-t-xl" alt="Movie Picture of cast member"
+                    src="{{series?.poster_path}}">
+             </div>
+             <div class="flex flex-col h-full justify-center mx-4 mt-4">
+              <div class="ratings">
+                <b>{{ getRatings(series?.vote_average) }}%</b>
+              </div>
+               <div class="text-center text-lg font-bold text-white">{{series.name}}</div>
+               <div class="text-center text-lg font-bold text-white">{{series.first_air_date}}</div>
+             </div>
+           </a>
             </div>
           </div>
         </div>

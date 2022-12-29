@@ -41,6 +41,7 @@ body {
   height: calc(100% - 68px - 52px);
   overflow-y: auto;
   overflow-x: hidden;
+  background: #3d414b;
 }
 
 .footer {

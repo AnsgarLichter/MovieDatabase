@@ -52,13 +52,14 @@
 }
 
 .element-slider .ratings {
-    top: 0px;
+    top: 16px;
     position: absolute;
     z-index: 100;
     background: #ffc107;
     color: #000;
     padding: 10px 10px;
-    left: 18%;
+    left: 4%;
+    border-radius: 10px;
 }
 
 .carousel-control-next, .carousel-control-prev {

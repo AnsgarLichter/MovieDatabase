@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { __values } from 'tslib';
-import { MovieTrends, ResultsMovie, SeriesTrends, ResultsSeries } from '../models/trends.model';
+import { MovieTrends, ResultsMovie } from '../models/trends-movies.model';
+import { ResultsSeries, SeriesTrends } from '../models/trends-series.model';
 import { Paths } from '../paths';
-import { TrendsService } from '../services/trends.service';
+import { TrendsMovieService } from '../services/trends-movies.service';
+import { TrendsSeriesService } from '../services/trends-series.service';
 import { ImageUrlProvider } from '../utilities/image-url-provider';
 
 
@@ -22,7 +24,11 @@ export class HomeComponent implements OnInit {
   public seriesTrends: SeriesTrends | undefined;
   public linkMovies: string = Paths.actors;
 
-  constructor(private trendsService: TrendsService, private imageUrlProvider: ImageUrlProvider) { }
+  constructor(
+    private movieTrendsService: TrendsMovieService, 
+    private seriesTrendsService: TrendsSeriesService, 
+    private imageUrlProvider: ImageUrlProvider
+    ){}
 
   ngOnInit(): void {
     this.getMovieTrends();
@@ -30,25 +36,18 @@ export class HomeComponent implements OnInit {
   }
 
   getMovieTrends(){
-    this.trendsService.getTrendsMovies().subscribe((movieTrends) => {
+    this.movieTrendsService.getTrendsMovies().subscribe((movieTrends) => {
       this.movieTrends = movieTrends;
       this.initSliderMovies(movieTrends);
     });
   }
 
   getSeriesTrends(){
-    this.trendsService.getTrendsSeries()
+    this.seriesTrendsService.getTrendsSeries()
       .subscribe((seriesTrends) => {
       this.seriesTrends = seriesTrends;
       this.initSliderSeries(seriesTrends);
     });
-  }
-
-  getPosterImages(posterPath: string | undefined){
-    if(posterPath !== undefined){
-      return this.imageUrlProvider.getPosterUrl(posterPath);
-    }
-    return "Not found";
   }
 
   getRatings(ratingNumber: number | undefined) : string {
@@ -123,13 +122,4 @@ export class HomeComponent implements OnInit {
       this.seriesList[seriesListLength].push(seriesTrends.results[i]);
     }
 }
-
-  getDate(date: string | undefined): string {
-    if(date !== undefined) {
-      var dateTest = new Date(date);
-      return dateTest.toLocaleDateString();
-    }
-
-    return "Undefined";
-  }
 }
