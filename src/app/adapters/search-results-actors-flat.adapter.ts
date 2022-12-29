@@ -30,10 +30,11 @@ export class SearchResultsActorsFlatAdapter
   }
 
   mapActors(item: TmdbActorsSearch): ActorsSearchFlat {
+    const profilePath = this.imagePathProvider.getProfileUrl(item?.profile_path) || "assets/fallbackPictureMovie.png";
     return new ActorsSearchFlat(
       item.id,
       item.name,
-      this.imagePathProvider.getProfileUrl(item?.profile_path)
+      profilePath
     );
   }
 }

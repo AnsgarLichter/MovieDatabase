@@ -14,6 +14,7 @@ export class ActorsAdapter implements Adapter<Actors> {
   
   adapt(item: TmdbActors): Actors {
     const combinedCredits = this.combinedCreditsAdapter.adapt(item?.combined_credits);
+    const profilePath = this.imagePathProvider.getProfileUrl(item?.profile_path) || "assets/fallbackPictureMovie.png";
     return new Actors(
       item?.adult,
       item?.also_known_as,
@@ -28,7 +29,7 @@ export class ActorsAdapter implements Adapter<Actors> {
       item?.name,
       item?.place_of_birth,
       item?.popularity,
-      this.imagePathProvider.getProfileUrl(item?.profile_path) || "assets/fallbackPictureMovie.png",
+      profilePath,
       combinedCredits
     );
   }

@@ -117,7 +117,7 @@
           <table class="table-fixed">
             <thead>
               <tr>
-                <th>Year</th>
+                <th class="text-center">Year</th>
                 <th></th>
                 <th>Title</th>
                 <th>Character</th>
@@ -125,13 +125,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let elm of cast" class="border-white space-y-2">
-                <td class="border-b-2 border-b-white p-3">{{elm?.release_date}}</td>
+                <td class="border-b-2 border-b-white p-3 text-center">{{elm?.year}}</td>
                 <td class="border-b-2 border-b-white p-3">-</td>
                 <td class="border-b-2 border-b-white p-3">
                   <div *ngIf="elm?.original_title !== undefined; else originalNameFallback">
-                    {{elm?.original_title}}
+                    <a [routerLink]="['/movies', elm.id]">{{elm?.original_title}}</a>
                   </div>
-                  <ng-template #originalNameFallback>{{elm?.original_name}}</ng-template>
+                  <ng-template #originalNameFallback><a [routerLink]="['/movies', elm.id]">{{elm?.original_name}}</a></ng-template>
                   </td>
                 <td class="border-b-2 border-b-white p-3">{{elm?.character}}</td>
               </tr>
@@ -147,7 +147,7 @@
           <table class="table-fixed">
             <thead>
               <tr>
-                <th>Year</th>
+                <th class="text-center">Year</th>
                 <th></th>
                 <th>Title</th>
                 <th>Job</th>
@@ -155,13 +155,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let elm of crew" class="border-white space-y-2">
-                <td class="border-b-2 border-b-white p-3">{{elm?.release_date}}</td>
+                <td class="border-b-2 border-b-white p-3 text-center">{{elm?.year}}</td>
                 <td class="border-b-2 border-b-white p-3">-</td>
                 <td class="border-b-2 border-b-white p-3">
                   <div *ngIf="elm?.original_name !== undefined; else titleFallback">
-                    {{elm?.original_name}}
+                    <a [routerLink]="['/movies', elm.id]">{{elm?.original_name}}</a>
                   </div>
-                  <ng-template #titleFallback>{{elm?.title}}</ng-template>
+                  <ng-template #titleFallback><a [routerLink]="['/movies', elm.id]">{{elm?.title}}</a></ng-template>
                 </td>
                 <td class="border-b-2 border-b-white p-3">{{elm?.job}}</td>
               </tr>

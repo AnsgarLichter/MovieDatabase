@@ -50,6 +50,7 @@ export class Cast {
         public order: number,
         public media_type: string,
         public episode_count: number,
+        public year: string,
         //public first_air_date: Date,
     ){}
 }
@@ -79,5 +80,6 @@ export class Crew {
         public video: boolean,
         public title: string,
         public adult: boolean,
+        public year: string,
     ){}
 }

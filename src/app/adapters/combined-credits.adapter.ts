@@ -66,6 +66,7 @@ export class CombinedCreditsAdapter implements Adapter<CombinedCredits> {
       cast.order,
       cast.media_type,
       cast.episode_count,
+      this.adaptDateOnlyInYear(cast.release_date, cast.first_air_date),
       );
   }
 
@@ -107,18 +108,19 @@ export class CombinedCreditsAdapter implements Adapter<CombinedCredits> {
       crew.video,
       crew.title,
       crew.adult,
+      this.adaptDateOnlyInYear(crew.release_date),
     );
   }
 
-  adaptDateOnlyInYear(releaseDate: string, firstAirDate: string) : string{
+  adaptDateOnlyInYear(releaseDate: string, firstAirDate?: string) : string{
     if(releaseDate === "" || firstAirDate === ""){
       return "Upcoming";
     }
     if(releaseDate !== undefined && firstAirDate === undefined){
-      return new Date(releaseDate).toLocaleDateString();
+      return new Date(releaseDate).getFullYear().toString();
     }
     if(firstAirDate !== undefined && releaseDate === undefined){
-      return new Date(firstAirDate).toLocaleDateString();
+      return new Date(firstAirDate).getFullYear().toString();
     }
     return "Upcoming";
   }

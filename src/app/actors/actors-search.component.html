@@ -24,12 +24,10 @@
        [routerLink]="['/actors', actors.id]">
       <div class="flex">
         <img loading="lazy" class="w-64 h-96 rounded-t-xl" alt="Profile Picture of cast member"
-             src="{{actors?.profilePath}}">
+             src="{{actors.profilePath}}">
       </div>
-
       <div class="flex flex-col h-full justify-center mx-4 mt-4">
         <div class="text-center text-lg font-bold text-white">{{actors.name}}</div>
-        <!--div class="text-center text-base font-bold text-white">{{actors.releaseDate.toLocaleDateString()}}</div-->
       </div>
     </a>
   </div>
