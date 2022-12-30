@@ -13,7 +13,7 @@ export class SearchMovie {
     public originalTitle: string,
     public overview: string,
     public posterPath: string,
-    public releaseDate: Date,
+    public releaseDate: Date | undefined,
   ) {
   }
 

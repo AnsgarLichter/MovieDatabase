@@ -6,7 +6,7 @@ export class Movie {
     public title: string,
     public tagline: string,
     public overview: string,
-    public releaseDate: Date,
+    public releaseDate: Date | undefined,
     public runtime: number,
     public revenue: number,
     public budget: number,

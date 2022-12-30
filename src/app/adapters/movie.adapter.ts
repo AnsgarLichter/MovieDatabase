@@ -55,6 +55,7 @@ export class MovieAdapter implements Adapter<Movie> {
 
     const backdropPath = this.imagePathProvider.getBackdropUrl(item.backdrop_path) || "assets/header_images/guardian_of_the_galaxy.jpg";
     const posterPath = this.imagePathProvider.getPosterUrl(item.poster_path) || "assets/fallbackPictureMovie.png";
+    const releaseDate = new Date(item.release_date);
 
     return new Movie(
       item.id,
@@ -63,7 +64,7 @@ export class MovieAdapter implements Adapter<Movie> {
       item.title,
       item.tagline,
       item.overview,
-      new Date(item.release_date),
+      isFinite(releaseDate.getTime()) ? releaseDate : undefined,
       item.runtime,
       item.revenue,
       item.budget,
