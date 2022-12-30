@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
+import {MatSnackBar} from "@angular/material/snack-bar";
+
 import {SearchMovieService} from "../services/search-movie.service";
 
 import {SearchMovie, SearchResults} from "../models/search-movie.model";
@@ -23,6 +25,7 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private searchService: SearchMovieService,
+    private snackbar: MatSnackBar
   ) {
     this.searchForm = new FormGroup({
       title: new FormControl(null, Validators.required),
@@ -82,6 +85,12 @@ export class MovieSearchComponent implements OnInit, OnDestroy {
 
     this.searchService.searchMovies(movieTitle, year, region, page)
       .subscribe((results: SearchResults<SearchMovie>) => {
+        if(!results.results.length) {
+          this.snackbar.open("No results found. Please try another query!", 'Dismiss', {
+            duration: 2000
+          });
+        }
+
         this.currentPage = results.page;
         this.totalPages = results.totalPages;
         this.movies?.push(...results.results);

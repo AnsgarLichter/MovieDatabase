@@ -13,6 +13,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from "@angular/material/select";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -30,9 +31,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {CountrySelectComponent} from './country-select/country-select.component';
 import {YearPickerComponent} from './year-picker/year-picker.component';
-import { ActorsDetailComponent } from './actors/actors-detail.component';
-import { ActorsSearchComponent } from './actors/actors-search.component';
-import {MatDividerModule} from '@angular/material/divider'; 
+import {ActorsDetailComponent} from './actors/actors-detail.component';
+import {ActorsSearchComponent} from './actors/actors-search.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatProgressBarModule,
     MatExpansionModule,
     MatDividerModule,
+    MatSnackBarModule,
   ],
   providers: [ImageUrlProvider],
   bootstrap: [AppComponent]
