@@ -3,7 +3,6 @@ import {Injectable} from "@angular/core";
 import {Adapter} from "./base.adapter";
 import {GenreAdapter} from "./genre.adapter";
 
-import {CrewMember, DirectorOrWriter} from "../models/movie.model";
 import {TvShow} from "../models/tv-show.model";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
 import {TMDB_TvShow} from "../models/tmdb/tmdb-tv-show-model";
@@ -12,16 +11,13 @@ import {CrewAdapter} from "./crew.adapter";
 import {WatchProvidersAdapter} from "./watch-provider.adapter";
 import {KeywordAdapter} from "./keyword.adapter";
 import {TvSeasonsAdapter} from "./tv-season.adapter";
+import {getDirectorsAndWriters} from "../utilities/functions";
 
 
 @Injectable({
   providedIn: "root",
 })
 export class TvShowAdapter implements Adapter<TvShow> {
-  JOB_TITLES = {
-    DIRECTOR: "Director",
-    WRITER: "Writer"
-  }
 
   constructor(
     private imagePathProvider: ImageUrlProvider,
@@ -40,7 +36,7 @@ export class TvShowAdapter implements Adapter<TvShow> {
     const castMembers = item.credits.cast.map(castMember => this.castAdapter.adapt(castMember));
     const crewMembers = item.credits.crew.map(crewMember => this.crewAdapter.adapt(crewMember));
     const seasons = item.seasons.map(seasons => this.tvSeasonsAdapter.adapt(seasons));
-    const directorsAndWriters = this.getDirectorsAndWriters(crewMembers);
+    const directorsAndWriters = getDirectorsAndWriters(crewMembers);
     const watchProviders = this.watchProvidersAdapter.adapt(item["watch/providers"]);
     const keywords = item.keywords?.results.map(keyword => this.keywordAdapter.adapt(keyword));
 
@@ -86,38 +82,5 @@ export class TvShowAdapter implements Adapter<TvShow> {
       item.next_episode_to_air,
       posterPath,
     );
-  }
-
-  getDirectorsAndWriters(crewMembers: CrewMember[]): DirectorOrWriter[] {
-    const directorsAndWriters: DirectorOrWriter[] = [];
-
-    crewMembers.filter((crewMember: CrewMember) => {
-      const isDirector: boolean = crewMember.job === this.JOB_TITLES.DIRECTOR;
-      const isWriter: boolean = crewMember.job === this.JOB_TITLES.WRITER;
-
-      if (!isDirector && !isWriter) {
-        return;
-      }
-
-      const directorOrWriter: DirectorOrWriter | undefined = directorsAndWriters.find(
-        directorOrWriter => directorOrWriter.name === crewMember.name
-      );
-      if (!directorOrWriter) {
-        directorsAndWriters.push(
-          new DirectorOrWriter(
-            crewMember.original_name,
-            crewMember.name,
-            isDirector,
-            isWriter
-          )
-        );
-        return;
-      }
-
-      directorOrWriter.isDirector = isDirector || directorOrWriter.isDirector;
-      directorOrWriter.isWriter = isWriter || directorOrWriter.isWriter;
-    });
-
-    return directorsAndWriters;
   }
 }

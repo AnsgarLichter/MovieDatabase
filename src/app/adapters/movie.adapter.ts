@@ -7,23 +7,20 @@ import {CastAdapter} from "./cast.adapter";
 import {CrewAdapter} from "./crew.adapter";
 import {WatchProvidersAdapter} from "./watch-provider.adapter";
 
-import {CrewMember, DirectorOrWriter, Movie} from "../models/movie.model";
+import {Movie} from "../models/movie.model";
 import {TmdbMovie} from "../models/tmdb/tmdb-movie.model";
 import {KeywordAdapter} from "./keyword.adapter";
 import {ImageUrlProvider} from "../utilities/image-url-provider";
 import {ProductionCountryAdapter} from "./production-country.adapter";
 import {ProductionCompanyAdapter} from "./production-company.adapter";
 import {SpokenLanguageAdapter} from "./spoken-language.adapter";
+import {getDirectorsAndWriters} from "../utilities/functions";
 
 
 @Injectable({
   providedIn: "root",
 })
 export class MovieAdapter implements Adapter<Movie> {
-  JOB_TITLES = {
-    DIRECTOR: "Director",
-    WRITER: "Writer"
-  }
 
   constructor(
     private imagePathProvider: ImageUrlProvider,
@@ -43,7 +40,7 @@ export class MovieAdapter implements Adapter<Movie> {
     const genres = item.genres.map(genre => this.genreAdapter.adapt(genre));
     const castMembers = item.credits.cast.map(castMember => this.castAdapter.adapt(castMember));
     const crewMembers = item.credits.crew.map(crewMember => this.crewAdapter.adapt(crewMember));
-    const directorsAndWriters = this.getDirectorsAndWriters(crewMembers);
+    const directorsAndWriters = getDirectorsAndWriters(crewMembers);
     const productionCompanies = item.production_companies.map(productCompany => this.productionCompanyAdapter.adapt(productCompany));
     const productionCountries = item.production_countries.map(productionCountry => this.productionCountryAdapter.adapt(productionCountry));
     const spokenLanguages = item.spoken_languages.map(spokenLanguage => this.spokenLanguageAdapter.adapt(spokenLanguage));
@@ -85,38 +82,5 @@ export class MovieAdapter implements Adapter<Movie> {
       watchProviders,
       keywords
     );
-  }
-
-  getDirectorsAndWriters(crewMembers: CrewMember[]): DirectorOrWriter[] {
-    const directorsAndWriters: DirectorOrWriter[] = [];
-
-    crewMembers.filter((crewMember: CrewMember) => {
-      const isDirector: boolean = crewMember.job === this.JOB_TITLES.DIRECTOR;
-      const isWriter: boolean = crewMember.job === this.JOB_TITLES.WRITER;
-
-      if (!isDirector && !isWriter) {
-        return;
-      }
-
-      const directorOrWriter: DirectorOrWriter | undefined = directorsAndWriters.find(
-        directorOrWriter => directorOrWriter.name === crewMember.name
-      );
-      if (!directorOrWriter) {
-        directorsAndWriters.push(
-          new DirectorOrWriter(
-            crewMember.original_name,
-            crewMember.name,
-            isDirector,
-            isWriter
-          )
-        );
-        return;
-      }
-
-      directorOrWriter.isDirector = isDirector || directorOrWriter.isDirector;
-      directorOrWriter.isWriter = isWriter || directorOrWriter.isWriter;
-    });
-
-    return directorsAndWriters;
   }
 }
