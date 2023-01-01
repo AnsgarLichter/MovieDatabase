@@ -9,7 +9,7 @@ import {SearchTVShow} from "../models/search-tv-show.model";
 @Component({
   selector: 'app-tv-show-search',
   templateUrl: './tv-show-search.component.html',
-  styleUrls: ['./tv-show-search.component.css']
+  styleUrls: ['../movies/movie-search.component.css']
 })
 export class TVShowSearchComponent implements OnInit {
   private routeParamsSubscription: any;
