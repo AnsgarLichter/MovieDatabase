@@ -141,4 +141,4 @@ This app uses the API of the [The Movie Database](https://www.themoviedb.org/?la
 * The user must be able to remove movies or series from his watchlist.
   * API: POST /list/{id}/remove_item
 
-© 2022 [Patrick](https://github.com/patdujmo), [Daniel](https://github.com/linxside), [Ansgar](https://github.com/AnsgarLichter)
+© 2022 - 2023 [Patrick](https://github.com/patdujmo), [Daniel](https://github.com/linxside), [Ansgar](https://github.com/AnsgarLichter)
