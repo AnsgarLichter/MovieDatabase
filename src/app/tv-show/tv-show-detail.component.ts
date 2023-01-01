@@ -10,10 +10,10 @@ import {getCurrentCountryCodeByNavigatorLanguage} from "../utilities/functions";
 
 @Component({
   selector: 'app-series',
-  templateUrl: './series.component.html',
-  styleUrls: ['./series.component.css']
+  templateUrl: './tv-show-detail.component.html',
+  styleUrls: ['./tv-show-detail.component.css']
 })
-export class SeriesComponent implements OnInit {
+export class TvShowDetailComponent implements OnInit {
 
   constructor(private tvShowService: TVShowService, private route: ActivatedRoute, private configurationService: ConfigurationService) {
     this.route.params.subscribe(params => this.showID = params["id"]);
