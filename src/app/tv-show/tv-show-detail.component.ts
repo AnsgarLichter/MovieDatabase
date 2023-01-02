@@ -11,7 +11,7 @@ import {getCurrentCountryCodeByNavigatorLanguage} from "../utilities/functions";
 @Component({
   selector: 'app-series',
   templateUrl: './tv-show-detail.component.html',
-  styleUrls: ['./tv-show-detail.component.css']
+  styleUrls: ['./tv-show-detail.component.css', '../movies/movie-detail.component.css']
 })
 export class TvShowDetailComponent implements OnInit {
 

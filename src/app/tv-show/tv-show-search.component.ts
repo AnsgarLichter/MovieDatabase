@@ -9,14 +9,14 @@ import {SearchTVShow} from "../models/search-tv-show.model";
 @Component({
   selector: 'app-tv-show-search',
   templateUrl: './tv-show-search.component.html',
-  styleUrls: ['./tv-show-search.component.css']
+  styleUrls: ['../movies/movie-search.component.css']
 })
 export class TVShowSearchComponent implements OnInit {
   private routeParamsSubscription: any;
 
   public tvShows: SearchTVShow[] = [];
-  private currentPage: number | undefined;
-  private totalPages: number | undefined;
+  public currentPage: number = 0;
+  public totalPages: number = 0;
 
   public searchForm: FormGroup;
 
@@ -53,12 +53,6 @@ export class TVShowSearchComponent implements OnInit {
   onSearchSubmitted(): void {
     this.loadSearchResultsByFormValues();
   }
-
-  onYearSelected(value: any, datePicker: any): void {
-    datePicker.close();
-    this.searchForm.get("year")?.setValue(value);
-  }
-
   onLoadMoreResultsPressed(): void {
     if (!this.currentPage || !this.totalPages || this.currentPage >= this.totalPages) {
       return;
