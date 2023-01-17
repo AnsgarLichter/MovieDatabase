@@ -1,0 +1,50 @@
+<div class="flex flex-row justify-center items-center bg-[#3D414B] py-8 pb:32 px-8 md:px-0"
+     [ngClass]="{'h-full' : !tvShows.length, 'border-b-2 border-[#007fad]': tvShows.length}">
+  <form class="flex flex-col" [formGroup]="searchForm" (ngSubmit)="onSearchSubmitted()">
+    <div class="flex flex-col md:flex-row md:space-x-8">
+      <mat-form-field appearance="outline">
+        <mat-label>Title:</mat-label>
+        <input matInput type="text" placeholder="Title ..." formControlName="title">
+      </mat-form-field>
+
+      <app-year-picker formControlName="year"></app-year-picker>
+
+      <app-country-select formControlName="region" hint="Only affects the shown release date"></app-country-select>
+    </div>
+
+    <div class="flex flex-row justify-center basis-full items-center mt-8 md:mt-0">
+      <button mat-button type="submit" color="accent" [disabled]="!searchForm.valid"
+              class="border-white border-solid border-solid-2 rounded-xl text-white">
+        <mat-icon>search</mat-icon>
+        Search
+      </button>
+    </div>
+  </form>
+</div>
+
+
+<div class="bg-[#3D414B]">
+  <div class="flex flex-row flex-wrap grow-0 shrink-0 justify-center space-x-4 md:mx-8">
+    <a *ngFor="let tvShow of tvShows"
+       class="flex flex-col items-center h-128 w-64 my-4 rounded-xl pb-4 bg-[#212529]"
+       [routerLink]="['/series', tvShow.id]">
+      <div class="flex">
+        <img loading="lazy" class="w-64 h-96 rounded-t-xl" alt="Picture of TV show poster"
+             src="{{tvShow.posterPath}}">
+      </div>
+
+      <div class="flex flex-col h-full justify-center mx-4 mt-4">
+        <div class="text-center text-lg font-bold text-white">{{tvShow.originalName}}</div>
+        <div class="text-center text-base font-bold text-white">{{tvShow.firstAirDate.toLocaleDateString()}}</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="py-8 flex justify-center items-center" *ngIf="!!tvShows.length && currentPage < totalPages">
+    <button mat-button type="submit" color="accent"
+            class="border-white border-solid border-solid-2 rounded-xl text-white" (click)="onLoadMoreResultsPressed()">
+      <mat-icon>expand_more</mat-icon>
+      Load more Results ...
+    </button>
+  </div>
+</div>

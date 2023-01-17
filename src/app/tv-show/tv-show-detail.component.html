@@ -1,0 +1,197 @@
+<div class="flex justify-center w-full h-full" [ngStyle]="{ 'background-image': 'url(' + tvShow?.backdrop_path + ')'}">
+  <div class="background-image-opacity">
+    <div
+      class="relative flex flex-col items-center justify-center rounded-xl max-w-[80rem] h-full lg:flex-row xl:my-12">
+      <div class="flex flex-col justify-center items-center min-w-[50%] xl:min-w-[40%]">
+        <img loading="lazy"
+             class="max-w-none h-96 w-64 lg:h-full lg:max-h-[45rem] lg:w-full lg:max-w-[20rem] rounded-xl"
+             src="{{tvShow?.poster_path}}" alt="TV Show Poster">
+      </div>
+      <div class="lg:mr-24 xl:mx-12 min-w-[50%] xl:min-w-[60%]">
+        <div class="flex flex-col items-center xl:flex-row mt-2 lg:mt-0">
+          <div class="flex flex-col lg:grow lg:shrink-0 lg:basis-auto lg:w-1/2">
+            <div class="text-2xl font-bold text-center text-white">{{tvShow?.original_name}}</div>
+            <div class="flex justify-center mt-2 lg:mt-4 text-white">{{tvShow?.tagline}}</div>
+          </div>
+
+          <div class="flex flex-col mt-2 lg:grow lg:shrink-0 lg:basis-auto lg:w-1/2 lg:mt-4 xl:mt-0">
+            <div>
+              <mat-chip-list class="flex justify-center genre-background-color" aria-label="Genres">
+                <mat-chip *ngFor="let genre of tvShow?.genres">{{genre.name}}</mat-chip>
+              </mat-chip-list>
+            </div>
+            <div class="flex flex-row mt-2 md:mt-4">
+              <div class="flex basis-1/2 justify-center text-white">
+                {{tvShow?.first_air_date?.toLocaleDateString()}}
+              </div>
+              <div class="flex basis-1/2 justify-center text-white">
+                {{tvShow?.episode_run_time}} Minutes
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col mx-20 md:mx-44 lg:mx-24 mt-2 lg:mt-12">
+          <div class="flex justify-center text-xl font-bold text-white">
+            Overview
+          </div>
+          <div class="mt-2 lg:mt-4 text-white">
+            {{tvShow?.overview}}
+          </div>
+        </div>
+
+        <div class="flex flex-row flex-wrap grow-0 shrink-0 justify-center mx-20 md:mx-44 lg:mx-24 mt-2 lg:mt-12">
+          <div class="flex flex-col flex-1 justify-center mx-4 my-1"
+               *ngFor="let directorOrWriter of tvShow?.directorsAndWriters">
+            <div class="flex justify-center font-bold text-base text-white text-center">
+              {{directorOrWriter.name}}
+            </div>
+            <div class="mx-8">
+              <div class="flex justify-center text-white">
+                <div *ngIf="directorOrWriter.isDirector && directorOrWriter.isWriter; else director">
+                  Director, Writer
+                </div>
+                <ng-template #director>
+                  <div *ngIf="directorOrWriter.isDirector; else writer">
+                    Director
+                  </div>
+                </ng-template>
+                <ng-template #writer>
+                  <div *ngIf="directorOrWriter.isWriter">
+                    Writer
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-col items-center lg:flex-row lg:items-start lg:space-x-8 bg-[#212529] px-8 md:px-32 py-12">
+  <div class="w-full lg:w-[80%] bg-[#3D414B] rounded-xl py-8">
+    <div class="flex flex-col justify-center items-center space-y-4 mt-4">
+      <div>
+        <div class="text-xl font-bold text-center text-white">Keywords</div>
+        <div>
+          <div class="flex justify-center" *ngIf="tvShow?.keywords; else keywordsFallback">
+            <mat-chip-list class="flex justify-center max-w-[80%] center-mat-chips mt-4 keyword-background-color"
+                           aria-label="Keywords">
+              <mat-chip *ngFor="let keyword of tvShow?.keywords">{{keyword.name}}</mat-chip>
+            </mat-chip-list>
+          </div>
+          <ng-template #keywordsFallback>-</ng-template>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xl font-bold text-center text-white">Rating</div>
+        <div class="text-lg text-center text-white">
+          <progress *ngIf="tvShow?.vote_average" id="progressBar" max="100"
+                    value="{{ tvShow?.vote_average }}"> {{ tvShow?.vote_average }}%
+          </progress>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xl font-bold text-center text-white">Original Language</div>
+        <div class="text-lg text-center text-white">
+          <div *ngIf="tvShow?.original_language; else originalLanguageFallback">{{tvShow?.original_language}}
+          </div>
+          <ng-template #originalLanguageFallback>-</ng-template>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xl font-bold text-center text-white">Status</div>
+        <div class="text-lg text-center text-white">{{tvShow?.status}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grow-0 shrink-0 basis-auto w-full lg:w-2/3 mt-12 lg:mt-0 my-24">
+    <div class="flex flex-col flex-1">
+      <div class="bg-[#3D414B] pb-4 rounded-xl">
+        <div class="flex justify-center text-3xl font-bold my-8 text-white">Seasons</div>
+        <div class="flex flex-col">
+          <mat-expansion-panel *ngFor="let season of tvShow?.seasons">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Season {{ season.season_number }} </mat-panel-title>
+              <mat-panel-description>First On Air: {{ season.air_date.toLocaleDateString() }}
+                Episodes: {{ season.episode_count }}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="grid overflow-hidden grid-cols-auto grid-rows-auto gap-5">
+              <div class="box row-span-2">
+                <img loading="lazy" class="w-64 h-96" alt="Season {{ season.season_number }} poster"
+                     src="{{ season.poster_path }}">
+              </div>
+              <div class="box col-start-2 col-span-2">
+                <p *ngIf="season.overview.length > 0; else overviewFallback">{{ season.overview }}</p>
+                <ng-template #overviewFallback>No season description provided !</ng-template>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <br>
+          <div class="flex flex-col justify-center items-center font-bold mt-8">
+            <div class="text-3xl text-white">
+              Watch Providers
+            </div>
+            <div class="flex flex-row w-full p-2 items-center justify-center">
+              <form class="flex flex-col" [formGroup]="countryForm">
+                <div class="flex flex-col md:flex-row md:space-x-8">
+                  <app-country-select class="w-full" formControlName="region" [isDeselectPossible]="false"
+                                      (selectionChange)="onCountrySelectionChanged()">
+                  </app-country-select>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div *ngIf="watchProvidersInCurrentCountry?.length; else noStreamingProvidersFound"
+               class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2 scroll-background mx-4">
+            <app-streaming-provider-card *ngFor="let streamingProvider of watchProvidersInCurrentCountry"
+                                         name="{{streamingProvider.providerName}}"
+                                         logoPath="{{streamingProvider.logoPath}}"
+                                         [isAvailableForRent]="streamingProvider.isAvailableForRent"
+                                         [isAvailableInFlatrate]="streamingProvider.isAvailableInFlatrate"
+                                         [isAvailableToBuy]="streamingProvider.isAvailableToBuy"
+                                         customClasses="bg-[#212529] text-white">
+            </app-streaming-provider-card>
+          </div>
+          <ng-template #noStreamingProvidersFound>
+            <div class="flex flex-row justify-center items-center text-white">
+              No Watch Providers available in the selected country.
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="bg-[#3D414B] mt-8 pb-4 rounded-xl" *ngIf="tvShow?.cast && !!tvShow?.cast?.length">
+          <div class="flex justify-center text-3xl font-bold my-8 text-white">
+            Cast
+          </div>
+          <div class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2 scroll-background mx-4">
+            <app-person-card *ngFor="let castMember of tvShow?.cast" name="{{castMember.name}}"
+                             subtitle="{{castMember.character}}"
+                             profilePicturePath="{{castMember.profilePath}}"
+                             customClasses="bg-[#212529] text-white cursor-pointer"
+                             [routerLink]="['/actors', castMember.id]"></app-person-card>
+          </div>
+        </div>
+
+        <div class="bg-[#3D414B] mt-8 pb-4 rounded-xl" *ngIf="tvShow?.crew && !!tvShow?.crew?.length">
+          <div class="flex justify-center text-3xl font-bold my-8 text-white">
+            Crew
+          </div>
+          <div class="flex flex-row overflow-x-auto space-x-4 px-4 scroll-container pb-2 scroll-background mx-4">
+            <app-person-card *ngFor="let crewMember of tvShow?.crew" name="{{crewMember.name}}"
+                             subtitle="{{crewMember.job}}"
+                             profilePicturePath="{{crewMember.profilePath}}"
+                             customClasses="bg-[#212529] text-white cursor-pointer"
+                             [routerLink]="['/actors', crewMember.id]"></app-person-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

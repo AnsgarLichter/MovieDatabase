@@ -1,0 +1,174 @@
+<div class="flex justify-center w-full h-full bg-[#3D414B] pb-20">
+  <div class="background-image-opacity">
+    <div
+      class="relative flex flex-col items-center justify-center rounded-xl max-w-[80rem] h-full lg:flex-row xl:my-12"
+    >
+      <div class="flex flex-col justify-center items-center min-w-[50%] xl:min-w-[40%]">
+        <img
+          loading="lazy"
+          class="max-w-none h-96 w-64 lg:h-full lg:max-h-[45rem] lg:w-full lg:max-w-[20rem] rounded-xl"
+          src="{{ actor?.profile_path }}"
+          alt="Actor Poster"
+        />
+      </div>
+      <div class="lg:mr-24 xl:mx-12 min-w-[50%] xl:min-w-[60%]">
+        <div class="flex flex-col items-center xl:flex-row mt-2 lg:mt-0">
+          <div class="flex flex-col lg:grow lg:shrink-0 lg:basis-auto lg:w-1/2">
+            <div class="text-2xl font-bold text-white">
+              {{ actorSearch?.name }}
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="mt-2 lg:mt-4 text-white">
+            <div class="biography"><p [innerHTML]="biography"></p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-col items-center lg:flex-row lg:items-start lg:space-x-8 bg-[#212529] px-8 md:px-32 py-12">
+  <div class="w-full lg:w-[80%] bg-[#3D414B] rounded-xl py-8">
+    <div class="flex flex-col justify-center items-center space-y-4 mt-4 text-white">
+      <div class="flex justify-center text-3xl font-bold my-8 text-white">
+        Overview
+      </div>
+      <div>
+        <div class="text-xl font-bold text-center">Name</div>
+        <div>
+          <div
+            class="text-lg text-center"
+            *ngIf="actor?.name; else nameFallback"
+          >
+            {{ actor?.name }}
+          </div>
+          <ng-template #nameFallback>-</ng-template>
+        </div>
+      </div>
+      <div>
+        <div class="text-xl font-bold text-center">Known for</div>
+        <div class="text-lg text-center">
+          <div
+            *ngIf="actor?.known_for_department; else knownForDepartmentFallback"
+          >
+            {{ actor?.known_for_department }}
+          </div>
+          <ng-template #knownForDepartmentFallback>-</ng-template>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xl font-bold text-center">Birthday</div>
+        <div class="text-lg text-center">
+          <div *ngIf="actor?.birthday; else birthdayFallback">
+            {{ actor?.birthday?.toLocaleDateString() }}
+          </div>
+          <ng-template #birthdayFallback>-</ng-template>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xl font-bold text-center">Place of birth</div>
+        <div class="text-lg text-center">
+          <div *ngIf="actor?.place_of_birth; else placeOfBirthFallback">
+            {{ actor?.place_of_birth }}
+          </div>
+          <ng-template #placeOfBirthFallback>-</ng-template>
+        </div>
+      </div>
+
+      <div *ngIf="actor?.deathday">
+        <div class="text-xl font-bold text-center">Deathday</div>
+        <div class="text-lg text-center">
+          <div>
+            {{ actor?.deathday?.toLocaleDateString() }}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xl font-bold text-center">Also known as</div>
+        <div class="text-lg text-center">
+          <div>
+            <div
+              class="also-known-as"
+              *ngFor="let also_known of actor?.also_known_as"
+            >
+              <p *ngIf="also_known; else alsoKnownAsFallback">
+                {{ also_known }}
+              </p>
+              <ng-template #alsoKnownAsFallback>-</ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grow-0 shrink-0 basis-auto w-full lg:w-2/3 mt-12 lg:mt-0 my-24">
+      <div class="flex flex-col flex-1 text-white">
+        <div class="bg-[#3D414B] pb-4 rounded-xl">
+          <div class="flex justify-center text-3xl font-bold my-8">
+            Cast
+          </div>
+          <div class="flex flex-col overflow-x-auto space-y-2 px-4 pb-2 mx-4">
+          <table class="table-fixed">
+            <thead>
+              <tr>
+                <th class="text-center">Year</th>
+                <th></th>
+                <th>Title</th>
+                <th>Character</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let elm of cast" class="border-white space-y-2">
+                <td class="border-b-2 border-b-white p-3 text-center">{{elm?.year}}</td>
+                <td class="border-b-2 border-b-white p-3">-</td>
+                <td class="border-b-2 border-b-white p-3">
+                  <div *ngIf="elm?.original_title !== undefined; else originalNameFallback">
+                    <a [routerLink]="['/movies', elm.id]">{{elm?.original_title}}</a>
+                  </div>
+                  <ng-template #originalNameFallback><a [routerLink]="['/movies', elm.id]">{{elm?.original_name}}</a></ng-template>
+                  </td>
+                <td class="border-b-2 border-b-white p-3">{{elm?.character}}</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="bg-[#3D414B] text-white pb-4 mt-8 rounded-xl">
+          <div class="flex justify-center text-3xl font-bold my-8">
+            Crew
+          </div>
+          <div class="flex flex-col overflow-x-auto space-y-2 px-4 pb-2 mx-4">
+          <table class="table-fixed">
+            <thead>
+              <tr>
+                <th class="text-center">Year</th>
+                <th></th>
+                <th>Title</th>
+                <th>Job</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let elm of crew" class="border-white space-y-2">
+                <td class="border-b-2 border-b-white p-3 text-center">{{elm?.year}}</td>
+                <td class="border-b-2 border-b-white p-3">-</td>
+                <td class="border-b-2 border-b-white p-3">
+                  <div *ngIf="elm?.original_name !== undefined; else titleFallback">
+                    <a [routerLink]="['/movies', elm.id]">{{elm?.original_name}}</a>
+                  </div>
+                  <ng-template #titleFallback><a [routerLink]="['/movies', elm.id]">{{elm?.title}}</a></ng-template>
+                </td>
+                <td class="border-b-2 border-b-white p-3">{{elm?.job}}</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

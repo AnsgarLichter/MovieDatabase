@@ -1,0 +1,42 @@
+<div class="flex flex-row justify-center items-center bg-[#3D414B] py-8 pb:32 px-8 md:px-0"
+[ngClass]="{'h-full' : !actorsList.length, 'border-b-2 border-[#007fad]': actorsList.length}">
+    <form class="flex flex-col" [formGroup]="searchForm" (ngSubmit)="onSearchSubmitted()">
+      <div class="flex flex-col md:flex-row md:space-x-8">
+        <mat-form-field appearance="outline">
+          <mat-label>Actors:</mat-label>
+          <input matInput type="text" placeholder="Search for Actor ..." formControlName="query">
+        </mat-form-field>
+      </div>
+      <div class="flex flex-col justify-center basis-full items-center mt-8 md:mt-0">
+        <button mat-button type="submit" color="accent" [disabled]="!searchForm.valid"
+        class="border-white border-solid border-solid-2 rounded-xl text-white">
+          <mat-icon>search</mat-icon>
+          Search
+        </button>
+      </div>
+    </form>
+</div>
+
+<div class="bg-[#3D414B]">
+  <div class="flex flex-row flex-wrap grow-0 shrink-0 justify-center space-x-4 md:mx-8">
+    <a *ngFor="let actors of actorsList"
+       class="flex flex-col items-center h-128 w-64 my-4 rounded-xl pb-4 bg-[#212529]"
+       [routerLink]="['/actors', actors.id]">
+      <div class="flex">
+        <img loading="lazy" class="w-64 h-96 rounded-t-xl" alt="Profile Picture of cast member"
+             src="{{actors.profilePath}}">
+      </div>
+      <div class="flex flex-col h-full justify-center mx-4 mt-4">
+        <div class="text-center text-lg font-bold text-white">{{actors.name}}</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="py-8 flex justify-center items-center" *ngIf="!!actorsList.length && currentPage < totalPages">
+    <button mat-raised-button type="submit" color="accent"
+            class="border-white border-solid border-solid-2 rounded-xl text-white" (click)="onLoadMoreResultsPressed()">
+      <mat-icon>expand_more</mat-icon>
+      Load more Results
+    </button>
+  </div>
+</div>

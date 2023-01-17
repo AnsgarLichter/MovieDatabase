@@ -1,19 +1,136 @@
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 .nav {
-    margin-left: 30px;
+  margin-left: 30px;
 }
 
 .logo {
-    display: flex;
-    justify-content: center;
-    align-content: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .logo p {
-    font-size: 25px;
-    margin-bottom: 0;
-    font-weight: 800;
+  font-size: 25px;
+  margin-bottom: 0;
+  font-weight: 800;
 }
 
 .button1 {
-    background: #ffc107;
+  background: #ffc107;
+}
+
+.scroll-container {
+  position: relative;
+  height: calc(100% - 68px - 52px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #3d414b;
+}
+
+.footer {
+  background: #212529;
+  color: #fff;
+  padding: 10px 0 10px 0;
+  width: 100%;
+  bottom: 0;
+}
+
+.footer li a {
+  color: #fff;
+}
+
+.footer .title h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.footer .copyright {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.footer .copyright p {
+  text-align: right;
+  padding: 0;
+  margin: 0;
+}
+
+body::-webkit-scrollbar-thumb, .scroll-container::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBackground);
+  border-radius: 0.25rem;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0 1000px #3D414B inset;
+}
+
+/* Change style of material components because applying a custom theme to angular material is really difficult */
+input.mat-input-element,
+input.mat-input-element::placeholder {
+  color: white;
+}
+
+.mat-form-field-ripple {
+  background-color: white !important;
+}
+
+.mat-form-field.ng-untouched .mat-form-field-label,
+.mat-form-field:not(.ng-invalid) .mat-form-field-label {
+  color: white !important;
+}
+
+.mat-form-field-appearance-outline.ng-untouched .mat-form-field-outline,
+.mat-form-field-appearance-outline:not(.ng-invalid) .mat-form-field-outline {
+  color: white !important;
+}
+
+.mat-snack-bar-container {
+  background-color: #3B667B;
+  color: white;
+}
+
+/* Scrollbar styling */
+html {
+  --scrollbarBackground: #ffffff;
+  --thumbBackground: #007fad;
+}
+
+body::-webkit-scrollbar, .scroll-container::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: var(--scrollbarBackground);
+}
+
+/* Firefox */
+body, .scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBackground) var(--scrollbarBackground);
 }

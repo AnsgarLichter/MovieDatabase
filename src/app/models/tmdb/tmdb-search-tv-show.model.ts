@@ -1,0 +1,15 @@
+export interface TmdbSearchTVShow {
+  id: number,
+  original_name: string,
+  original_language: string,
+  name: string,
+  overview: string,
+  first_air_date: string,
+  popularity: number,
+  vote_count: number,
+  vote_average: number,
+  poster_path: string,
+  backdrop_path: string,
+  genre_ids: number[],
+  origin_country: string[],
+}

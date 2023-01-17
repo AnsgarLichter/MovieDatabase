@@ -1,0 +1,16 @@
+progress#progressBar:hover:after {
+  display: inline;
+  content: attr(value);
+  text-align: center;
+  position: relative;
+  top: 0;
+}
+
+.mat-chip-list-wrapper {
+  justify-content: center;
+}
+
+mat-expansion-panel {
+  background-color: #3D414B;
+  border: 1px solid white;
+}
