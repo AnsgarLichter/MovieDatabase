@@ -92,7 +92,7 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 1000px #3D414B inset;
 }
 
-/* Change style of all material inputs because applying a custom theme to angular material is really difficult */
+/* Change style of material components because applying a custom theme to angular material is really difficult */
 input.mat-input-element,
 input.mat-input-element::placeholder {
   color: white;
@@ -112,6 +112,10 @@ input.mat-input-element::placeholder {
   color: white !important;
 }
 
+.mat-snack-bar-container {
+  background-color: #3B667B;
+  color: white;
+}
 
 /* Scrollbar styling */
 html {

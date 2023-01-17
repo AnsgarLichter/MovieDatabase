@@ -9,3 +9,8 @@ progress#progressBar:hover:after {
 .mat-chip-list-wrapper {
   justify-content: center;
 }
+
+mat-expansion-panel {
+  background-color: #3D414B;
+  border: 1px solid white;
+}
