@@ -1,16 +1,29 @@
 # MovieDatabase
 
-Movie Database is a project for the lecture software architectures laboratory.
+Movie Database is a project for the lecture software architectures laboratory at the University of Applied Sciences in Karlsruhe.
 
 ## Getting Started
+
+### Installing Dependencies
+
+To be able to execute the Angular application you need to do the following steps:
+1. To install Angular on your local system, you need an active LTS or maintenance LTS version of [Node.js](https://nodejs.org/en/). and Node Package Manager which is installed with Node.js. 
+2. To install the Angular CLI, open a terminal window and run the following command: ``npm install -g @angular/cli``.
+3. Open the workspace folder in a terminal and run the following command: ``npm install``.
+
+If you need further information please have a look at Angular's guide [Setting up the local environment and workspace](https://angular.io/guide/setup-local).
 
 ### Providing Values for Secrets
 
 You need to add your API key for the [The Movie Database API](https://www.themoviedb.org/?language=de) in the ``.env`` file.
 Please rename ``template.env`` to ``.env`` and provide your own API key accordingly.
-Afterwards you can run ``ng serve`` to start your development server.
 
 The values of the secrets can be accessed as follows ``process.env["ENVIRONMENT_VARIABLE_KEY"]``.
+
+### Run the Development Server
+You can start the developoment server running the following command: ``ng serve``.
+
+## Contribute
 
 ### Adding new secrets
 
@@ -41,6 +54,13 @@ If you want to know how to build and run the app you can have a look at the [Ang
 
 The app is built with the UI components of [Angular Material](https://material.angular.io/).
 At the moment the built-in theme pink bluegrey is configured.
+
+### Bootstrap
+The app uses [Bootstrap](https://getbootstrap.com/) to use some components which aren't provided in Angular Material.
+
+### Tailwind CSS
+
+The app uses [Tailwind CSS](https://tailwindcss.com/) for easier handling of CSS.
 
 ### Movie Database API
 
