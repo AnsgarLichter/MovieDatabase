@@ -152,12 +152,12 @@
       >
         <div class="container-fluid marketing">
           <div class="row">
-            <div class="col-lg-2 element-slider" *ngFor="let movie of row">
+            <div class="col-lg-2 element-slider flex justify-center" *ngFor="let movie of row">
               <a
               class="flex flex-col items-center h-128 w-64 my-4 rounded-xl pb-4 bg-[#212529]"
               [routerLink]="['/movies', movie.id]">
              <div class="flex">
-               <img loading="lazy" class="w-64 h-96 rounded-t-xl" alt="Movie Picture of cast member"
+               <img loading="lazy" class="w-64 h-80 rounded-t-xl" alt="Movie Picture of cast member"
                     src="{{movie?.poster_path}}">
              </div>
              <div class="flex flex-col h-full justify-center mx-4 mt-4">
@@ -237,12 +237,12 @@
       >
         <div class="container-fluid marketing">
           <div class="row">
-            <div class="col-lg-2 element-slider" *ngFor="let series of row">
+            <div class="col-lg-2 element-slider flex justify-center" *ngFor="let series of row">
               <a
               class="flex flex-col items-center h-128 w-64 my-4 rounded-xl pb-4 bg-[#212529]"
               [routerLink]="['/series', series.id]">
              <div class="flex">
-               <img loading="lazy" class="w-64 h-96 rounded-t-xl" alt="Movie Picture of cast member"
+               <img loading="lazy" class="w-64 h-80 rounded-t-xl" alt="Movie Picture of cast member"
                     src="{{series?.poster_path}}">
              </div>
              <div class="flex flex-col h-full justify-center mx-4 mt-4">
